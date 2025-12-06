@@ -103,9 +103,9 @@ export default function Hero({ isDarkTheme }: HeroProps) {
               onClick={scrollToWork}
               className={`group px-10 py-4 rounded-full font-semibold ${
                 isDarkTheme
-                  ? 'bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-500 hover:shadow-violet-500/30'
-                  : 'bg-white text-violet-600 hover:shadow-white/30'
-              } transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-3 font-body text-white`}
+                  ? 'bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-500 hover:via-purple-500 hover:to-indigo-500 hover:shadow-violet-500/30 text-white'
+                  : 'bg-white hover:shadow-white/30 text-violet-600'
+              } transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center justify-center gap-3 font-body`}
             >
               View My Work
               <span className="group-hover:translate-x-1 transition-transform text-lg">→</span>
