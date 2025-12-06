@@ -1,0 +1,57 @@
+/* ===== Google Fonts (must be first) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+/* ===== Font Utilities ===== */
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+.font-body {
+  font-family: 'Space Grotesk', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== Floating Orb Animations ===== */
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(100px, -50px) rotate(90deg); }
+  50% { transform: translate(50px, 100px) rotate(180deg); }
+  75% { transform: translate(-50px, 50px) rotate(270deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-80px, 80px); }
+  66% { transform: translate(60px, -40px); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(120px, 60px) scale(1.2); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-60px, -80px); }
+  50% { transform: translate(40px, -120px); }
+  75% { transform: translate(80px, -40px); }
+}
+
+@keyframes float5 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-100px, 80px) rotate(180deg); }
+}
+
+.animate-float1 { animation: float1 20s ease-in-out infinite; }
+.animate-float2 { animation: float2 15s ease-in-out infinite; }
+.animate-float3 { animation: float3 25s ease-in-out infinite; }
+.animate-float4 { animation: float4 18s ease-in-out infinite; }
+.animate-float5 { animation: float5 22s ease-in-out infinite; }
+
+/* ===== Selection Color ===== */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+}
