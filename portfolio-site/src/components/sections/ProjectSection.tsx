@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { projects, Project } from '@/data/projects';
 import ProjectCard from '@/components/projects/ProjectCard';
+import FeaturedProjectCard from '@/components/projects/FeaturedProjectCard';
 import ProjectModal from '@/components/projects/ProjectModal';
 
 interface ProjectsSectionProps {
@@ -15,6 +16,10 @@ export default function ProjectsSection({ isDarkTheme }: ProjectsSectionProps) {
   const theme = {
     textSubtle: isDarkTheme ? 'text-gray-400' : 'text-white/70',
   };
+
+  // Separate NOM (featured) from other projects
+  const featuredProject = projects.find((p) => p.slug === 'nom');
+  const otherProjects = projects.filter((p) => p.slug !== 'nom');
 
   return (
     <section id="work" className="py-32 px-6 relative">
@@ -40,7 +45,18 @@ export default function ProjectsSection({ isDarkTheme }: ProjectsSectionProps) {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project) => (
+          {/* Featured NOM Project - Full Width */}
+          {featuredProject && (
+            <FeaturedProjectCard
+              project={featuredProject}
+              isDarkTheme={isDarkTheme}
+              onClick={() => setSelectedProject(featuredProject)}
+              videoSrc="/nom-demo.mp4"
+            />
+          )}
+
+          {/* Other Projects */}
+          {otherProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
