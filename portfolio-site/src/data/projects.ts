@@ -33,6 +33,7 @@ export interface Project {
   features?: ProjectFeature[];
   metrics?: ProjectMetric[];
   previewImage?: string;
+  previewImages?: string[]; // Array of images for gallery/lightbox
   previewVideo?: string;
 }
 
@@ -133,6 +134,14 @@ Key technical achievements include a custom multi-step email verification flow u
       { label: 'Stack', value: 'Next.js + Firebase' }
     ],
     previewImage: '/images/hoopgang-preview.png',
+    previewImages: [
+      '/images/hoopgang/admin-dashboard.png',
+      '/images/hoopgang/creator-dashboard.png', 
+      '/images/hoopgang/application-flow.png',
+      '/images/hoopgang/application-view.png',
+      '/images/hoopgang/creator-info.png',
+      '/images/hoopgang/landing-page.png'
+    ],
   },
   {
     id: 3,
