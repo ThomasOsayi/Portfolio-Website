@@ -44,7 +44,7 @@ export default function Home() {
       {isMounted && (
         <>
           <div
-            className="fixed rounded-full pointer-events-none z-0 transition-all duration-150 ease-out hidden md:block"
+            className="fixed rounded-full pointer-events-none z-0 hidden md:block"
             style={{
               width: '600px',
               height: '600px',
@@ -55,7 +55,7 @@ export default function Home() {
             }}
           />
           <div
-            className="fixed rounded-full pointer-events-none z-0 transition-all duration-100 ease-out hidden md:block"
+            className="fixed rounded-full pointer-events-none z-0 hidden md:block"
             style={{
               width: '200px',
               height: '200px',
