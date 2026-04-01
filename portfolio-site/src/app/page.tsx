@@ -1,169 +1,226 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import NavBar from '@/components/layout/NavBar';
-import Footer from '@/components/layout/Footer';
-import Hero from '@/components/sections/Hero';
-import ProjectsSection from '@/components/sections/ProjectSection';
-import SkillsSection from '@/components/sections/SkillsSection';
-import AboutSection from '@/components/sections/AboutSection';
-import ContactSection from '@/components/sections/ContactSection';
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  TextReveal, FadeUp, ZoomTransition, HorizontalScroll,
+  ScaleTransition, ClipReveal, useVelocitySkew,
+} from '@/components/scroll';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  useVelocitySkew();
 
-  // Wait for client-side mount to avoid hydration mismatch
   useEffect(() => {
-    setIsMounted(true);
+    const t = setTimeout(() => ScrollTrigger.refresh(), 200);
+    return () => clearTimeout(t);
   }, []);
-
-  // Mouse tracking for cursor glow
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouse);
-    return () => window.removeEventListener('mousemove', handleMouse);
-  }, []);
-
-  // Theme colors
-  const theme = {
-    bg: isDarkTheme ? '#030305' : '#7c3aed',
-    glowColor: isDarkTheme ? 'rgba(139,92,246,0.35)' : 'rgba(255,255,255,0.4)',
-    glowColorInner: isDarkTheme ? 'rgba(167,139,250,0.5)' : 'rgba(255,255,255,0.6)',
-  };
 
   return (
-    <div
-      className="min-h-screen text-white overflow-x-hidden transition-colors duration-700"
-      style={{ backgroundColor: theme.bg }}
-    >
-      {/* Cursor Glow - Only render on client after mount */}
-      {isMounted && (
-        <>
-          <div
-            className="fixed rounded-full pointer-events-none z-0 hidden md:block"
-            style={{
-              width: '600px',
-              height: '600px',
-              background: `radial-gradient(circle, ${theme.glowColor} 0%, transparent 70%)`,
-              left: mousePos.x - 300,
-              top: mousePos.y - 300,
-              filter: 'blur(20px)',
-            }}
-          />
-          <div
-            className="fixed rounded-full pointer-events-none z-0 hidden md:block"
-            style={{
-              width: '200px',
-              height: '200px',
-              background: `radial-gradient(circle, ${theme.glowColorInner} 0%, transparent 70%)`,
-              left: mousePos.x - 100,
-              top: mousePos.y - 100,
-            }}
-          />
-        </>
-      )}
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] overflow-x-hidden">
 
-      {/* Animated Floating Orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Large gradient blurs */}
-        <div
-          className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[800px] ${
-            isDarkTheme
-              ? 'bg-gradient-to-b from-violet-600/20 via-purple-500/10 to-transparent'
-              : 'bg-gradient-to-b from-white/10 via-indigo-300/10 to-transparent'
-          } blur-3xl transition-colors duration-700`}
-        />
-        <div
-          className={`absolute bottom-0 left-0 w-[700px] h-[500px] ${
-            isDarkTheme
-              ? 'bg-gradient-to-tr from-indigo-600/15 to-transparent'
-              : 'bg-gradient-to-tr from-white/10 to-transparent'
-          } blur-3xl transition-colors duration-700`}
-        />
+      {/* NAV */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] px-[clamp(24px,4vw,64px)] py-6 flex justify-between items-center mix-blend-difference">
+        <div className="text-[1.1rem] font-extrabold tracking-tight uppercase text-white">Thomas Osayi</div>
+        <ul className="hidden md:flex gap-10 list-none">
+          {['Projects', 'About', 'Skills', 'Contact'].map((link) => (
+            <li key={link}>
+              <a href={`#${link.toLowerCase()}`} className="text-xs font-medium tracking-wide text-white opacity-60 hover:opacity-100 transition-opacity">
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-        {/* Animated orbs */}
-        <div
-          className={`absolute top-[15%] left-[20%] w-32 h-32 rounded-full ${
-            isDarkTheme ? 'bg-violet-500/30' : 'bg-white/20'
-          } blur-2xl animate-float1`}
-        />
-        <div
-          className={`absolute top-[25%] right-[15%] w-24 h-24 rounded-full ${
-            isDarkTheme ? 'bg-cyan-500/25' : 'bg-indigo-200/25'
-          } blur-2xl animate-float2`}
-        />
-        <div
-          className={`absolute bottom-[30%] left-[10%] w-40 h-40 rounded-full ${
-            isDarkTheme ? 'bg-fuchsia-500/20' : 'bg-pink-200/20'
-          } blur-3xl animate-float3`}
-        />
-        <div
-          className={`absolute top-[50%] right-[25%] w-20 h-20 rounded-full ${
-            isDarkTheme ? 'bg-indigo-500/35' : 'bg-white/30'
-          } blur-xl animate-float4`}
-        />
-        <div
-          className={`absolute bottom-[20%] right-[20%] w-36 h-36 rounded-full ${
-            isDarkTheme ? 'bg-purple-500/25' : 'bg-indigo-300/20'
-          } blur-2xl animate-float5`}
-        />
-        <div
-          className={`absolute top-[70%] left-[30%] w-16 h-16 rounded-full ${
-            isDarkTheme ? 'bg-teal-500/30' : 'bg-white/25'
-          } blur-xl animate-float2`}
-          style={{ animationDelay: '-5s' }}
-        />
-        <div
-          className={`absolute top-[10%] left-[60%] w-12 h-12 rounded-full ${
-            isDarkTheme ? 'bg-pink-500/40' : 'bg-yellow-200/30'
-          } blur-lg animate-float4`}
-          style={{ animationDelay: '-8s' }}
-        />
-
-        {/* Small bright dots */}
-        <div
-          className={`absolute top-[20%] left-[35%] w-2 h-2 rounded-full ${
-            isDarkTheme ? 'bg-violet-400' : 'bg-white'
-          } animate-pulse`}
-        />
-        <div
-          className={`absolute top-[40%] right-[30%] w-1.5 h-1.5 rounded-full ${
-            isDarkTheme ? 'bg-cyan-400' : 'bg-white'
-          } animate-pulse`}
-          style={{ animationDelay: '1s' }}
-        />
-        <div
-          className={`absolute bottom-[35%] left-[25%] w-2 h-2 rounded-full ${
-            isDarkTheme ? 'bg-pink-400' : 'bg-white'
-          } animate-pulse`}
-          style={{ animationDelay: '2s' }}
-        />
-        <div
-          className={`absolute top-[60%] right-[40%] w-1 h-1 rounded-full ${
-            isDarkTheme ? 'bg-emerald-400' : 'bg-white'
-          } animate-pulse`}
-          style={{ animationDelay: '0.5s' }}
-        />
-      </div>
-
-      {/* Navigation */}
-      <NavBar isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
-
-      {/* Main Content */}
       <main>
-        <Hero isDarkTheme={isDarkTheme} />
-        <ProjectsSection isDarkTheme={isDarkTheme} />
-        <SkillsSection isDarkTheme={isDarkTheme} />
-        <AboutSection isDarkTheme={isDarkTheme} />
-        <ContactSection isDarkTheme={isDarkTheme} />
+
+        {/* 01 — HERO */}
+        <section className="relative min-h-screen flex items-end pb-[clamp(60px,10vh,120px)] overflow-hidden section-light">
+          <div className="container-portfolio relative z-10">
+            <TextReveal as="h1" className="text-display mb-8" type="lines" immediate delay={0.3}>
+              Full-Stack Developer{'\n'}& <span className="text-accent">Entrepreneur</span>
+            </TextReveal>
+            <FadeUp className="max-w-[520px]" immediate delay={0.9}>
+              <p className="text-body">
+                CS student at LMU building at the intersection of code and commerce.
+                Creator of SQWAD, THG, and digital products that move.
+              </p>
+            </FadeUp>
+            <div className="absolute bottom-10 right-[clamp(24px,4vw,64px)] flex flex-col items-center gap-3">
+              <span className="text-[0.6rem] font-semibold tracking-[0.15em] uppercase text-[var(--text-muted)] [writing-mode:vertical-lr]">Scroll</span>
+              <div className="scroll-line" />
+            </div>
+          </div>
+        </section>
+
+        {/* 02 — ZOOM TRANSITION */}
+        <ZoomTransition
+          zoomText={<>Building the <span className="text-accent">future</span></>}
+          revealContent={
+            <div className="text-center max-w-[600px] px-[clamp(24px,4vw,64px)]">
+              <div className="section-label justify-center text-white/30 mb-6"><span className="dot" />What I Do</div>
+              <TextReveal as="h2" className="text-h2 text-white mb-6">Products that solve real problems</TextReveal>
+              <FadeUp>
+                <p className="text-body text-[var(--text-on-dark-secondary)]">
+                  From SaaS platforms to streetwear brands to consulting tools — I build full-stack products from zero to revenue.
+                </p>
+              </FadeUp>
+            </div>
+          }
+        />
+
+        {/* 03 — PROJECTS: Horizontal Scroll */}
+        <section id="projects" className="section-dark overflow-hidden">
+          <div className="container-portfolio pt-[clamp(60px,8vh,100px)] pb-[clamp(40px,5vh,60px)]">
+            <div className="section-label text-white/30"><span className="dot" />Featured Projects</div>
+            <TextReveal as="h2" className="text-h1 text-white">
+              Projects that <span className="text-accent">move</span> people
+            </TextReveal>
+          </div>
+          <HorizontalScroll>
+            {[
+              { num: '01', tag: 'SaaS Platform', title: 'SQWAD', desc: 'Creator management platform for brands and agencies.' },
+              { num: '02', tag: 'E-Commerce', title: 'The Hoop Gang', desc: 'Basketball streetwear brand with explosive TikTok Shop growth.' },
+              { num: '03', tag: 'Consulting Tool', title: 'CardIntel', desc: 'AI-powered business card scanning and outreach pipeline.' },
+              { num: '04', tag: 'Mobile App', title: 'NOM', desc: 'Food discovery app connecting people to great local eats.' },
+              { num: '05', tag: 'Creator Portal', title: 'HoopGang Portal', desc: 'Dual admin/creator-facing React app with full pipeline tracking.' },
+              { num: '06', tag: 'Client Work', title: 'Svarma AI', desc: 'B2B jewelry platform frontend built with HERO UI components.' },
+            ].map((project) => (
+              <div key={project.num} className="flex-none w-[clamp(320px,30vw,480px)] rounded-xl overflow-hidden bg-[var(--bg-dark-elevated)] skew-target transition-transform duration-600 hover:-translate-y-2">
+                <div className="w-full aspect-[4/5] bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                  <span className="text-[4rem] font-extralight text-white/10">{project.num}</span>
+                </div>
+                <div className="p-[clamp(20px,2vw,32px)]">
+                  <div className="text-label text-accent mb-3">{project.tag}</div>
+                  <h3 className="text-h3 text-white mb-3">{project.title}</h3>
+                  <p className="text-sm font-normal leading-relaxed text-[var(--text-on-dark-secondary)]">{project.desc}</p>
+                </div>
+              </div>
+            ))}
+          </HorizontalScroll>
+        </section>
+
+        {/* 04 — ABOUT: Clip-Path Reveal */}
+        <section id="about" className="section-light py-[clamp(120px,18vh,240px)] overflow-hidden">
+          <div className="container-portfolio grid grid-cols-1 md:grid-cols-2 gap-[clamp(40px,6vw,120px)] items-center">
+            <div>
+              <div className="section-label"><span className="dot" />About Me</div>
+              <TextReveal as="h2" className="text-h1 mb-8">Code meets <span className="text-accent">commerce</span></TextReveal>
+              <FadeUp>
+                <p className="text-body mb-4">
+                  I&apos;m Thomas — a Computer Science student at Loyola Marymount University
+                  who simultaneously operates as a full-stack developer and entrepreneur.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <p className="text-body">
+                  I run SQWAD (a creator management SaaS), The Hoop Gang (basketball streetwear
+                  with significant TikTok Shop revenue), and HNO Consulting — all while maintaining
+                  a full course load and freelance development practice.
+                </p>
+              </FadeUp>
+            </div>
+            <ClipReveal
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&h=930&fit=crop"
+              alt="Thomas Osayi workspace"
+              className="aspect-[3/4]"
+            />
+          </div>
+        </section>
+
+        {/* 05 — SCALE-DOWN → STATS */}
+        <ScaleTransition
+          frontContent={
+            <div className="text-center max-w-[800px] px-[clamp(24px,4vw,64px)]">
+              <div className="section-label justify-center"><span className="dot" />Results</div>
+              <TextReveal as="h2" className="text-h1 mb-6">Numbers that <span className="text-accent">speak</span></TextReveal>
+              <FadeUp><p className="text-body max-w-[500px] mx-auto">This section scales down revealing the stats behind it.</p></FadeUp>
+            </div>
+          }
+          behindContent={
+            <div className="w-full">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-[clamp(30px,4vw,60px)] max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
+                {[
+                  { number: '15+', label: 'Live Projects' },
+                  { number: '6', label: 'Active Ventures' },
+                  { number: '2027', label: 'Graduation Year' },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center py-[clamp(30px,4vw,60px)]">
+                    <div className="text-[clamp(3rem,7vw,6.5rem)] font-light tracking-tight leading-none text-accent mb-3">{stat.number}</div>
+                    <div className="text-xs font-medium tracking-widest uppercase text-white/30">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          }
+        />
+
+        {/* 06 — SKILLS */}
+        <section id="skills" className="section-light py-[clamp(120px,18vh,240px)] overflow-hidden">
+          <div className="container-portfolio">
+            <div className="section-label"><span className="dot" />Tech Stack</div>
+            <TextReveal as="h2" className="text-h1 mb-16">Tools of the <span className="text-accent">trade</span></TextReveal>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {['React', 'Next.js', 'TypeScript', 'Firebase', 'Node.js', 'Python', 'Tailwind', 'Figma'].map((skill) => (
+                <FadeUp key={skill}>
+                  <div className="p-8 rounded-xl bg-[var(--bg-card)] text-center hover:bg-[var(--bg-elevated)] transition-colors border border-[var(--border)]">
+                    <div className="text-lg font-medium">{skill}</div>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 07 — BIG TEXT */}
+        <section className="section-dark py-[clamp(120px,18vh,240px)] text-center">
+          <div className="container-portfolio">
+            <TextReveal as="h2" className="text-display text-white" type="chars">
+              Let&apos;s build{'\n'}something <span className="text-accent">great</span>
+            </TextReveal>
+          </div>
+        </section>
+
+        {/* 08 — CONTACT */}
+        <section id="contact" className="section-light py-[clamp(80px,12vh,140px)] border-t border-[var(--border)]">
+          <div className="container-portfolio">
+            <TextReveal as="h2" className="text-h1 mb-12">Have an idea?{'\n'}Tell <span className="text-accent">me</span></TextReveal>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { label: 'Email', value: 'hello@thomasosayi.com', href: 'mailto:hello@thomasosayi.com' },
+                { label: 'LinkedIn', value: 'thomas-osayi', href: 'https://linkedin.com/in/thomas-osayi' },
+                { label: 'GitHub', value: '@thomasosayi', href: 'https://github.com/thomasosayi' },
+              ].map((contact) => (
+                <FadeUp key={contact.label}>
+                  <a href={contact.href} target="_blank" rel="noopener noreferrer"
+                    className="block p-8 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] transition-colors border border-[var(--border)] group">
+                    <div className="text-label text-accent mb-3">{contact.label}</div>
+                    <div className="text-lg font-medium group-hover:text-[var(--accent)] transition-colors">{contact.value}</div>
+                  </a>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
-      <Footer isDarkTheme={isDarkTheme} />
+      {/* FOOTER */}
+      <footer className="section-light border-t border-[var(--border)] py-[clamp(40px,6vh,60px)]">
+        <div className="container-portfolio flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-xs font-medium text-[var(--text-muted)]">&copy; 2026 Thomas Osayi</div>
+          <div className="flex gap-8">
+            {[
+              { label: 'LinkedIn', href: 'https://linkedin.com/in/thomas-osayi' },
+              { label: 'GitHub', href: '#' },
+            ].map((link) => (
+              <a key={link.label} href={link.href} className="text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">{link.label}</a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
