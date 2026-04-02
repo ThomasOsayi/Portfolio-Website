@@ -20,6 +20,15 @@ export const metadata: Metadata = {
     title: 'Thomas Osayi | Full-Stack Developer & Entrepreneur',
     description: 'Building at the intersection of code and commerce.',
     type: 'website',
+    url: 'https://thomasosayi.com',
+    images: [
+      {
+        url: 'https://thomasosayi.com/og-port-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Thomas Osayi — Full-Stack Developer & Entrepreneur',
+      },
+    ],
   },
 };
 
