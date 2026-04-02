@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 
 interface DirectionCardProps {
   children: React.ReactNode;
@@ -11,6 +11,11 @@ interface DirectionCardProps {
 export default function DirectionCard({ children, className = '', href }: DirectionCardProps) {
   const cardRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const getDirection = useCallback((e: React.MouseEvent) => {
     if (!cardRef.current) return 'bottom';
@@ -32,7 +37,7 @@ export default function DirectionCard({ children, className = '', href }: Direct
   };
 
   const handleEnter = useCallback((e: React.MouseEvent) => {
-    if (!overlayRef.current) return;
+    if (isTouch || !overlayRef.current) return;
     const dir = getDirection(e);
     overlayRef.current.style.transition = 'none';
     overlayRef.current.style.transform = transforms[dir];
@@ -41,13 +46,13 @@ export default function DirectionCard({ children, className = '', href }: Direct
       overlayRef.current.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
       overlayRef.current.style.transform = 'translate(0, 0)';
     });
-  }, [getDirection]);
+  }, [getDirection, isTouch]);
 
   const handleLeave = useCallback((e: React.MouseEvent) => {
-    if (!overlayRef.current) return;
+    if (isTouch || !overlayRef.current) return;
     const dir = getDirection(e);
     overlayRef.current.style.transform = transforms[dir];
-  }, [getDirection]);
+  }, [getDirection, isTouch]);
 
   const Tag = href ? 'a' : 'div';
   const linkProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
@@ -60,7 +65,7 @@ export default function DirectionCard({ children, className = '', href }: Direct
       onMouseLeave={handleLeave}
       {...linkProps}
     >
-      <div ref={overlayRef} className="direction-overlay" />
+      {!isTouch && <div ref={overlayRef} className="direction-overlay" />}
       <div className="direction-arrow">↗</div>
       <div className="direction-inner">
         {children}

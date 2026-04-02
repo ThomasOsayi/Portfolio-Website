@@ -49,7 +49,7 @@ export default function Home() {
 
       <SpotlightCursor />
 
-      <nav className="fixed top-0 left-0 right-0 z-[100] px-[clamp(24px,4vw,64px)] py-6 flex justify-between items-center mix-blend-difference isolate">
+      <nav className="fixed top-0 left-0 right-0 z-[100] px-[clamp(20px,4vw,64px)] py-5 flex justify-between items-center mix-blend-difference isolate">
         <div className="text-[1.1rem] font-extrabold tracking-tight uppercase text-white">Thomas Osayi</div>
         <ul className="hidden md:flex gap-10 list-none">
           {['Projects', 'About', 'Skills', 'Contact'].map((link) => (
@@ -67,7 +67,37 @@ export default function Home() {
             </li>
           ))}
         </ul>
+        <button
+          type="button"
+          className="hamburger md:hidden"
+          onClick={() => {
+            document.querySelector('.mobile-menu')?.classList.toggle('open');
+            document.querySelector('.hamburger')?.classList.toggle('open');
+          }}
+        >
+          <span /><span /><span />
+        </button>
       </nav>
+
+      {/* Mobile menu */}
+      <div className="mobile-menu">
+        {['Projects', 'About', 'Skills', 'Contact'].map((link) => (
+          <button
+            type="button"
+            key={link}
+            onClick={() => {
+              document.querySelector('.mobile-menu')?.classList.remove('open');
+              document.querySelector('.hamburger')?.classList.remove('open');
+              setTimeout(() => {
+                const el = document.getElementById(link.toLowerCase());
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 300);
+            }}
+          >
+            {link}
+          </button>
+        ))}
+      </div>
 
       <main>
 

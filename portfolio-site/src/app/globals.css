@@ -35,7 +35,7 @@ html.lenis, html.lenis body { height: auto; }
 /* ═══ Layout ═══ */
 .section-light { background-color: var(--bg); color: var(--text-primary); }
 .section-dark { background-color: var(--bg-dark); color: var(--text-on-dark); }
-.container-portfolio { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(24px, 4vw, 64px); }
+.container-portfolio { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 64px); }
 
 /* ═══ Section Labels ═══ */
 .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
@@ -43,10 +43,10 @@ html.lenis, html.lenis body { height: auto; }
 .section-dark .section-label { color: rgba(255,255,255,0.3); }
 
 /* ═══ Typography ═══ */
-.text-display { font-size: clamp(3rem, 9vw, 8.5rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; }
-.text-h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.035em; }
-.text-h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.025em; }
-.text-h3 { font-size: clamp(1.3rem, 2vw, 1.8rem); font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
+.text-display { font-size: clamp(2.4rem, 9vw, 8.5rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.04em; }
+.text-h1 { font-size: clamp(2rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.035em; }
+.text-h2 { font-size: clamp(1.6rem, 4vw, 3.5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.025em; }
+.text-h3 { font-size: clamp(1.1rem, 2vw, 1.8rem); font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
 .text-body { font-size: 0.95rem; font-weight: 400; line-height: 1.8; color: var(--text-secondary); }
 .text-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
 .text-accent { color: var(--accent); }
@@ -73,10 +73,45 @@ html.lenis, html.lenis body { height: auto; }
 }
 .nav-link:hover::after { width: 100%; }
 
+/* ═══ Mobile Nav ═══ */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 99;
+  background: var(--bg-dark);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-menu button {
+  font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em;
+  color: var(--text-on-dark); background: none; border: none;
+  cursor: pointer; padding: 8px 0;
+  transition: color 0.3s ease;
+}
+.mobile-menu button:hover { color: var(--accent); }
+
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 32px; height: 20px; position: relative; z-index: 101;
+}
+.hamburger span {
+  display: block; width: 100%; height: 1.5px; background: #fff;
+  position: absolute; left: 0;
+  transition: all 0.3s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+.hamburger.open span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
 /* ═══ Magnetic Button ═══ */
 .magnetic-btn {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 36px; border-radius: 100px;
+  padding: 14px 32px; border-radius: 100px;
   border: 1px solid rgba(0,0,0,0.12);
   font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
   cursor: pointer; background: transparent; color: var(--text-primary);
@@ -101,7 +136,6 @@ html.lenis, html.lenis body { height: auto; }
 }
 .tilt-card:hover { box-shadow: 0 20px 60px rgba(252,0,25,0.1), 0 8px 24px rgba(0,0,0,0.3); }
 
-/* Animated gradient border on hover */
 .tilt-card-border {
   position: absolute; inset: 0; border-radius: 16px; padding: 1px;
   background: linear-gradient(135deg, transparent 40%, rgba(252,0,25,0.3) 50%, transparent 60%);
@@ -126,7 +160,7 @@ html.lenis, html.lenis body { height: auto; }
 .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .bento-item {
   background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 20px;
-  padding: clamp(28px, 3vw, 44px); position: relative; overflow: hidden;
+  padding: clamp(24px, 3vw, 44px); position: relative; overflow: hidden;
   transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s ease, border-color 0.3s ease;
   cursor: default;
 }
@@ -150,7 +184,7 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ═══ Direction-Aware Card ═══ */
 .direction-card {
-  display: block; position: relative; padding: clamp(28px, 3vw, 40px); border-radius: 20px;
+  display: block; position: relative; padding: clamp(24px, 3vw, 40px); border-radius: 20px;
   background: var(--bg-elevated); border: 1px solid var(--border);
   overflow: hidden; cursor: pointer;
   transition: border-color 0.3s ease, transform 0.4s var(--ease-out-expo);
@@ -164,17 +198,46 @@ html.lenis, html.lenis body { height: auto; }
 .direction-inner { position: relative; z-index: 1; transition: color 0.3s ease; }
 .direction-card:hover .direction-inner { color: #fff; }
 .direction-card:hover .direction-inner .text-label { color: rgba(255,255,255,0.7); }
-.direction-card:hover .direction-inner .contact-value { color: #fff; }
 .direction-arrow {
-  position: absolute; top: 24px; right: 24px; font-size: 1.2rem;
+  position: absolute; top: 20px; right: 20px; font-size: 1.2rem;
   opacity: 0; transform: translate(-8px, 8px);
   transition: all 0.4s var(--ease-out-expo); z-index: 1;
 }
 .direction-card:hover .direction-arrow { opacity: 1; transform: translate(0, 0); color: #fff; }
 
-/* ═══ Responsive ═══ */
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE
+═══════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .hamburger { display: block; }
+
+  /* Typography scales down */
+  .text-display { font-size: clamp(2rem, 11vw, 3.5rem); line-height: 1.0; }
+  .text-h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .text-h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+  /* Bento: 2 columns on small screens */
+  .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+  /* Contact grid: stack */
+  .direction-card { padding: 20px; }
+  .direction-arrow { display: block; opacity: 1; transform: translate(0, 0); color: var(--accent); }
+
+  /* Disable hover effects on touch */
+  .tilt-card:hover { box-shadow: none; }
+  .tilt-card:hover .tilt-card-border { opacity: 0; }
+  .tilt-card:hover .tilt-card-image { transform: none; }
+  .bento-item:hover { transform: none; box-shadow: none; }
+
+  /* Scale section: shorter on mobile */
+  .scroll-line { height: 40px; }
+}
+
+@media (max-width: 480px) {
+  /* Bento: 1 column on very small */
   .bento-grid { grid-template-columns: 1fr; }
+
+  .text-display { font-size: clamp(1.8rem, 12vw, 2.8rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
