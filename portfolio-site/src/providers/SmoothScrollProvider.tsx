@@ -4,10 +4,9 @@ import { useEffect, useRef } from 'react';
 import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
@@ -36,7 +35,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
   }, []);
 
   return (
-    <ReactLenis root ref={lenisRef} options={{ autoRaf: false, lerp: 0.07, smoothWheel: true }}>
+    <ReactLenis root ref={lenisRef} options={{ autoRaf: false, lerp: 0.1, smoothWheel: true }}>
       {children}
     </ReactLenis>
   );

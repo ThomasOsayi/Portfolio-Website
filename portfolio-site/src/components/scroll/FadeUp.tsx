@@ -28,7 +28,7 @@ export function FadeUp({ className = '', immediate = false, delay = 0, children 
       } else {
         gsap.fromTo(el, from, {
           ...to,
-          scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true },
         });
       }
     },
@@ -36,7 +36,7 @@ export function FadeUp({ className = '', immediate = false, delay = 0, children 
   );
 
   return (
-    <div ref={ref} className={`will-change-transform ${className}`}>
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

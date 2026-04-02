@@ -7,6 +7,11 @@ import {
   TextReveal, FadeUp, ZoomTransition, HorizontalScroll,
   ScaleTransition, ClipReveal, useVelocitySkew,
 } from '@/components/scroll';
+import {
+  SpotlightCursor, AuroraBackground, MagneticButton,
+  TextScramble, TiltCard, BentoCard, DirectionCard,
+} from '@/components/micro';
+import { projects } from '@/data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,22 +19,51 @@ export default function Home() {
   useVelocitySkew();
 
   useEffect(() => {
-    const t = setTimeout(() => ScrollTrigger.refresh(), 200);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => ScrollTrigger.refresh(), 200);
+    const t2 = setTimeout(() => ScrollTrigger.refresh(), 1000);
+    const t3 = setTimeout(() => ScrollTrigger.refresh(), 2500);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, []);
+
+  // Count-up animation for stats
+  useEffect(() => {
+    const el = document.querySelector('.stat-count') as HTMLElement;
+    if (!el) return;
+    const target = parseInt(el.dataset.count || '0', 10);
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#skills',
+        start: 'top 120%',
+        once: true,
+      },
+      onUpdate: () => { el.textContent = Math.round(obj.val).toString(); },
+    });
   }, []);
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text-primary)] overflow-x-hidden">
 
-      {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] px-[clamp(24px,4vw,64px)] py-6 flex justify-between items-center mix-blend-difference">
+      <SpotlightCursor />
+
+      <nav className="fixed top-0 left-0 right-0 z-[100] px-[clamp(24px,4vw,64px)] py-6 flex justify-between items-center mix-blend-difference isolate">
         <div className="text-[1.1rem] font-extrabold tracking-tight uppercase text-white">Thomas Osayi</div>
         <ul className="hidden md:flex gap-10 list-none">
           {['Projects', 'About', 'Skills', 'Contact'].map((link) => (
             <li key={link}>
-              <a href={`#${link.toLowerCase()}`} className="text-xs font-medium tracking-wide text-white opacity-60 hover:opacity-100 transition-opacity">
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById(link.toLowerCase());
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="nav-link text-xs font-medium tracking-wide text-white opacity-60 hover:opacity-100 transition-opacity cursor-pointer bg-transparent border-none"
+              >
                 {link}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
@@ -39,15 +73,21 @@ export default function Home() {
 
         {/* 01 — HERO */}
         <section className="relative min-h-screen flex items-end pb-[clamp(60px,10vh,120px)] overflow-hidden section-light">
+          <AuroraBackground />
           <div className="container-portfolio relative z-10">
             <TextReveal as="h1" className="text-display mb-8" type="lines" immediate delay={0.3}>
-              Full-Stack Developer{'\n'}& <span className="text-accent">Entrepreneur</span>
+              Full-Stack Developer{'\n'}& <TextScramble text="Entrepreneur" className="text-accent" delay={1200} />
             </TextReveal>
             <FadeUp className="max-w-[520px]" immediate delay={0.9}>
               <p className="text-body">
                 CS student at LMU building at the intersection of code and commerce.
-                Creator of SQWAD, THG, and digital products that move.
+                Creator of SQWAD, NOM, and digital products that move.
               </p>
+            </FadeUp>
+            <FadeUp immediate delay={1.1}>
+              <MagneticButton onClick={() => { const el = document.getElementById('projects'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="mt-10">
+                View Projects <span className="arrow">→</span>
+              </MagneticButton>
             </FadeUp>
             <div className="absolute bottom-10 right-[clamp(24px,4vw,64px)] flex flex-col items-center gap-3">
               <span className="text-[0.6rem] font-semibold tracking-[0.15em] uppercase text-[var(--text-muted)] [writing-mode:vertical-lr]">Scroll</span>
@@ -65,40 +105,46 @@ export default function Home() {
               <TextReveal as="h2" className="text-h2 text-white mb-6">Products that solve real problems</TextReveal>
               <FadeUp>
                 <p className="text-body text-[var(--text-on-dark-secondary)]">
-                  From SaaS platforms to streetwear brands to consulting tools — I build full-stack products from zero to revenue.
+                  From SaaS platforms to mobile apps to consulting tools, I build full-stack products from zero to revenue.
                 </p>
               </FadeUp>
             </div>
           }
         />
 
-        {/* 03 — PROJECTS: Horizontal Scroll */}
+        {/* 03 — PROJECTS: Horizontal Scroll with 3D Tilt Cards */}
         <section id="projects" className="section-dark overflow-hidden">
-          <div className="container-portfolio pt-[clamp(60px,8vh,100px)] pb-[clamp(40px,5vh,60px)]">
+          <div className="container-portfolio pt-[clamp(60px,8vh,100px)] pb-[clamp(60px,8vh,120px)]">
             <div className="section-label text-white/30"><span className="dot" />Featured Projects</div>
             <TextReveal as="h2" className="text-h1 text-white">
               Projects that <span className="text-accent">move</span> people
             </TextReveal>
           </div>
           <HorizontalScroll>
-            {[
-              { num: '01', tag: 'SaaS Platform', title: 'SQWAD', desc: 'Creator management platform for brands and agencies.' },
-              { num: '02', tag: 'E-Commerce', title: 'The Hoop Gang', desc: 'Basketball streetwear brand with explosive TikTok Shop growth.' },
-              { num: '03', tag: 'Consulting Tool', title: 'CardIntel', desc: 'AI-powered business card scanning and outreach pipeline.' },
-              { num: '04', tag: 'Mobile App', title: 'NOM', desc: 'Food discovery app connecting people to great local eats.' },
-              { num: '05', tag: 'Creator Portal', title: 'HoopGang Portal', desc: 'Dual admin/creator-facing React app with full pipeline tracking.' },
-              { num: '06', tag: 'Client Work', title: 'Svarma AI', desc: 'B2B jewelry platform frontend built with HERO UI components.' },
-            ].map((project) => (
-              <div key={project.num} className="flex-none w-[clamp(320px,30vw,480px)] rounded-xl overflow-hidden bg-[var(--bg-dark-elevated)] skew-target transition-transform duration-600 hover:-translate-y-2">
-                <div className="w-full aspect-[4/5] bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
-                  <span className="text-[4rem] font-extralight text-white/10">{project.num}</span>
-                </div>
-                <div className="p-[clamp(20px,2vw,32px)]">
+            {projects.map((project) => (
+              <TiltCard key={project.num} className="flex-none w-[clamp(400px,45vw,720px)] skew-target">
+                <span className="absolute top-5 right-6 text-[0.85rem] font-light text-white/15 z-[2]">{project.num}</span>
+                {project.url ? (
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="block overflow-hidden">
+                    <img src={project.image} alt={`${project.title} screenshot`} className="tilt-card-image" />
+                  </a>
+                ) : (
+                  <div className="overflow-hidden">
+                    <img src={project.image} alt={`${project.title} screenshot`} className="tilt-card-image" />
+                  </div>
+                )}
+                <div className="p-[clamp(20px,2vw,32px)] relative z-[2]">
                   <div className="text-label text-accent mb-3">{project.tag}</div>
                   <h3 className="text-h3 text-white mb-3">{project.title}</h3>
                   <p className="text-sm font-normal leading-relaxed text-[var(--text-on-dark-secondary)]">{project.desc}</p>
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-4 text-xs font-semibold tracking-wide text-accent hover:text-white transition-colors">
+                      View Live <span>↗</span>
+                    </a>
+                  )}
                 </div>
-              </div>
+              </TiltCard>
             ))}
           </HorizontalScroll>
         </section>
@@ -109,19 +155,15 @@ export default function Home() {
             <div>
               <div className="section-label"><span className="dot" />About Me</div>
               <TextReveal as="h2" className="text-h1 mb-8">Code meets <span className="text-accent">commerce</span></TextReveal>
-              <FadeUp>
-                <p className="text-body mb-4">
-                  I&apos;m Thomas — a Computer Science student at Loyola Marymount University
-                  who simultaneously operates as a full-stack developer and entrepreneur.
-                </p>
-              </FadeUp>
-              <FadeUp delay={0.1}>
-                <p className="text-body">
-                  I run SQWAD (a creator management SaaS), The Hoop Gang (basketball streetwear
-                  with significant TikTok Shop revenue), and HNO Consulting — all while maintaining
-                  a full course load and freelance development practice.
-                </p>
-              </FadeUp>
+              <TextReveal as="p" className="text-body mb-4">
+                I&apos;m Thomas, a Computer Science student at Loyola Marymount University
+                who simultaneously operates as a full-stack developer and entrepreneur.
+              </TextReveal>
+              <TextReveal as="p" className="text-body">
+                I built SQWAD (a creator management SaaS), the HoopGang Creator Portal
+                (managing 50+ basketball creators on TikTok), and multiple client projects
+                for local businesses, all while maintaining a full course load.
+              </TextReveal>
             </div>
             <ClipReveal
               src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&h=930&fit=crop"
@@ -137,39 +179,40 @@ export default function Home() {
             <div className="text-center max-w-[800px] px-[clamp(24px,4vw,64px)]">
               <div className="section-label justify-center"><span className="dot" />Results</div>
               <TextReveal as="h2" className="text-h1 mb-6">Numbers that <span className="text-accent">speak</span></TextReveal>
-              <FadeUp><p className="text-body max-w-[500px] mx-auto">This section scales down revealing the stats behind it.</p></FadeUp>
             </div>
           }
           behindContent={
-            <div className="w-full">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-[clamp(30px,4vw,60px)] max-w-[1400px] mx-auto px-[clamp(24px,4vw,64px)]">
-                {[
-                  { number: '15+', label: 'Live Projects' },
-                  { number: '6', label: 'Active Ventures' },
-                  { number: '2027', label: 'Graduation Year' },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center py-[clamp(30px,4vw,60px)]">
-                    <div className="text-[clamp(3rem,7vw,6.5rem)] font-light tracking-tight leading-none text-accent mb-3">{stat.number}</div>
-                    <div className="text-xs font-medium tracking-widest uppercase text-white/30">{stat.label}</div>
-                  </div>
-                ))}
+            <div className="w-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-[clamp(5rem,15vw,12rem)] font-extralight tracking-tight leading-none text-accent">
+                  <span className="stat-count" data-count="15">0</span>+
+                </div>
+                <div className="text-sm font-medium tracking-[0.2em] uppercase text-white/30 mt-4">Projects Shipped</div>
               </div>
             </div>
           }
+          scrollHeight="200vh"
         />
 
-        {/* 06 — SKILLS */}
+        {/* 06 — SKILLS: Bento Grid */}
         <section id="skills" className="section-light py-[clamp(120px,18vh,240px)] overflow-hidden">
           <div className="container-portfolio">
             <div className="section-label"><span className="dot" />Tech Stack</div>
             <TextReveal as="h2" className="text-h1 mb-16">Tools of the <span className="text-accent">trade</span></TextReveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {['React', 'Next.js', 'TypeScript', 'Firebase', 'Node.js', 'Python', 'Tailwind', 'Figma'].map((skill) => (
-                <FadeUp key={skill}>
-                  <div className="p-8 rounded-xl bg-[var(--bg-card)] text-center hover:bg-[var(--bg-elevated)] transition-colors border border-[var(--border)]">
-                    <div className="text-lg font-medium">{skill}</div>
-                  </div>
-                </FadeUp>
+            <div className="bento-grid">
+              {[
+                { icon: '⚛', title: 'React & Next.js', desc: 'Server components, App Router, and the full React ecosystem.', span: 2 as const },
+                { icon: 'TS', title: 'TypeScript', desc: 'Type safety from schema to component.', span: 1 as const },
+                { icon: '🔥', title: 'Firebase', desc: 'Auth, Firestore, Functions. Ship fast.', span: 1 as const },
+                { icon: '🐍', title: 'Python', desc: 'AI/ML pipelines and automation.', span: 1 as const },
+                { icon: '🎨', title: 'Figma', desc: 'Design systems before code.', span: 1 as const },
+                { icon: '💨', title: 'Tailwind & Motion', desc: 'Utility styling meets declarative animation. GSAP for scroll, Motion for everything else.', span: 2 as const },
+              ].map((skill) => (
+                <BentoCard key={skill.title} span={skill.span}>
+                  <div className="bento-icon">{skill.icon}</div>
+                  <div className="bento-title">{skill.title}</div>
+                  <div className="bento-desc">{skill.desc}</div>
+                </BentoCard>
               ))}
             </div>
           </div>
@@ -179,7 +222,8 @@ export default function Home() {
         <section className="section-dark py-[clamp(120px,18vh,240px)] text-center">
           <div className="container-portfolio">
             <TextReveal as="h2" className="text-display text-white" type="chars">
-              Let&apos;s build{'\n'}something <span className="text-accent">great</span>
+              Let&apos;s build<br />
+              something <span className="text-accent whitespace-nowrap">great</span>
             </TextReveal>
           </div>
         </section>
@@ -188,18 +232,17 @@ export default function Home() {
         <section id="contact" className="section-light py-[clamp(80px,12vh,140px)] border-t border-[var(--border)]">
           <div className="container-portfolio">
             <TextReveal as="h2" className="text-h1 mb-12">Have an idea?{'\n'}Tell <span className="text-accent">me</span></TextReveal>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
-                { label: 'Email', value: 'hello@thomasosayi.com', href: 'mailto:hello@thomasosayi.com' },
-                { label: 'LinkedIn', value: 'thomas-osayi', href: 'https://linkedin.com/in/thomas-osayi' },
-                { label: 'GitHub', value: '@thomasosayi', href: 'https://github.com/thomasosayi' },
+                { label: 'Email', value: 'thomasosayi@gmail.com', href: 'mailto:thomasosayi@gmail.com' },
+                { label: 'LinkedIn', value: 'thomas-osayi', href: 'https://www.linkedin.com/in/thomas-osayi' },
+                { label: 'GitHub', value: '@ThomasOsayi', href: 'https://github.com/ThomasOsayi' },
               ].map((contact) => (
                 <FadeUp key={contact.label}>
-                  <a href={contact.href} target="_blank" rel="noopener noreferrer"
-                    className="block p-8 rounded-xl bg-[var(--bg-card)] hover:bg-[var(--bg-elevated)] transition-colors border border-[var(--border)] group">
+                  <DirectionCard href={contact.href}>
                     <div className="text-label text-accent mb-3">{contact.label}</div>
-                    <div className="text-lg font-medium group-hover:text-[var(--accent)] transition-colors">{contact.value}</div>
-                  </a>
+                    <div className="text-lg font-medium">{contact.value}</div>
+                  </DirectionCard>
                 </FadeUp>
               ))}
             </div>
@@ -207,16 +250,15 @@ export default function Home() {
         </section>
       </main>
 
-      {/* FOOTER */}
       <footer className="section-light border-t border-[var(--border)] py-[clamp(40px,6vh,60px)]">
         <div className="container-portfolio flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-xs font-medium text-[var(--text-muted)]">&copy; 2026 Thomas Osayi</div>
           <div className="flex gap-8">
             {[
-              { label: 'LinkedIn', href: 'https://linkedin.com/in/thomas-osayi' },
-              { label: 'GitHub', href: '#' },
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/thomas-osayi' },
+              { label: 'GitHub', href: 'https://github.com/ThomasOsayi' },
             ].map((link) => (
-              <a key={link.label} href={link.href} className="text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">{link.label}</a>
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">{link.label}</a>
             ))}
           </div>
         </div>

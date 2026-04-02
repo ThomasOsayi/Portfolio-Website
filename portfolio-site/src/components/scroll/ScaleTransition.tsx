@@ -11,11 +11,10 @@ interface ScaleTransitionProps {
   frontContent: React.ReactNode;
   behindContent: React.ReactNode;
   scrollHeight?: string;
-  frontBg?: string;
   behindBg?: string;
 }
 
-export default function ScaleTransition({ frontContent, behindContent, scrollHeight = '250vh', frontBg = 'bg-[var(--bg)]', behindBg = 'bg-black' }: ScaleTransitionProps) {
+export default function ScaleTransition({ frontContent, behindContent, scrollHeight = '250vh', behindBg = 'bg-black' }: ScaleTransitionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -34,7 +33,7 @@ export default function ScaleTransition({ frontContent, behindContent, scrollHei
     <section ref={sectionRef} className="relative" style={{ height: scrollHeight }}>
       <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden">
         <div className={`absolute inset-0 flex items-center ${behindBg}`} style={{ zIndex: 0 }}>{behindContent}</div>
-        <div ref={cardRef} className={`absolute inset-0 flex items-center justify-center ${frontBg} will-change-transform`} style={{ zIndex: 1 }}>{frontContent}</div>
+        <div ref={cardRef} className="absolute inset-0 flex items-center justify-center will-change-transform" style={{ zIndex: 1, backgroundColor: '#fafafa' }}>{frontContent}</div>
       </div>
     </section>
   );

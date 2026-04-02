@@ -50,7 +50,7 @@ function mapChars(node: ReactNode): ReactNode {
   return Children.map(node, (child) => {
     if (typeof child === 'string') {
       return child.split('').map((c, i) => (
-        <span key={i} className="reveal-char inline-block will-change-transform">
+        <span key={i} className="reveal-char inline-block">
           {c === ' ' ? '\u00a0' : c}
         </span>
       ));
@@ -89,11 +89,11 @@ export function TextReveal({
       const lineGroups = splitIntoLines(children);
       return lineGroups.map((line, i) => (
         <span key={i} className="block overflow-hidden">
-          <span className="reveal-line-inner inline-block will-change-transform">{line}</span>
+          <span className="reveal-line-inner inline-block">{line}</span>
         </span>
       ));
     }
-    return <span className="reveal-block-inner inline-block will-change-transform">{children}</span>;
+    return <span className="reveal-block-inner inline-block">{children}</span>;
   }, [type, children]);
 
   useGSAP(
@@ -112,7 +112,7 @@ export function TextReveal({
         } else {
           gsap.fromTo(charEls, from, {
             ...to,
-            scrollTrigger: { trigger: root, start: 'top 88%', toggleActions: 'play none none none' },
+            scrollTrigger: { trigger: root, start: 'top 88%', once: true },
           });
         }
         return;
@@ -133,7 +133,7 @@ export function TextReveal({
         } else {
           gsap.fromTo(lineInners, from, {
             ...to,
-            scrollTrigger: { trigger: root, start: 'top 88%', toggleActions: 'play none none none' },
+            scrollTrigger: { trigger: root, start: 'top 88%', once: true },
           });
         }
       }
