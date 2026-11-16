@@ -47,7 +47,7 @@ export default function Motion() {
     }
 
     // pointer + custom cursor (hidden over the texture so the material itself is the cursor feedback)
-    const cursor = $('.cursor')!, dot = $('.cursor-dot')!, cursorLabel = cursor.querySelector('span')!;
+    const cursor = $('.cursor')!, dot = $('.cursor-dot')!;
     let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
     let engine: typeof import('@/lib/textureEngine') | null = null;
     on(window, 'pointermove', ((e: PointerEvent) => {
@@ -58,18 +58,15 @@ export default function Motion() {
       document.body.classList.add('has-cursor');
       let id = 0;
       const loop = () => {
-        cx += (mx - cx) * 0.18; cy += (my - cy) * 0.18;
-        cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-        dot.style.transform = `translate(${mx}px, ${my}px)`;
+        // ring trails the dot only slightly so it reads as one cursor
+        cx += (mx - cx) * 0.42; cy += (my - cy) * 0.42;
+        cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+        dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
         id = requestAnimationFrame(loop);
       };
       loop();
       cleanups.push(() => { cancelAnimationFrame(id); document.body.classList.remove('has-cursor'); });
-      $$('[data-cursor]').forEach((el) => {
-        on(el, 'pointerenter', () => { cursorLabel.textContent = el.dataset.cursor || ''; cursor.classList.add('is-label'); });
-        on(el, 'pointerleave', () => cursor.classList.remove('is-label'));
-      });
-      $$('a:not([data-cursor]), button, [data-cursor-link]').forEach((el) => {
+      $$('a, button, [data-cursor], [data-cursor-link]').forEach((el) => {
         on(el, 'pointerenter', () => cursor.classList.add('is-link'));
         on(el, 'pointerleave', () => cursor.classList.remove('is-link'));
       });
@@ -186,7 +183,8 @@ export default function Motion() {
         old.canvas.remove();
       }
       try {
-        hero = new engine.TextureWord(stage, key, { bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44 });
+        // capped resolution and strand count keep the hero at a steady frame rate
+        hero = new engine.TextureWord(stage, key, { bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.6 : 0.55 });
         hero.build('THOMAS');
         engine.instances.push(hero);
       } catch {
@@ -290,8 +288,9 @@ export default function Motion() {
       const stickyTop = (i: number) => innerHeight * 0.14 + i * 26;
       cards.forEach((c, i) => {
         if (i === cards.length - 1) return;
-        gsap.fromTo(c, { scale: 1, filter: 'brightness(1)' }, {
-          scale: 0.94 + i * 0.01, filter: 'brightness(0.55)', ease: 'none', immediateRender: false,
+        // dim with an overlay's opacity (GPU) instead of a CSS filter, which repaints every frame
+        gsap.fromTo(c, { scale: 1, '--dim': 0 }, {
+          scale: 0.94 + i * 0.01, '--dim': 0.45, ease: 'none', immediateRender: false,
           scrollTrigger: {
             trigger: cards[i + 1],
             start: () => `top ${stickyTop(i) + c.offsetHeight}px`,

@@ -1,4 +1,6 @@
 import Motion from '@/components/Motion';
+import Icon from '@/components/Icon';
+import GlassCube from '@/components/GlassCube';
 import { clients, experience, products, ringWords, stackCards } from '@/data/projects';
 import { CALENDLY_URL } from '@/data/inquiry';
 
@@ -52,9 +54,9 @@ export default function Home() {
           <div className="hero-foot">
             <div className="hero-role">Full-Stack Developer<br />&amp; <em>Entrepreneur</em></div>
             <div className="material">
-              <button type="button" id="mat-prev" aria-label="Previous material">←</button>
+              <button type="button" id="mat-prev" aria-label="Previous material"><Icon name="arrow-left" /></button>
               <span className="material-name" id="mat-name" aria-live="polite">Liquid metal · 01/11</span>
-              <button type="button" id="mat-next" aria-label="Next material">→</button>
+              <button type="button" id="mat-next" aria-label="Next material"><Icon name="arrow-right" /></button>
             </div>
             <p className="hero-line">Building at the intersection of code and commerce. Tap the name to change its material.</p>
           </div>
@@ -105,7 +107,7 @@ export default function Home() {
                   <>
                     <div className="card-meta">
                       <span className="card-title">{p.title}</span>
-                      <span className="label">{p.urlLabel ? `${p.urlLabel} ↗` : p.tag}</span>
+                      <span className="label">{p.urlLabel ? <>{p.urlLabel} <Icon name="arrow-up-right" /></> : p.tag}</span>
                     </div>
                     <p className="card-desc">{p.desc}</p>
                   </>
@@ -173,12 +175,12 @@ export default function Home() {
           <span className="label">Contact · Open to new projects</span>
           <h2 className="big-cta split">Let&apos;s <em>build</em><br />something.</h2>
           <div className="contact-row">
-            <a className="magnet" href="/start" data-magnetic data-cursor-link><span>Start a<br />project</span></a>
+            <GlassCube href="/start" />
             <div className="links">
-              <a href={CALENDLY_URL} target="_blank" rel="noopener" data-cursor-link>Book a 30 min call ↗</a>
+              <a href={CALENDLY_URL} target="_blank" rel="noopener" data-cursor-link>Book a 30 min call <Icon name="arrow-up-right" /></a>
               <button type="button" id="copy-email" data-cursor-link>{EMAIL}</button>
-              <a href="https://www.linkedin.com/in/thomas-osayi" target="_blank" rel="noopener" data-cursor-link>LinkedIn ↗</a>
-              <a href="https://github.com/ThomasOsayi" target="_blank" rel="noopener" data-cursor-link>GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/thomas-osayi" target="_blank" rel="noopener" data-cursor-link>LinkedIn <Icon name="arrow-up-right" /></a>
+              <a href="https://github.com/ThomasOsayi" target="_blank" rel="noopener" data-cursor-link>GitHub <Icon name="arrow-up-right" /></a>
               <span className="copied" id="copied" hidden>Email copied</span>
             </div>
           </div>

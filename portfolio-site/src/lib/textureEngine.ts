@@ -392,7 +392,7 @@
     build(word) {
       const { gl, mat, stage, canvas } = this;
       const rect = stage.getBoundingClientRect();
-      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const dpr = Math.min(devicePixelRatio || 1, this.opts.maxDpr || 2);
       const w = Math.max(2, Math.round(rect.width * dpr)), h = Math.max(2, Math.round(rect.height * dpr));
       canvas.width = w; canvas.height = h;
       this.w = w; this.h = h; this.dpr = dpr;
@@ -436,7 +436,7 @@
 
       if (mat.kind === 0) {
         let area = 0; for (let i = 0; i < cov.length; i++) area += cov[i]; area *= q * q;
-        const cap = rect.width < 700 ? 60000 : 160000;
+        const cap = Math.round((rect.width < 700 ? 60000 : 160000) * (this.opts.strandScale || 1));
         const count = Math.min(cap, Math.round(area / mat.density));
         const data = new Float32Array(count * 7), baseLen = size * mat.len;
         const bx0 = Math.max(0, Math.floor(x - m.actualBoundingBoxLeft)), bx1 = Math.min(w - 1, Math.ceil(x + m.actualBoundingBoxRight));

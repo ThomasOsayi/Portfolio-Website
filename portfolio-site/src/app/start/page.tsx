@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Inquiry from '@/components/Inquiry';
+import { answersFromParams } from '@/data/inquiry';
 
 export const metadata: Metadata = {
   title: 'Start a project | Thomas Osayi',
@@ -7,6 +8,6 @@ export const metadata: Metadata = {
   alternates: { canonical: '/start' },
 };
 
-export default function StartPage() {
-  return <Inquiry />;
+export default async function StartPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  return <Inquiry initialAnswers={answersFromParams(await searchParams)} />;
 }

@@ -50,3 +50,16 @@ export const steps: Step[] = [
 ];
 
 export const heardFrom = ['LinkedIn', 'Referral', 'LMU', 'Google', 'SQWAD', 'Other'];
+
+// Preselect answers from a link, e.g. /start?need=Mobile%20app&budget=$5,000%20to%20$10,000
+export function answersFromParams(q: Record<string, string | string[] | undefined>): Record<string, string[]> {
+  const pre: Record<string, string[]> = {};
+  for (const s of steps) {
+    if (s.kind !== 'multi' && s.kind !== 'single') continue;
+    const raw = q[s.id];
+    const vals = (Array.isArray(raw) ? raw : raw ? [raw] : []).flatMap((v) => v.split(',')).map((v) => v.trim().toLowerCase());
+    const hit = s.options.filter((o) => vals.includes(o.toLowerCase()));
+    if (hit.length) pre[s.id] = s.kind === 'single' ? [hit[0]] : hit;
+  }
+  return pre;
+}
