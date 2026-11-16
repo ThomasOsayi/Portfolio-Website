@@ -30,41 +30,43 @@ export default function GlassCube({ href }: { href: string }) {
       }
       renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.05;
+      renderer.toneMappingExposure = 1;
       stage.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
       const pmrem = new THREE.PMREMGenerator(renderer);
       scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-      scene.environmentIntensity = 0.6;
+      scene.environmentIntensity = 0.45;
 
       const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
       camera.position.set(0, 0, 6.2);
 
-      // a small painted backdrop (page color plus drifting colored light) that the glass refracts;
-      // it matches the section background, so the canvas edge is invisible
-      const bgCanvas = document.createElement('canvas'); bgCanvas.width = bgCanvas.height = 256;
+      // what sits "behind" the glass: the page color, a faint dot grid and drifting text. The cube is
+      // fully clear, so you read this straight through it, bent only at the edges.
+      const S = 512;
+      const bgCanvas = document.createElement('canvas'); bgCanvas.width = bgCanvas.height = S;
       const bg = bgCanvas.getContext('2d')!;
       const bgTex = new THREE.CanvasTexture(bgCanvas);
       bgTex.colorSpace = THREE.SRGBColorSpace;
       scene.background = bgTex;
-      const LIGHTS: [string, number, number][] = [['75,85,255', 0.95, 0.9], ['255,95,162', 0.8, 0.8], ['61,220,132', 0.55, 0.7], ['233,230,223', 0.9, 0.35]];
+      const heavy = getComputedStyle(document.documentElement).getPropertyValue('--f-heavy').trim() || 'Arial Black';
+      const WORD = 'START A PROJECT  ';
       const paint = (t: number) => {
-        bg.globalCompositeOperation = 'source-over';
-        bg.fillStyle = '#0b0b0c'; bg.fillRect(0, 0, 256, 256);
-        bg.globalCompositeOperation = 'lighter';
-        LIGHTS.forEach(([rgb, alpha, r], i) => {
-          const a = t * (0.35 + i * 0.08) + i * 1.7;
-          const x = 128 + Math.cos(a) * 58 * r, y = 128 + Math.sin(a * 1.3) * 50 * r, rad = i === 3 ? 34 : 70;
-          const g = bg.createRadialGradient(x, y, 0, x, y, rad);
-          g.addColorStop(0, `rgba(${rgb},${alpha})`); g.addColorStop(1, `rgba(${rgb},0)`);
-          bg.fillStyle = g; bg.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+        bg.fillStyle = '#0b0b0c'; bg.fillRect(0, 0, S, S);
+        bg.fillStyle = 'rgba(233,230,223,0.16)';
+        for (let y = 8; y < S; y += 22) for (let x = 8; x < S; x += 22) bg.fillRect(x, y, 2, 2);
+        bg.font = `400 46px ${heavy}`;
+        bg.textBaseline = 'middle';
+        const w = bg.measureText(WORD).width;
+        [[150, 1, 0.9], [256, -1, 1], [362, 1, 0.9]].forEach(([y, dir, a], i) => {
+          bg.fillStyle = i === 1 ? `rgba(233,230,223,${a})` : `rgba(75,85,255,${a})`;
+          const off = ((t * 28 * dir + i * 130) % w + w) % w;
+          for (let x = -off; x < S; x += w) bg.fillText(WORD, x, y);
         });
-        // fade the edges back to the page color
-        bg.globalCompositeOperation = 'source-over';
-        const v = bg.createRadialGradient(128, 128, 70, 128, 128, 128);
+        // fade the edges back to the page color so the canvas has no visible border
+        const v = bg.createRadialGradient(S / 2, S / 2, S * 0.3, S / 2, S / 2, S / 2);
         v.addColorStop(0, 'rgba(11,11,12,0)'); v.addColorStop(1, 'rgba(11,11,12,1)');
-        bg.fillStyle = v; bg.fillRect(0, 0, 256, 256);
+        bg.fillStyle = v; bg.fillRect(0, 0, S, S);
         bgTex.needsUpdate = true;
       };
 
@@ -72,35 +74,32 @@ export default function GlassCube({ href }: { href: string }) {
       const mat = new THREE.MeshPhysicalMaterial({
         color: 0xffffff,
         metalness: 0,
-        roughness: 0.06,
+        roughness: 0,
         transmission: 1,
-        thickness: 0.9,
-        ior: 1.45,
-        dispersion: 4,
-        iridescence: 0.35,
-        iridescenceIOR: 1.3,
+        thickness: 0.55,
+        ior: 1.5,
+        dispersion: 0.35,
+        specularIntensity: 1,
         clearcoat: 1,
-        clearcoatRoughness: 0.04,
-        attenuationColor: new THREE.Color(0xdfe3ff),
-        attenuationDistance: 3,
-        envMapIntensity: 0.7,
+        clearcoatRoughness: 0,
+        envMapIntensity: 0.55,
       });
-      // a gentle surface ripple makes the glass read as liquid rather than solid
+      // a slow, small surface ripple so the glass reads as liquid
       mat.onBeforeCompile = (shader) => {
         shader.uniforms.uTime = uniforms.uTime;
         shader.vertexShader = 'uniform float uTime;\n' + shader.vertexShader.replace(
           '#include <begin_vertex>',
           `#include <begin_vertex>
-           float w = sin(position.y * 3.2 + uTime * 1.6) * 0.035 + sin(position.x * 2.6 - uTime * 1.2) * 0.03;
+           float w = sin(position.y * 3.0 + uTime * 1.4) * 0.022 + sin(position.x * 2.4 - uTime * 1.1) * 0.018;
            transformed += normal * w;`,
         );
       };
-      const cube = new THREE.Mesh(new RoundedBoxGeometry(1.55, 1.55, 1.55, 10, 0.26), mat);
+      const cube = new THREE.Mesh(new RoundedBoxGeometry(1.6, 1.6, 1.6, 10, 0.24), mat);
       cube.rotation.set(0.5, 0.6, 0);
       scene.add(cube);
 
-      const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 4, 5); scene.add(key);
-      const rim = new THREE.DirectionalLight(0x8f96ff, 1.6); rim.position.set(-4, -2, -3); scene.add(rim);
+      // only bright edge highlights, no fill light, so the faces stay clear
+      const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 4, 5); scene.add(key);
 
       const resize = () => {
         const s = stage.clientWidth;

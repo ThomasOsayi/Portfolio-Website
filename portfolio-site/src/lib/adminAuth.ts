@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 // Only a salted scrypt hash of the admin password lives in the repo. Set ADMIN_PASSWORD in
 // Vercel to replace it without a code change.
-const PASSWORD_HASH = 'scrypt$6a091ff889df2afae47ed215a2f868f2$15af1179a9e2904e38aedb2f9ec5f059262669ff35ecdf5811ade9a78d51c72f';
+const PASSWORD_HASH = 'scrypt$fcc994524f3f61aad8c4e5ff4f56e7a3$65ab9a69aeb3c8c0870bffbd2ab2ccc1e0ccb13a839a02311d149fb609d8b166';
 const COOKIE = 'to_admin';
 const DAY = 24 * 60 * 60 * 1000;
 

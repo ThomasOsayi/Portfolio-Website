@@ -15,6 +15,8 @@ async function login(form: FormData) {
     await startSession();
     redirect('/admin');
   }
+  // slow down repeated guesses
+  await new Promise((r) => setTimeout(r, 1500));
   redirect('/admin?error=1');
 }
 
