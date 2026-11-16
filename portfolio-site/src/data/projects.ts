@@ -1,67 +1,89 @@
-export interface Project {
-  num: string;
-  tag: string;
+// All site copy lives here so the layout never needs touching to update content.
+
+export interface Product {
   title: string;
+  tag: string;
   desc: string;
-  image: string;
   url?: string;
+  urlLabel?: string;
+  image?: string;
+  alt?: string;
+  kind?: 'nom';
 }
 
-export const projects: Project[] = [
+export const products: Product[] = [
   {
-    num: '01',
-    tag: 'Creator Management',
-    title: 'TheHoopGang',
-    desc: 'Creator portal for basketball\'s biggest streetwear brand. Manage 50+ creators, track content, and handle refundable gear gifting — all in one dashboard.',
-    image: '/projects/hoopgang.png',
-    url: 'https://thehoopgang.xyz',
-  },
-  {
-    num: '02',
-    tag: 'SaaS Platform',
     title: 'SQWAD',
-    desc: 'Creator management SaaS for brands and agencies. Track UGC programs, gifting, content, and Meta Ads attribution from one platform.',
-    image: '/projects/sqwad.png',
-    url: 'https://sqwad.io',
+    tag: 'SaaS · Founder',
+    desc: 'UGC creator program software for Shopify brands. Applications, shipping, content, competitions and payouts on a branded portal, with every Meta ad traced back to the creator who made the sale.',
+    url: 'https://joinsqwad.com',
+    urlLabel: 'joinsqwad.com',
+    image: '/work/sqwad.jpg',
+    alt: 'SQWAD homepage: Your creators drive sales. Now you can prove it.',
   },
   {
-    num: '03',
-    tag: 'Restaurant Website',
-    title: 'New York Nook',
-    desc: 'Fine Russian cuisine in Hollywood. Full reservation booking system and online pickup ordering built into a premium editorial design.',
-    image: '/projects/newyorknook.png',
-    url: 'https://new-york-nook.vercel.app',
+    title: 'TheHoopGang',
+    tag: 'Creator portal',
+    desc: 'Creator portal for a basketball streetwear brand. Manages 50+ creators, tracks content and runs refundable gear gifting.',
+    url: 'https://thehoopgang.xyz',
+    urlLabel: 'thehoopgang.xyz',
+    image: '/work/hoopgang.jpg',
+    alt: 'TheHoopGang creator portal landing page',
   },
   {
-    num: '04',
-    tag: 'Local Business',
-    title: 'Majestic Car Wash',
-    desc: 'Landing page with integrated subscription management — membership verification, tracking, and payment handling for a 40-year LA institution.',
-    image: '/projects/majestic.png',
-    url: 'https://majestic-car-wash.vercel.app',
+    title: 'NOM',
+    tag: 'Mobile app · LMU Tech & Digital Ventures',
+    desc: 'Food discovery app built in React Native, Expo and Firebase. Share restaurant reviews with photos, ratings and comments in a social feed.',
+    kind: 'nom',
   },
   {
-    num: '05',
-    tag: 'B2B Platform',
-    title: 'Artistic Printing',
-    desc: 'End-to-end quote management system for a commercial printer. Self-updatable site with service catalog, portfolio, and client intake pipeline.',
-    image: '/projects/artistic.png',
-    url: 'https://www.artisticprinting.com',
-  },
-  {
-    num: '06',
-    tag: 'Beauty & Wellness',
-    title: 'Astiglow',
-    desc: 'Premium waxing studio website with online booking integration, service packages, and a clean editorial aesthetic for a luxury LA brand.',
-    image: '/projects/astiglow.png',
-    url: 'https://asti-glow.vercel.app',
-  },
-  {
-    num: '07',
-    tag: 'Operations Tool',
     title: 'FieldOps',
-    desc: 'Job scheduling platform with Outlook Calendar sync. Manage field operations, contacts, and documents from a single dashboard.',
-    image: '/projects/fieldops.png',
+    tag: 'Operations tool',
+    desc: 'Job scheduling platform with Outlook Calendar sync for managing field operations, contacts and documents.',
     url: 'https://fieldopapp.com',
+    urlLabel: 'fieldopapp.com',
+    image: '/work/fieldops.jpg',
+    alt: 'FieldOps sign-in and scheduling dashboard',
   },
 ];
+
+export interface Client {
+  name: string;
+  accent: string;
+  desc: string;
+  url: string;
+  image: string;
+}
+
+export const clients: Client[] = [
+  { name: 'New York', accent: 'Nook', desc: 'Russian restaurant, Hollywood. Reservations and pickup ordering.', url: 'https://new-york-nook.vercel.app', image: '/work/newyorknook.jpg' },
+  { name: 'Majestic', accent: 'Car Wash', desc: '40-year LA business. Memberships, tracking and payments.', url: 'https://majestic-car-wash.vercel.app', image: '/work/majestic.jpg' },
+  { name: 'Artistic', accent: 'Printing', desc: 'Commercial printer. Quote management and client intake.', url: 'https://www.artisticprinting.com', image: '/work/artistic.jpg' },
+  { name: 'Asti', accent: 'glow', desc: 'Waxing studio. Online booking and service packages.', url: 'https://asti-glow.vercel.app', image: '/work/astiglow.jpg' },
+];
+
+export interface Role {
+  when: string;
+  org: string;
+  role: string;
+  what: string;
+}
+
+export const experience: Role[] = [
+  { when: 'Now', org: 'SQWAD', role: 'Founder & software engineer', what: 'Building the platform and signing the brands that run their creator programs on it.' },
+  { when: 'Nov 2025 to now', org: 'The Hoop Gang', role: 'Software engineer', what: 'Full-stack e-commerce and creator platform for a streetwear brand expanding to Japan and France. Next.js, TypeScript, Prisma, Postgres.' },
+  { when: 'Oct 2025 to now', org: 'LMU Tech & Digital Ventures', role: 'Software engineer', what: 'Built NOM end to end in React Native and Firebase, from an 11-screen onboarding flow to camera uploads.' },
+  { when: 'Ongoing', org: 'HNO Consulting', role: 'Freelance web developer', what: 'Sites and booking, ordering and quote tools for LA businesses.' },
+  { when: '2027', org: 'Loyola Marymount University', role: 'B.S. Computer Science', what: 'Expected May 2027.' },
+];
+
+export const stackCards = [
+  { label: '01 · Frontend', title: 'React & Next.js', text: 'Server components, the App Router and the wider React ecosystem.', bg: '#1d1e24', fg: 'var(--bone)' },
+  { label: '02 · Mobile', title: 'React Native', text: 'Expo apps with camera, uploads and native navigation.', bg: '#2a2fd8', fg: '#fff' },
+  { label: '03 · Language', title: 'TypeScript', text: 'Type safety from the database schema to the component.', bg: '#e9e6df', fg: '#0b0b0c' },
+  { label: '04 · Backend', title: 'Firebase & Postgres', text: 'Auth, Firestore and Functions, or Supabase and Prisma when the data is relational.', bg: '#24302a', fg: '#e9f3ec' },
+  { label: '05 · Design', title: 'Figma', text: 'Design systems before a line of code.', bg: '#3a1f2a', fg: '#f6dfe7' },
+  { label: '06 · Motion', title: 'GSAP & WebGL', text: 'Scroll choreography, shaders and everything that moves on this page.', bg: '#121214', fg: 'var(--bone)' },
+];
+
+export const ringWords = ['React', 'Next.js', 'TypeScript', 'React Native', 'Expo', 'Firebase', 'Supabase', 'Postgres', 'Prisma', 'Python', 'Figma', 'GSAP', 'WebGL', 'Stripe', 'Vercel'];
