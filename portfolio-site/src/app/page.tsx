@@ -1,5 +1,6 @@
 import Motion from '@/components/Motion';
 import { clients, experience, products, ringWords, stackCards } from '@/data/projects';
+import { CALENDLY_URL } from '@/data/inquiry';
 
 const EMAIL = 'thomasosayi@gmail.com';
 
@@ -40,7 +41,7 @@ export default function Home() {
           <a href="#work" data-link>Work</a>
           <a href="#about" data-link>About</a>
           <a href="#stack" data-link>Stack</a>
-          <a href="#contact" data-link>Contact</a>
+          <a href="/start">Hire me</a>
         </div>
       </nav>
 
@@ -65,7 +66,7 @@ export default function Home() {
           </p>
           <div className="facts">
             <div className="fact"><b data-count="8">8</b><span>Products and client sites shipped</span></div>
-            <div className="fact"><b data-count="500" data-prefix="$" data-suffix="K">$500K</b><span>Creator-attributed revenue tracked on SQWAD</span></div>
+            <div className="fact"><b data-count="500" data-prefix="$" data-suffix="K+">$500K+</b><span>Creator-attributed revenue tracked on SQWAD</span></div>
             <div className="fact"><b data-count="50" data-suffix="+">50+</b><span>Creators managed on the HoopGang portal</span></div>
           </div>
         </section>
@@ -169,11 +170,12 @@ export default function Home() {
         </section>
 
         <section className="contact gutter" id="contact">
-          <span className="label">Contact</span>
+          <span className="label">Contact · Open to new projects</span>
           <h2 className="big-cta split">Let&apos;s <em>build</em><br />something.</h2>
           <div className="contact-row">
-            <a className="magnet" href={`mailto:${EMAIL}`} data-magnetic data-cursor-link><span>Email me</span></a>
+            <a className="magnet" href="/start" data-magnetic data-cursor-link><span>Start a<br />project</span></a>
             <div className="links">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener" data-cursor-link>Book a 30 min call ↗</a>
               <button type="button" id="copy-email" data-cursor-link>{EMAIL}</button>
               <a href="https://www.linkedin.com/in/thomas-osayi" target="_blank" rel="noopener" data-cursor-link>LinkedIn ↗</a>
               <a href="https://github.com/ThomasOsayi" target="_blank" rel="noopener" data-cursor-link>GitHub ↗</a>
