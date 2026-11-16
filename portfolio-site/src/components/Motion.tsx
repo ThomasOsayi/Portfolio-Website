@@ -286,9 +286,20 @@ export default function Motion() {
       }
 
       const cards = gsap.utils.toArray<HTMLElement>('.skill');
+      // a card only dims while the next one is actually sliding over it, so the card you are reading stays fully lit
+      const stickyTop = (i: number) => innerHeight * 0.14 + i * 26;
       cards.forEach((c, i) => {
         if (i === cards.length - 1) return;
-        gsap.to(c, { scale: 0.92 + i * 0.012, filter: 'brightness(0.6)', ease: 'none', scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 30%', scrub: true } });
+        gsap.fromTo(c, { scale: 1, filter: 'brightness(1)' }, {
+          scale: 0.94 + i * 0.01, filter: 'brightness(0.55)', ease: 'none', immediateRender: false,
+          scrollTrigger: {
+            trigger: cards[i + 1],
+            start: () => `top ${stickyTop(i) + c.offsetHeight}px`,
+            end: () => `top ${stickyTop(i + 1) + 1}px`,
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
       });
     };
 

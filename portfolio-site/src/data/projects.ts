@@ -22,6 +22,15 @@ export const products: Product[] = [
     alt: 'SQWAD homepage: Your creators drive sales. Now you can prove it.',
   },
   {
+    title: 'Guardian MindCare',
+    tag: 'Healthcare platform',
+    desc: 'Therapy practice platform that matches clients with licensed therapists and supervised associates who take their insurance, with role-based portals for therapists, supervisors, trainees, clients and admins.',
+    url: 'https://www.guardianmindcare.com',
+    urlLabel: 'guardianmindcare.com',
+    image: '/work/guardian.jpg',
+    alt: 'Guardian MindCare homepage: Real therapy, in network with your plan, with a therapist search by insurance',
+  },
+  {
     title: 'TheHoopGang',
     tag: 'Creator portal',
     desc: 'Creator portal for a basketball streetwear brand. Manages 50+ creators, tracks content and runs refundable gear gifting.',
@@ -37,13 +46,11 @@ export const products: Product[] = [
     kind: 'nom',
   },
   {
-    title: 'FieldOps',
-    tag: 'Operations tool',
-    desc: 'Job scheduling platform with Outlook Calendar sync for managing field operations, contacts and documents.',
-    url: 'https://fieldopapp.com',
-    urlLabel: 'fieldopapp.com',
-    image: '/work/fieldops.jpg',
-    alt: 'FieldOps sign-in and scheduling dashboard',
+    title: 'THG Brain',
+    tag: 'Internal data platform',
+    desc: "Every number The Hoop Gang runs on in one place: sales, email, ads, support inbox and the creator portal, synced and searchable, and queryable straight from the team's own Claude.",
+    image: '/work/thgbrain.jpg',
+    alt: 'THG Brain sign-in: Every number THG runs on, in one place',
   },
 ];
 
@@ -55,10 +62,15 @@ export interface Client {
   image: string;
 }
 
+// ordered by weight: funded startups and healthcare first, local businesses after
 export const clients: Client[] = [
+  { name: 'Ven', accent: 'Care', desc: 'Health startup. Wall-mounted epinephrine stations for venues, like an AED for allergic reactions.', url: 'https://www.vencarehealth.com', image: '/work/vencare.jpg' },
+  { name: 'Pacific', accent: 'Harbor', desc: 'Medical group. Physician-led executive physicals in Torrance and the South Bay.', url: 'https://phmg-executive-physical.vercel.app', image: '/work/phmg.jpg' },
+  { name: 'SCOPRO', accent: 'Creators', desc: 'Creator program for a coaching board brand. Buy, post one video, get refunded, earn on sales.', url: 'https://www.scoprocreatorportal.com', image: '/work/scopro.jpg' },
+  { name: 'Serenity', accent: 'Institute', desc: 'Live, Zoom-based certification program for intervention professionals.', url: 'https://serenityintervention.com', image: '/work/serenity.jpg' },
   { name: 'New York', accent: 'Nook', desc: 'Russian restaurant, Hollywood. Reservations and pickup ordering.', url: 'https://new-york-nook.vercel.app', image: '/work/newyorknook.jpg' },
-  { name: 'Majestic', accent: 'Car Wash', desc: '40-year LA business. Memberships, tracking and payments.', url: 'https://majestic-car-wash.vercel.app', image: '/work/majestic.jpg' },
   { name: 'Artistic', accent: 'Printing', desc: 'Commercial printer. Quote management and client intake.', url: 'https://www.artisticprinting.com', image: '/work/artistic.jpg' },
+  { name: 'Field', accent: 'Ops', desc: 'Job scheduling with Outlook Calendar sync for field teams.', url: 'https://fieldopapp.com', image: '/work/fieldops.jpg' },
   { name: 'Asti', accent: 'glow', desc: 'Waxing studio. Online booking and service packages.', url: 'https://asti-glow.vercel.app', image: '/work/astiglow.jpg' },
 ];
 

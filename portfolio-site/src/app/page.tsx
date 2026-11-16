@@ -62,10 +62,10 @@ export default function Home() {
 
         <section className="statement gutter" id="about">
           <p className="reveal-words">
-            I&apos;m a CS student at LMU who builds full-stack products and runs a business on the side. *SQWAD,* the *HoopGang* creator portal, the *NOM* app and a run of sites for LA businesses, all shipped while carrying a *full* course load.
+            I&apos;m a CS student at LMU who builds full-stack products and runs a business on the side. *SQWAD,* the *HoopGang* creator portal, the *NOM* app and sites for health startups and LA businesses, all shipped while carrying a *full* course load.
           </p>
           <div className="facts">
-            <div className="fact"><b data-count="8">8</b><span>Products and client sites shipped</span></div>
+            <div className="fact"><b data-count="20" data-suffix="+">20+</b><span>Products and client sites shipped</span></div>
             <div className="fact"><b data-count="500" data-prefix="$" data-suffix="K+">$500K+</b><span>Creator-attributed revenue tracked on SQWAD</span></div>
             <div className="fact"><b data-count="50" data-suffix="+">50+</b><span>Creators managed on the HoopGang portal</span></div>
           </div>
