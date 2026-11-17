@@ -5,7 +5,9 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
   return (
     <div className="seo">
       <header className="seo-top gutter">
-        <Link href="/" className="seo-brand">Thomas Osayi</Link>
+        {/* full load into the homepage so its animation layer starts clean */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+        <a href="/" className="seo-brand">Thomas Osayi</a>
         <nav aria-label="Main">
           <Link href="/services">Services</Link>
           <Link href="/projects">Work</Link>
@@ -16,7 +18,8 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
       </header>
       {crumbs && (
         <nav aria-label="Breadcrumb" className="seo-crumbs gutter label">
-          <Link href="/">Home</Link>
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/">Home</a>
           {crumbs.map((c) => (
             <span key={c.href}> / <Link href={c.href}>{c.label}</Link></span>
           ))}

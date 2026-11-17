@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Motion from '@/components/Motion';
 import Icon from '@/components/Icon';
 import GlassCube from '@/components/GlassCube';
@@ -178,7 +177,9 @@ export default function Home() {
           <footer className="foot">
             <span className="label">© 2026 Thomas Osayi</span>
             <nav className="label foot-links" aria-label="More">
-              <Link href="/services">Services</Link> · <Link href="/websites-for">Industries</Link> · <Link href="/fix">Fix AI-built apps</Link> · <Link href="/tools/website-cost-calculator">Cost calculator</Link> · <Link href="/projects">Case studies</Link> · <Link href="/blog">Writing</Link>
+              {/* plain anchors on purpose: the homepage's animation layer rewrites DOM that React owns, so client-side navigation away from it crashes */}
+              {/* eslint-disable @next/next/no-html-link-for-pages */}
+              <a href="/services">Services</a> · <a href="/websites-for">Industries</a> · <a href="/fix">Fix AI-built apps</a> · <a href="/tools/website-cost-calculator">Cost calculator</a> · <a href="/projects">Case studies</a> · <a href="/blog">Writing</a>
             </nav>
             <span className="label">Los Angeles · LMU</span>
           </footer>
