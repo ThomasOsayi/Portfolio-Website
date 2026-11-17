@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Archivo_Black, Instrument_Serif, Inter_Tight, JetBrains_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const display = Inter_Tight({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--f-display', display: 'swap' });
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
