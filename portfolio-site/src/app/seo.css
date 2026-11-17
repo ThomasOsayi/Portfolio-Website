@@ -69,3 +69,18 @@
 .seo-short { border: 1px solid var(--line); border-left: 3px solid var(--cobalt); border-radius: 10px; background: var(--graphite); padding: 18px 22px; margin: 0 0 32px; max-width: 68ch; }
 .seo-short p { margin: 6px 0 0; font-size: 18px; line-height: 1.6; }
 .seo-byline { color: var(--muted); font-size: 15px; max-width: 68ch; margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+/* long-form article pieces */
+.seo-prose h2 { scroll-margin-top: 24px; }
+.seo-prose h3 { font-size: 20px; line-height: 1.3; margin: 26px 0 8px; }
+.seo-fig { margin: 28px 0; }
+.seo-fig img, .seo-fig video { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--graphite); }
+.seo-fig figcaption { margin-top: 8px; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--fg) 62%, transparent); }
+.seo-tip { border: 1px solid var(--line); border-left: 3px solid var(--cobalt); border-radius: 10px; background: var(--graphite); padding: 14px 18px; margin: 0 0 18px; }
+.seo-tip p { margin: 4px 0 0; }
+.seo-take, .seo-toc { border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin: 0 0 24px; max-width: 68ch; }
+.seo-take { background: var(--graphite); }
+.seo-take ul, .seo-toc ol { margin: 8px 0 0; padding-left: 20px; font-size: 17px; line-height: 1.55; }
+.seo-take li, .seo-toc li { margin: 5px 0; }
+.seo-toc a { text-decoration: none; }
+.seo-toc a:hover { text-decoration: underline; }

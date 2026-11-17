@@ -18,6 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE}/projects`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     ...caseStudies.map((c) => ({ url: `${SITE}/projects/${c.slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 })),
     { url: `${SITE}/blog`, lastModified: latest, changeFrequency: 'weekly', priority: 0.7 },
-    ...posts.map((p) => ({ url: `${SITE}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: 'yearly' as const, priority: 0.6 })),
+    ...posts.map((p) => ({ url: `${SITE}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), changeFrequency: 'yearly' as const, priority: 0.6 })),
   ];
 }

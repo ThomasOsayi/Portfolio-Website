@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Shell, Prose, JsonLd } from '@/components/seo/Shell';
+import { Shell, Prose, JsonLd, proseHeadings, readingMinutes } from '@/components/seo/Shell';
 import { Faqs, faqLd } from '@/components/seo/CaseCards';
 import { posts, postBySlug, serviceBySlug, SITE } from '@/data/seo';
 
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: p.description,
     keywords: p.keywords,
     alternates: { canonical: `/blog/${p.slug}` },
-    openGraph: { type: 'article', title: p.title, description: p.description, url: `${SITE}/blog/${p.slug}`, publishedTime: p.date, images: ['/og-port-image.png'] },
+    openGraph: { type: 'article', title: p.title, description: p.description, url: `${SITE}/blog/${p.slug}`, publishedTime: p.date, modifiedTime: p.updated ?? p.date, images: ['/og-port-image.png'] },
   };
 }
 
@@ -25,11 +25,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!p) notFound();
   const svc = p.service ? serviceBySlug(p.service) : undefined;
   const more = [...posts.filter((x) => x.slug !== p.slug && x.service === p.service), ...posts.filter((x) => x.slug !== p.slug && x.service !== p.service)].slice(0, 4);
+  const toc = proseHeadings(p.body);
+  const fmt = (d: string) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   return (
     <Shell crumbs={[{ href: '/blog', label: 'Writing' }, { href: `/blog/${p.slug}`, label: p.title }]}>
       {p.faqs?.length ? <JsonLd data={faqLd(p.faqs)} /> : null}
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', ...(p.shortAnswer ? { abstract: p.shortAnswer } : {}), headline: p.title, description: p.description, datePublished: p.date, dateModified: p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-port-image.png`, keywords: p.keywords.join(', ') }} />
-      <p className="label">{new Date(p.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} · Thomas Osayi</p>
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', ...(p.shortAnswer ? { abstract: p.shortAnswer } : {}), headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-port-image.png`, keywords: p.keywords.join(', ') }} />
+      <p className="label">{fmt(p.date)}{p.updated && p.updated !== p.date ? ` · Updated ${fmt(p.updated)}` : ''} · {readingMinutes(p.body)} min read · Thomas Osayi</p>
       <h1 style={{ maxWidth: '22ch' }}>{p.title}</h1>
       <p className="lede">{p.description}</p>
       {p.shortAnswer && (
@@ -37,6 +39,18 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <span className="label">The short answer</span>
           <p>{p.shortAnswer}</p>
         </aside>
+      )}
+      {p.takeaways?.length ? (
+        <aside className="seo-take" aria-label="Key takeaways">
+          <span className="label">Key takeaways</span>
+          <ul>{p.takeaways.map((t) => <li key={t}>{t}</li>)}</ul>
+        </aside>
+      ) : null}
+      {toc.length > 3 && (
+        <nav className="seo-toc" aria-label="In this article">
+          <span className="label">In this article</span>
+          <ol>{toc.map((h) => <li key={h.id}><a href={`#${h.id}`}>{h.label}</a></li>)}</ol>
+        </nav>
       )}
       <Prose text={p.body} />
       {p.faqs?.length ? (<>
