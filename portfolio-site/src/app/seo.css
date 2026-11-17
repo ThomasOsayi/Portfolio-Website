@@ -1,0 +1,49 @@
+.seo { min-height: 100vh; display: flex; flex-direction: column; }
+.seo-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.seo-brand { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
+.seo-top nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.seo-top nav a { text-decoration: none; color: var(--muted); }
+.seo-top nav a:hover { color: var(--fg); }
+.seo-top nav .seo-cta { color: var(--ink); background: var(--bone); padding: 8px 14px; border-radius: 6px; font-weight: 600; }
+.seo-crumbs { padding-top: 18px; }
+.seo-crumbs a { text-decoration: none; }
+.seo main { flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding-top: 48px; padding-bottom: 96px; }
+.seo h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; margin: 12px 0 20px; max-width: 16ch; }
+.seo h1 em { font-family: var(--serif); font-weight: 400; font-style: italic; }
+.seo .lede { font-size: clamp(18px, 2vw, 21px); color: var(--muted); max-width: 62ch; margin: 0 0 32px; }
+.seo h2 { font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.02em; font-weight: 600; margin: 56px 0 16px; }
+.seo-prose { max-width: 68ch; font-size: 18px; line-height: 1.65; }
+.seo-prose h2 { font-size: 26px; margin: 40px 0 10px; }
+.seo-prose p { margin: 0 0 18px; color: color-mix(in srgb, var(--fg) 86%, transparent); }
+.seo-prose ul { padding-left: 20px; margin: 0 0 18px; }
+.seo-prose li { margin: 6px 0; }
+.seo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.seo-card { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; text-decoration: none; background: var(--graphite); transition: border-color .2s ease, transform .2s ease; }
+.seo-card:hover { border-color: rgba(233,230,223,.4); transform: translateY(-2px); }
+.seo-card img { display: block; width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; }
+.seo-card div { padding: 18px 18px 20px; }
+.seo-card h3 { margin: 6px 0 6px; font-size: 20px; letter-spacing: -0.01em; }
+.seo-card p { margin: 0; color: var(--muted); font-size: 15px; }
+.seo-hero-img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); margin: 8px 0 8px; }
+.seo-pk { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.seo-pk > div { border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.seo-pk strong { display: block; font-size: 18px; }
+.seo-pk .price { font-size: 26px; font-weight: 600; margin: 8px 0 2px; }
+.seo-pk p { color: var(--muted); margin: 8px 0 0; font-size: 15px; }
+.seo-checks { list-style: none; padding: 0; columns: 2 280px; column-gap: 32px; }
+.seo-checks li { padding: 8px 0 8px 22px; position: relative; break-inside: avoid; }
+.seo-checks li::before { content: ''; position: absolute; left: 0; top: 16px; width: 10px; height: 2px; background: var(--cobalt); }
+.seo-faq details { border-top: 1px solid var(--line); padding: 16px 0; max-width: 760px; }
+.seo-faq summary { cursor: pointer; font-weight: 600; font-size: 17px; }
+.seo-faq p { color: var(--muted); margin: 10px 0 0; }
+.seo-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+.seo-chips li { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; color: var(--muted); }
+.seo-btn { display: inline-block; background: var(--cobalt); color: #fff; text-decoration: none; padding: 14px 22px; border-radius: 8px; font-weight: 600; margin-top: 8px; }
+.seo-band { margin-top: 72px; border: 1px solid var(--line); border-radius: 16px; padding: clamp(24px, 4vw, 48px); background: var(--graphite); }
+.seo-band h2 { margin-top: 0; }
+.seo-posts { list-style: none; padding: 0; margin: 0; }
+.seo-posts li { border-top: 1px solid var(--line); padding: 22px 0; }
+.seo-posts a { text-decoration: none; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.seo-posts p { color: var(--muted); margin: 6px 0 0; }
+.seo-foot { border-top: 1px solid var(--line); padding-top: 28px; padding-bottom: 40px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.seo-foot p { margin: 0; }

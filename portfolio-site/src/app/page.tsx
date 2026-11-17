@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Motion from '@/components/Motion';
 import Icon from '@/components/Icon';
 import GlassCube from '@/components/GlassCube';
@@ -6,20 +7,10 @@ import { CALENDLY_URL } from '@/data/inquiry';
 
 const EMAIL = 'thomasosayi@gmail.com';
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Thomas Osayi',
-  url: 'https://thomasosayi.com',
-  jobTitle: 'Full-Stack Developer',
-  alumniOf: 'Loyola Marymount University',
-  sameAs: ['https://www.linkedin.com/in/thomas-osayi', 'https://github.com/ThomasOsayi', 'https://joinsqwad.com'],
-};
 
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <a className="skip" href="#about">Skip to content</a>
       <div className="cursor" aria-hidden="true"><span>View</span></div>
       <div className="cursor-dot" aria-hidden="true" />
@@ -186,6 +177,9 @@ export default function Home() {
           </div>
           <footer className="foot">
             <span className="label">© 2026 Thomas Osayi</span>
+            <nav className="label foot-links" aria-label="More">
+              <Link href="/services">Services</Link> · <Link href="/projects">Case studies</Link> · <Link href="/blog">Writing</Link>
+            </nav>
             <span className="label">Los Angeles · LMU</span>
           </footer>
         </section>
