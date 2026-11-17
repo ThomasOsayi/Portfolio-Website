@@ -104,8 +104,8 @@ html.seen .loader { display: none; }
 .statement .w { opacity: 0.16; }
 .statement .w.em { font-style: italic; }
 html.no-motion .statement .w { opacity: 1; }
-.facts { margin: 12vh auto 0; max-width: 1100px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; border-top: 1px solid var(--line); padding-top: 22px; }
-.fact b { display: block; font-family: var(--heavy); font-weight: 400; font-size: clamp(44px, 6vw, 88px); line-height: 0.9; font-variant-numeric: tabular-nums; }
+.facts { margin: 12vh auto 0; max-width: 1100px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 48px; border-top: 1px solid var(--line); padding-top: 22px; }
+.fact b { display: block; font-family: var(--heavy); font-weight: 400; font-size: clamp(44px, 4.4vw, 68px); white-space: nowrap; line-height: 0.9; font-variant-numeric: tabular-nums; }
 .fact span { color: var(--muted); font-size: 14px; }
 @media (max-width: 760px) { .facts { grid-template-columns: 1fr; } }
 
