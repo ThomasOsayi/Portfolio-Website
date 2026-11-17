@@ -65,6 +65,7 @@ export default function CostCalculator() {
 
   return (
     <div className="calc">
+      <div className="calc-in">
       <fieldset>
         <legend>What do you need?</legend>
         <div className="calc-opts">
@@ -102,6 +103,7 @@ export default function CostCalculator() {
       )}
 
       <label className="calc-rush"><input type="checkbox" checked={rush} onChange={(e) => setRush(e.target.checked)} /> I need it fast (rush)</label>
+      </div>
 
       <div className="calc-out" aria-live="polite">
         <span className="label">Estimated cost</span>
