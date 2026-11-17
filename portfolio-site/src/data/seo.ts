@@ -263,6 +263,9 @@ export interface Post {
   date: string; // YYYY-MM-DD
   keywords: string[];
   service?: string;
+  // answer-first block AI tools can lift verbatim: 1-3 plain sentences
+  shortAnswer?: string;
+  faqs?: { q: string; a: string }[];
   body: string;
 }
 
@@ -275,6 +278,12 @@ export const posts: Post[] = [
     date: '2026-11-16',
     keywords: ['fix Lovable app', 'Bolt app not working', 'vibe coded app production', 'AI generated app bugs'],
     service: 'fix-ai-built-app',
+    shortAnswer: 'Most Lovable and Bolt apps break at launch for five reasons: open database rules, payment webhooks that were never deployed, secrets that only exist locally, duplicated AI-generated code, and missing error handling. Each one is fixable in a few hours by someone who reads the code directly instead of prompting again.',
+    faqs: [
+      { q: 'Why does my Lovable app work in preview but not in production?', a: 'Usually because redirect URLs, environment variables or webhooks still point at the preview environment. Production needs its own values set in the host and in Supabase or Firebase.' },
+      { q: 'Is my AI-built app secure?', a: 'Not by default. Check that database rules or row level security tie every record to its owner, and that no secret keys are shipped to the browser.' },
+      { q: 'How much does it cost to fix an AI-built app?', a: 'Thomas Osayi fixes single bugs from $60, several fixes plus a feature from $200, and takes a stuck app to launch from $600.' },
+    ],
     body: `AI app builders are great at the first 80 percent. Most of the apps people send me look finished. They fall over on the details that only matter once real users and real money show up.
 ## 1. Auth that lets anyone read everything
 The most common issue is a database with open security rules. The app checks if you are logged in, but the database does not check who you are. Anyone with the project ID can read every user's data. Fix: write Firebase security rules or Supabase row level security that tie every record to its owner.
@@ -296,6 +305,12 @@ If you are stuck on any of these, I fix and launch AI-built apps as a fixed-pric
     date: '2026-11-16',
     keywords: ['Next.js vs WordPress', 'best website platform small business', 'custom website vs WordPress'],
     service: 'nextjs-website-development',
+    shortAnswer: 'For a small business that wants a fast, secure site that ranks well without constant plugin updates, Next.js is the better choice. WordPress still makes sense if you plan to rearrange page layouts yourself every week.',
+    faqs: [
+      { q: 'Is Next.js better than WordPress for SEO?', a: 'Next.js sites are usually faster and ship cleaner HTML, and page speed is a ranking factor. Both can rank well when the content is good.' },
+      { q: 'Is a Next.js website more expensive?', a: 'The build can cost about the same, and hosting on Vercel is often free at small business traffic, while WordPress adds yearly costs for premium themes, plugins and managed hosting.' },
+      { q: 'Can I edit a Next.js website myself?', a: 'Yes, when a simple CMS or admin panel is added. Thomas Osayi includes one on larger builds.' },
+    ],
     body: `Most small business owners are told to use WordPress. It is a fine tool, but it is not the only choice, and for many businesses it is no longer the best one.
 ## Speed
 A Next.js site is pre-built into fast static pages and served from a global network. A typical WordPress site runs PHP, a database and a stack of plugins on every visit. Page speed affects both Google rankings and how many visitors stay.

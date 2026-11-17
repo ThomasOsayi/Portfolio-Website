@@ -17,6 +17,9 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
         </nav>
       </header>
       {crumbs && (
+        <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ href: '/', label: 'Home' }, ...crumbs].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.label, item: `https://thomasosayi.com${c.href === '/' ? '' : c.href}` })) }} />
+      )}
+      {crumbs && (
         <nav aria-label="Breadcrumb" className="seo-crumbs gutter label">
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/">Home</a>

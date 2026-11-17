@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Shell, Prose, JsonLd } from '@/components/seo/Shell';
+import { Faqs, faqLd } from '@/components/seo/CaseCards';
 import { posts, postBySlug, serviceBySlug, SITE } from '@/data/seo';
 
 export const dynamicParams = false;
@@ -25,11 +26,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const svc = p.service ? serviceBySlug(p.service) : undefined;
   return (
     <Shell crumbs={[{ href: '/blog', label: 'Writing' }, { href: `/blog/${p.slug}`, label: p.title }]}>
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.description, datePublished: p.date, dateModified: p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-port-image.png`, keywords: p.keywords.join(', ') }} />
+      {p.faqs?.length ? <JsonLd data={faqLd(p.faqs)} /> : null}
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', ...(p.shortAnswer ? { abstract: p.shortAnswer } : {}), headline: p.title, description: p.description, datePublished: p.date, dateModified: p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-port-image.png`, keywords: p.keywords.join(', ') }} />
       <p className="label">{new Date(p.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} · Thomas Osayi</p>
       <h1 style={{ maxWidth: '22ch' }}>{p.title}</h1>
       <p className="lede">{p.description}</p>
+      {p.shortAnswer && (
+        <aside className="seo-short" aria-label="Short answer">
+          <span className="label">The short answer</span>
+          <p>{p.shortAnswer}</p>
+        </aside>
+      )}
       <Prose text={p.body} />
+      {p.faqs?.length ? (<>
+        <h2>Questions, answered in one line</h2>
+        <Faqs items={p.faqs} />
+      </>) : null}
+      <p className="seo-byline">Written by Thomas Osayi, a full-stack developer in Los Angeles who builds custom Next.js websites, SaaS MVPs and fixes AI-built apps. Founder of SQWAD.</p>
       {svc && (
         <section className="seo-band">
           <h2>{svc.title}</h2>
