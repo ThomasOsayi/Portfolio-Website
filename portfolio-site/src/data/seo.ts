@@ -2,6 +2,7 @@
 // Body text uses a tiny format: a line starting with "## " is a heading, "- " is a bullet, anything else is a paragraph.
 
 import { morePosts } from './posts-more';
+import { postsBatch2 } from './posts-batch2';
 
 export const SITE = 'https://thomasosayi.com';
 
@@ -327,7 +328,7 @@ If you want to change layouts yourself every week, WordPress is reasonable. If y
   },
 ];
 
-export const posts: Post[] = [...morePosts, ...basePosts];
+export const posts: Post[] = [...postsBatch2, ...morePosts, ...basePosts];
 
 export const serviceBySlug = (s: string) => services.find((x) => x.slug === s);
 export const caseBySlug = (s: string) => caseStudies.find((x) => x.slug === s);

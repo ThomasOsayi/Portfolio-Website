@@ -1,5 +1,7 @@
 // Industry pages (/websites-for/[slug]) and AI-tool fix pages (/fix/[slug]).
 import { moreIndustries } from './industries-more';
+import { industriesBatch2 } from './industries-batch2';
+import { moreToolFixes } from './tools-more';
 // Each one has to carry real, specific content: no name-swapped templates.
 
 export interface Faq { q: string; a: string }
@@ -199,7 +201,7 @@ const baseIndustries: Industry[] = [
   },
 ];
 
-export const industries: Industry[] = [...baseIndustries, ...moreIndustries];
+export const industries: Industry[] = [...baseIndustries, ...moreIndustries, ...industriesBatch2];
 
 export interface ToolFix {
   slug: string;
@@ -213,7 +215,7 @@ export interface ToolFix {
   faqs: Faq[];
 }
 
-export const toolFixes: ToolFix[] = [
+const baseToolFixes: ToolFix[] = [
   {
     slug: 'lovable',
     tool: 'Lovable',
@@ -322,4 +324,6 @@ export const toolFixes: ToolFix[] = [
 ];
 
 export const industryBySlug = (s: string) => industries.find((x) => x.slug === s);
+export const toolFixes: ToolFix[] = [...baseToolFixes, ...moreToolFixes];
+
 export const toolBySlug = (s: string) => toolFixes.find((x) => x.slug === s);

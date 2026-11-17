@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = postBySlug((await params).slug);
   if (!p) return {};
   return {
-    title: `${p.title} | Thomas Osayi`,
+    title: p.title.length > 52 ? p.title : `${p.title} | Thomas Osayi`,
     description: p.description,
     keywords: p.keywords,
     alternates: { canonical: `/blog/${p.slug}` },

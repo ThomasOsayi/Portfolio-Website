@@ -8,7 +8,7 @@ export const moreIndustries: Industry[] = [
     noun: 'dental practice',
     h1: 'Dental practice websites that book new patients',
     metaTitle: 'Dental Practice Website Design & Development | Thomas Osayi',
-    description: 'Dental websites with online booking, insurance info, dentist profiles and service pages that rank locally. Fast, custom Next.js builds from a Los Angeles developer.',
+    description: 'Dental websites with online booking, insurance info, dentist profiles and service pages that rank locally. Custom Next.js builds from LA.',
     intro: 'New patients pick a dentist on three questions: do you take my insurance, can I get in soon, and will this be a calm experience. A dental site that answers those on the first screen and makes booking one tap away turns local searches into appointments.',
     mustHaves: [
       { title: 'Online booking or a request form', text: 'A link or embed from your practice management or scheduling tool, or a short request form with preferred times that emails the front desk.' },
@@ -68,7 +68,7 @@ export const moreIndustries: Industry[] = [
     noun: 'real estate business',
     h1: 'Websites for real estate agents and small brokerages',
     metaTitle: 'Real Estate Agent Website Design & Development | Thomas Osayi',
-    description: 'Real estate agent websites with neighborhood pages, listing showcases, home valuation requests and lead capture. Custom Next.js builds by a Los Angeles developer.',
+    description: 'Real estate agent websites with neighborhood pages, listing showcases, home valuation requests and lead capture. Custom Next.js builds from LA.',
     intro: 'Buyers and sellers usually find an agent through a referral and then check the website. The site has to confirm that you know the area, show recent work and make it easy to start a conversation, whether that is a showing request or a home valuation.',
     mustHaves: [
       { title: 'Neighborhood pages', text: 'Pages for the areas you actually work, with what living there is like, typical homes and your recent activity. These are the pages that rank.' },
