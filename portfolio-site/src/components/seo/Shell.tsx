@@ -9,6 +9,7 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
         <nav aria-label="Main">
           <Link href="/services">Services</Link>
           <Link href="/projects">Work</Link>
+          <Link href="/tools/website-cost-calculator">Cost calculator</Link>
           <Link href="/blog">Writing</Link>
           <Link href="/start" className="seo-cta">Start a project</Link>
         </nav>
@@ -24,7 +25,7 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
       <main className="gutter">{children}</main>
       <footer className="seo-foot gutter">
         <p>Thomas Osayi · Full-stack developer in Los Angeles</p>
-        <p><Link href="/start">Start a project</Link> · <Link href="/services">Services</Link> · <Link href="/projects">Work</Link> · <Link href="/blog">Writing</Link></p>
+        <p><Link href="/start">Start a project</Link> · <Link href="/services">Services</Link> · <Link href="/websites-for">Industries</Link> · <Link href="/fix">Fix your AI-built app</Link> · <Link href="/tools/website-cost-calculator">Cost calculator</Link> · <Link href="/projects">Work</Link> · <Link href="/blog">Writing</Link></p>
       </footer>
     </div>
   );

@@ -58,6 +58,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </>)}
 
+      {s.slug === 'fix-ai-built-app' && (<>
+        <h2>By tool</h2>
+        <p className="seo-prose"><Link href="/fix/lovable">Lovable</Link> · <Link href="/fix/bolt">Bolt</Link> · <Link href="/fix/v0">v0</Link> · <Link href="/fix/replit">Replit</Link> · <Link href="/fix/cursor">Cursor</Link></p>
+      </>)}
+      {s.slug !== 'fix-ai-built-app' && (<>
+        <h2>By industry</h2>
+        <p className="seo-prose"><Link href="/websites-for/restaurants">Restaurants</Link> · <Link href="/websites-for/therapy-practices">Therapy practices</Link> · <Link href="/websites-for/medical-clinics">Medical clinics</Link> · <Link href="/websites-for/salons-and-spas">Salons and spas</Link> · <Link href="/websites-for/startups">Startups</Link> · <Link href="/websites-for/local-service-businesses">Local services</Link> · <Link href="/tools/website-cost-calculator">Cost calculator</Link></p>
+      </>)}
+
       <h2>Questions</h2>
       <div className="seo-faq">{s.faqs.map((f) => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
 

@@ -57,7 +57,9 @@ export function answersFromParams(q: Record<string, string | string[] | undefine
   for (const s of steps) {
     if (s.kind !== 'multi' && s.kind !== 'single') continue;
     const raw = q[s.id];
-    const vals = (Array.isArray(raw) ? raw : raw ? [raw] : []).flatMap((v) => v.split(',')).map((v) => v.trim().toLowerCase());
+    const list = Array.isArray(raw) ? raw : raw ? [raw] : [];
+    // keep each raw value too, so options that contain commas ($2,500 to $5,000) still match
+    const vals = list.flatMap((v) => [v, ...v.split(',')]).map((v) => v.trim().toLowerCase());
     const hit = s.options.filter((o) => vals.includes(o.toLowerCase()));
     if (hit.length) pre[s.id] = s.kind === 'single' ? [hit[0]] : hit;
   }

@@ -178,7 +178,7 @@ export default function Home() {
           <footer className="foot">
             <span className="label">© 2026 Thomas Osayi</span>
             <nav className="label foot-links" aria-label="More">
-              <Link href="/services">Services</Link> · <Link href="/projects">Case studies</Link> · <Link href="/blog">Writing</Link>
+              <Link href="/services">Services</Link> · <Link href="/websites-for">Industries</Link> · <Link href="/fix">Fix AI-built apps</Link> · <Link href="/tools/website-cost-calculator">Cost calculator</Link> · <Link href="/projects">Case studies</Link> · <Link href="/blog">Writing</Link>
             </nav>
             <span className="label">Los Angeles · LMU</span>
           </footer>
