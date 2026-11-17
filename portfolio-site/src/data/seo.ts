@@ -1,6 +1,8 @@
 // Search-facing pages: services, case studies and articles.
 // Body text uses a tiny format: a line starting with "## " is a heading, "- " is a bullet, anything else is a paragraph.
 
+import { morePosts } from './posts-more';
+
 export const SITE = 'https://thomasosayi.com';
 
 export interface Service {
@@ -270,7 +272,7 @@ export interface Post {
 }
 
 // Newest first. The SEO routine adds new entries at the top.
-export const posts: Post[] = [
+const basePosts: Post[] = [
   {
     slug: 'fix-lovable-bolt-app-before-launch',
     title: 'Your Lovable or Bolt app works locally. Here is what breaks at launch.',
@@ -324,6 +326,8 @@ This is where WordPress wins: a built-in editor. A Next.js site can match it wit
 If you want to change layouts yourself every week, WordPress is reasonable. If you want a fast, custom site that ranks well and does not need babysitting, Next.js is the better fit.`,
   },
 ];
+
+export const posts: Post[] = [...morePosts, ...basePosts];
 
 export const serviceBySlug = (s: string) => services.find((x) => x.slug === s);
 export const caseBySlug = (s: string) => caseStudies.find((x) => x.slug === s);

@@ -49,7 +49,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <Faqs items={i.faqs} />
 
       <section className="seo-band">
-        <h2>Building a site for your {i.name.toLowerCase().replace(/s$/, '')}?</h2>
+        <h2>Building a site for your {i.noun ?? i.name.toLowerCase().replace(/s$/, '')}?</h2>
         <p className="lede" style={{ marginBottom: 8 }}>Six quick questions, then an intro call if you want one.</p>
         <Link href="/start?need=Website" className="seo-btn">Start a project</Link>
       </section>

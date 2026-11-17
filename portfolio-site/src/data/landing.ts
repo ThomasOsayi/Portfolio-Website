@@ -1,4 +1,5 @@
 // Industry pages (/websites-for/[slug]) and AI-tool fix pages (/fix/[slug]).
+import { moreIndustries } from './industries-more';
 // Each one has to carry real, specific content: no name-swapped templates.
 
 export interface Faq { q: string; a: string }
@@ -6,6 +7,7 @@ export interface Faq { q: string; a: string }
 export interface Industry {
   slug: string;
   name: string; // "Restaurants"
+  noun?: string; // singular for "your ___", e.g. "restaurant"
   h1: string;
   metaTitle: string;
   description: string;
@@ -18,7 +20,7 @@ export interface Industry {
   faqs: Faq[];
 }
 
-export const industries: Industry[] = [
+const baseIndustries: Industry[] = [
   {
     slug: 'restaurants',
     name: 'Restaurants',
@@ -109,6 +111,7 @@ export const industries: Industry[] = [
   {
     slug: 'salons-and-spas',
     name: 'Salons and spas',
+    noun: 'salon or spa',
     h1: 'Websites for salons, spas and beauty studios',
     metaTitle: 'Salon & Spa Website Design with Online Booking | Thomas Osayi',
     description: 'Beautiful websites for salons, spas, waxing and lash studios with service menus, packages and online booking. Built in Next.js, fast on phones.',
@@ -167,6 +170,7 @@ export const industries: Industry[] = [
   {
     slug: 'local-service-businesses',
     name: 'Local service businesses',
+    noun: 'business',
     h1: 'Websites for local service businesses',
     metaTitle: 'Website Developer for Local Service Businesses | Quotes, Booking, Local SEO',
     description: 'Websites for printers, contractors, field service teams and other local businesses: quote requests, scheduling tools and local SEO, built in Next.js.',
@@ -194,6 +198,8 @@ export const industries: Industry[] = [
     ],
   },
 ];
+
+export const industries: Industry[] = [...baseIndustries, ...moreIndustries];
 
 export interface ToolFix {
   slug: string;

@@ -24,6 +24,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const p = postBySlug((await params).slug);
   if (!p) notFound();
   const svc = p.service ? serviceBySlug(p.service) : undefined;
+  const more = [...posts.filter((x) => x.slug !== p.slug && x.service === p.service), ...posts.filter((x) => x.slug !== p.slug && x.service !== p.service)].slice(0, 4);
   return (
     <Shell crumbs={[{ href: '/blog', label: 'Writing' }, { href: `/blog/${p.slug}`, label: p.title }]}>
       {p.faqs?.length ? <JsonLd data={faqLd(p.faqs)} /> : null}
@@ -43,6 +44,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <Faqs items={p.faqs} />
       </>) : null}
       <p className="seo-byline">Written by Thomas Osayi, a full-stack developer in Los Angeles who builds custom Next.js websites, SaaS MVPs and fixes AI-built apps. Founder of SQWAD.</p>
+      <h2>Related articles</h2>
+      <ul className="seo-posts">
+        {more.map((m) => (
+          <li key={m.slug}><Link href={`/blog/${m.slug}`}>{m.title}</Link></li>
+        ))}
+      </ul>
       {svc && (
         <section className="seo-band">
           <h2>{svc.title}</h2>
