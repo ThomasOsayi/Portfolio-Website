@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Shell, JsonLd } from '@/components/seo/Shell';
+import { Shell, JsonLd, Prose } from '@/components/seo/Shell';
 import { services, serviceBySlug, caseBySlug, posts, SITE } from '@/data/seo';
 
 export const dynamicParams = false;
@@ -57,6 +57,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           ))}
         </div>
       </>)}
+
+      {s.guide && <Prose text={s.guide} />}
 
       {s.slug === 'fix-ai-built-app' && (<>
         <h2>By tool</h2>

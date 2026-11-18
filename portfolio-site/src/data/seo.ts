@@ -17,6 +17,8 @@ export interface Service {
   includes: string[];
   packages: { name: string; price: string; days: string; text: string }[];
   related: string[]; // case study slugs
+  // long-form section in the article body format
+  guide?: string;
   faqs: { q: string; a: string }[];
 }
 
@@ -44,11 +46,76 @@ export const services: Service[] = [
       { name: 'Full Custom Build', price: 'from $1,200', days: '21 days', text: 'Multi-page site with custom features, CMS or admin tools.' },
     ],
     related: ['vencare', 'new-york-nook', 'artistic-printing', 'astiglow'],
+    guide: `Hiring a developer for a website is easier when you know what the weeks will look like before you commit. This is how a site project with me runs from first message to launch, what each package honestly covers, what I need from you, and what you are left with afterwards.
+## How does a website project work, step by step?
+It runs in six stages, and you can see the site on a private link from the first week onward.
+### Brief
+You tell me what the business does, who the site is for and what a visitor should do on it. I usually reply within a day, and a short intro call settles anything a message cannot. From that I write down the scope: the pages, the one main action, the features and the package it fits.
+### Direction
+I look at your brand and at the best sites in your category, then propose a direction for layout, type and colour. Agreeing this early is cheaper than redesigning finished pages.
+### Build on a preview link
+I build in Next.js and TypeScript and deploy to Vercel. Each update gets its own preview address, so you can open the work in progress on your own phone and comment on something real.
+### Content and revisions
+Your copy and photos go in as they arrive, and I draft text where there are gaps. Feedback works best in batches: one list per round, from one person.
+### Launch
+I connect your domain, set up redirects from old addresses if you had a site before, submit the sitemap to Google Search Console, switch on analytics and test every form with a real submission.
+### Handover
+You get access to everything, a short note on how to change copy, and a walkthrough if you want one.
+## What does each package realistically cover?
+Each one is sized by the number of pages and by how much the site has to do, and the price and timeline are fixed for that scope.
+### Starter Site, from $150, 7 days
+A polished one-page site with a contact form and SEO basics. Realistically that is a hero section, what you offer, proof such as photos or reviews, hours and location if you have them, and a form that emails you. It fits a new business, a solo provider, a single offer or an event. It does not include booking logic, multiple pages or an editing dashboard.
+### Business Site, from $450, 14 days
+Up to 5 pages, a booking or quote form, and local SEO setup. A typical set is home, services, about, a booking or quote page and contact. The form is built around your business, so it asks for party size and time, or for the specs you need to quote. Local SEO setup means page titles and descriptions, a sitemap, local business structured data and details that match your Google Business Profile. This is the right size for most established small businesses.
+### Full Custom Build, from $1,200, 21 days
+A multi-page site with custom features, a CMS or admin tools. This is where online ordering with payment, a quote management tool, a searchable directory of staff or services, or a password-protected page for changing prices belong. For Artistic Printing, a commercial printer, the build was a website together with a quote intake and management tool. The scope is written down in detail before I start, because custom features are where projects grow if nobody is watching.
+All three include a custom design, a mobile-first layout tested on real phones, technical SEO and analytics. "From" means the price for the scope described. If you need more than the package describes, I tell you the price for that before any work starts.
+## How do I tell which package I need?
+Answer three questions and the package usually picks itself.
+- How many distinct things do visitors need to read about? If it all fits in one scroll, that is a Starter Site. If each service or audience needs its own page, that is a Business Site or larger.
+- What does the site have to do when someone acts? Sending you an email is a form, and any package handles it. Taking payment, saving records you manage later or showing live data is custom work.
+- Who changes the content, and how often? If prices or a menu change monthly and you want to do it yourself, plan for an admin page, which sits in the Full Custom Build.
+Two honest notes. If you are between two packages, start with the smaller one. The site is code I wrote for you, so adding pages or features later builds on it instead of replacing it. And if what you need is closer to an application, with accounts, dashboards and subscriptions, that is my SaaS MVP service and not a website package.
+A custom site is also not always the right call. If you want to rearrange layouts yourself every week, or the business runs on a specific WordPress plugin or a Shopify store that works, I will say so.
+## What do I need to provide?
+Content, access and one decision maker. Projects that have all three finish on time, and the ones that run late are almost always waiting on content.
+### Content
+- Your logo and any brand colours or fonts. If you have none, I propose them.
+- Text for each page, even as rough notes. I can turn bullet points into copy, but I cannot invent your prices or your story.
+- Photos of your actual work, space or team.
+- Facts: hours, address, phone, services, prices, policies.
+- Two or three websites you like, and what you like about each.
+### Access
+- The login for your domain name, or a few minutes on a call to change its settings together.
+- Your Google Business Profile, if local search matters.
+- Any booking, ordering or email system the site should connect to.
+### A decision maker
+One person who gathers feedback and gives a final yes. Feedback from five people in five separate messages is the most common reason a two week build takes six.
+> Send the content you have on day one, even if it is unfinished. Real text and real photos change design decisions, and a site designed around placeholder text usually has to be adjusted twice.
+## What happens on launch day?
+The new site replaces the old one at your domain, usually without downtime, and I check it as a customer would. The steps are routine, and they are also where a careless launch loses search rankings.
+- Domain. Your domain's DNS settings are pointed at Vercel, and HTTPS is issued automatically. Changes can take a few hours to reach everyone.
+- Redirects. If an old site existed, every old address is kept or permanently redirected to its new page, so links and rankings carry over.
+- Email. If your email runs on the same domain, I leave its records alone. This is the thing most often broken by a rushed move.
+- Search. The sitemap goes to Google Search Console, and I check that pages can be indexed.
+- Forms. I send a real submission through every form and confirm it reaches the right inbox.
+## What happens after launch?
+You own the site and it costs very little to keep running. The code lives in a repository you have access to, the hosting is in an account you control, and the domain stays yours.
+### Running costs
+Hosting on Vercel is free or close to it for most small business sites. You pay your registrar for the domain each year, and any outside service you chose, such as a booking system, bills you itself. There are no plugin or theme licences to renew.
+### Changes
+On smaller sites, copy lives in one place and a text change is a quick job. On larger builds, an admin page or CMS lets you change text and photos without code. New pages and features are scoped and priced the same way the original project was.
+### Maintenance
+There are no plugins to update. The project's dependencies want updating now and then, and forms are worth testing every few months, since an inbox change on your side can quietly break delivery.
+## The bottom line
+Pick the package by how many pages you need and what the site has to do, send your content early, and keep feedback in one voice. In return you get a fast, custom site you own outright, on a fixed price and timeline, with nothing to renew except the domain.`,
     faqs: [
       { q: 'Why Next.js instead of WordPress or Wix?', a: 'Next.js sites are faster, more secure and fully custom. Speed is a Google ranking factor, and there are no plugins to update or break.' },
       { q: 'Can I edit the site myself?', a: 'Yes. Copy lives in one place, and on larger builds I add a simple admin or CMS so you can change text and photos without code.' },
       { q: 'Do you handle domains and hosting?', a: 'I deploy on Vercel and connect your domain. Hosting is free or close to it for most small business sites.' },
       { q: 'Do you work with businesses outside Los Angeles?', a: 'Yes. I am based in LA and work with clients anywhere over video calls.' },
+      { q: 'Which website package do I need?', a: 'A one-page site is the Starter Site from $150, up to 5 pages with a booking or quote form is the Business Site from $450, and anything with payments, admin tools or other custom features is the Full Custom Build from $1,200.' },
+      { q: 'What do I need to provide before you start?', a: 'Your logo, rough text for each page, real photos, facts such as hours and prices, and access to your domain. One person should collect feedback and give the final approval.' },
     ],
   },
   {
@@ -74,11 +141,74 @@ export const services: Service[] = [
       { name: 'Finish and Launch', price: 'from $600', days: '10 days', text: 'Take the app from stuck to live in production.' },
     ],
     related: ['sqwad', 'guardian-mindcare', 'thehoopgang'],
+    guide: `Handing your app to a stranger is uncomfortable, especially when you built it yourself by prompting and are not sure what is inside it. So here is exactly what happens when you do: the order I work in, what each package covers, what access I need and how to give it safely, and what state the app is in when I hand it back.
+## How does a fix project work, step by step?
+I read the code before I change any of it, fix on a separate branch, and prove each fix on a live URL.
+### Describe the problem
+You tell me what the app is meant to do, what it does instead, and the exact error text if there is any. A screenshot of the error and the steps that trigger it are worth more than a long explanation.
+### Give access
+I get the code and, where the problem involves them, the database and hosting projects. More on doing that safely below.
+### Reproduce and diagnose
+I run a production build, not only the preview, and make the problem happen myself. Then I trace it to its cause. In AI-built apps the visible error is often two steps away from the real fault: a blank dashboard that turns out to be a database rule, or a failed login that is a redirect address in a settings panel.
+### Confirm scope
+Before fixing, I tell you what I found, what it takes and which package it fits. If the audit turns up something serious you did not ask about, such as user data readable by anyone, I tell you then, not after.
+### Fix and verify
+Changes go on a branch so the working version is never at risk. Each fix is checked on a deployed preview, signed in as a fresh user.
+### Hand back
+The fix is merged and deployed, and you get a short write-up of what was wrong and what changed, in plain language.
+## What does each package realistically cover?
+The packages are sized by how many problems there are and how far the app is from live, not by which tool built it.
+### Quick Fix, from $60, 2 days
+One bug or error fixed and explained. Examples of that size: a build that fails on deploy with a type error, a login that redirects to a preview address, a form that saves nothing, a page that goes blank for new users. It suits a founder who is otherwise moving fine and is blocked by one thing. It does not cover a review of the rest of the app.
+### Fix Plus Features, from $200, 5 days
+Several fixes plus a feature or integration added. Typical contents: locking down database rules, repairing auth, and then adding something the builder could not finish, such as Stripe checkout with a working webhook, transactional email or a file upload. It suits an app that mostly works and has a short list of known problems.
+### Finish and Launch, from $600, 10 days
+The app goes from stuck to live in production. That means a full pass over security rules, payments, environment settings and error handling, cleanup of the duplicated code that makes every change risky, and a deploy to Vercel on your own domain. It suits a founder who wants to take real users and real payments and needs someone to be accountable for the whole thing working.
+Every package ends with the write-up. If the work turns out larger than the package you picked, I say so and give a price before continuing.
+## How do I tell which package I need?
+Go by the symptoms. You do not need to diagnose the cause to choose.
+- One specific thing is broken and you can point at it: Quick Fix.
+- You have a list, or the same fix keeps coming undone when you prompt again: Fix Plus Features.
+- A feature has never worked no matter how you prompt for it, most often payments or email: Fix Plus Features.
+- The app has never been deployed outside the builder's preview: Finish and Launch.
+- You are about to take money or store personal information about other people: Finish and Launch, because that is the point where a security review stops being optional.
+- You cannot tell what is wrong, only that it is not ready: start with a Quick Fix sized look at the worst problem, and I will tell you honestly what the rest needs.
+> Before you write to me, try the app in a private browser window as a brand new user and note the first place it breaks. That single observation often decides the package.
+## What do I need to give you, and how do I share access safely?
+The repository, access to the services the app depends on, and a list of what works and what does not. You should never need to send me a password.
+### The code
+GitHub is easiest. Most AI builders can connect a project to a GitHub repository or let you download the code, and you then add me as a collaborator. If the code only exists inside the builder, getting it into a repository you own is the first job.
+### The services
+- Database and auth. Firebase and Supabase both let you invite another person to a project by email, with a role.
+- Hosting. An invitation to the project where the service allows it, or we set the environment values together on a call.
+- Payments. Stripe lets you add a team member with a developer role, so I can see webhooks and test mode without seeing more than I need.
+### The safety rules
+- Invite, do not share logins. An invitation can be removed in one click when the work is done.
+- Send secret keys through the service's own dashboard or a password manager's share link, not by email or chat.
+- If a secret key has ever been pasted into a prompt, a chat or the code itself, tell me. I will list it for rotation, because removing it from the code does not remove it from the history.
+- When the project ends, remove my access.
+## Can I keep using Lovable, Bolt or Cursor after you have worked on it?
+Yes, with one habit: treat the repository as the source of truth. When the code lives in GitHub, your builder and I are both editing the same project, and the history shows who changed what.
+What to watch for is a later prompt rewriting something I fixed. AI tools do not know that a file was repaired by hand for a reason, and a broad request like "clean up the auth" can undo it. Three things reduce that risk:
+- I leave short comments on the lines that matter, saying why they are the way they are.
+- The write-up lists the files that should not be regenerated without a check, usually the security rules, the payment webhook and the auth setup.
+- Ask the tool for small, specific changes, and look at which files it touched before accepting.
+A sensible split is to keep building screens in your AI tool and bring in a developer for the parts that involve money, permissions or deployment.
+## What happens after the app is live?
+You own everything, and the app keeps running without me. The code is in your GitHub, the app is deployed from your hosting account, and the database and payment accounts are yours.
+The first two weeks of real use are when new problems surface, because real users do things test accounts never did. It is worth watching three places in that period: the hosting logs for errors, the Stripe dashboard for failed webhook deliveries, and your own inbox for confused users. Ongoing fixes and new features are available after the first project, scoped the same way.
+## Will you tell me if it needs a rewrite?
+Yes. I keep what works and fix what does not, and a rewrite only comes up if it is truly cheaper for you than repairing what is there.
+The signs that point that way are structural: no consistent data model, several half-finished versions of every screen with no clear live one, or a stack that cannot do what the product needs. Even then the usual answer is a partial rebuild, where the screens and design stay and the data layer underneath is redone.
+## The bottom line
+You bring the repository, the access and a clear description of what is broken. I read the code, fix it on a branch, prove it on a live URL and write down what changed. Choose the package by your symptoms, and if you are about to take payments or hold other people's data, choose the one that includes the full review.`,
     faqs: [
       { q: 'Which tools do you work with?', a: 'Code from Lovable, Bolt, v0, Replit, Cursor, Windsurf and Claude, usually React or Next.js with Firebase or Supabase.' },
       { q: 'Do I need to give you my whole codebase?', a: 'Access to the repo (GitHub is easiest) and the hosting or database project is enough.' },
       { q: 'Will you rewrite everything?', a: 'No. I keep what works and fix what does not. A rewrite only comes up if it is truly cheaper for you.' },
       { q: 'Can you keep maintaining it after launch?', a: 'Yes, ongoing fixes and features are available after the first project.' },
+      { q: 'Which fix package do I need?', a: 'One specific bug is a Quick Fix from $60, a list of problems plus a missing feature is Fix Plus Features from $200, and an app that has never been live or is about to take payments is Finish and Launch from $600.' },
+      { q: 'Can I keep using my AI builder after you fix the app?', a: 'Yes. Keep the code in GitHub as the source of truth and make small, specific prompts, because a broad prompt can overwrite security rules, webhooks or auth code that were fixed by hand.' },
     ],
   },
   {
@@ -104,11 +234,77 @@ export const services: Service[] = [
       { name: 'Full SaaS Platform', price: 'from $3,000', days: '45 days', text: 'Multi-role platform with admin tools and integrations.' },
     ],
     related: ['sqwad', 'thehoopgang', 'guardian-mindcare'],
+    guide: `An MVP project goes wrong in predictable ways: the scope grows every week, the first real user arrives after the money is spent, or the thing that ships cannot be extended without starting again. The way I run a build is designed around avoiding those three. Below is the sequence, what each package gets you, what you have to bring, and how to choose.
+## How does an MVP build work, step by step?
+It starts on paper, moves to a working core within the first week, and adds one finished slice at a time after that. You can sign in to the real thing throughout.
+### The core workflow
+We write down the single path a customer takes to get the value they would pay for, as numbered steps in plain language. For SQWAD, my own SaaS, that path was a brand seeing which creator drove a sale. Everything not on the path goes on a later list.
+### The data model and the permissions table
+Before any screen, I define what the product stores and who can see it. Every kind of user goes down one side of a table, every kind of record across the top, and each cell says read, write or nothing. This takes an afternoon and prevents the worst class of bug, where one customer sees another's data.
+### A working slice
+The first thing I build is the core workflow end to end, with real sign-in and a real database, deployed to a staging address. It will be plain. It will also be true, which a clickable mock-up is not.
+### Weekly slices
+Each week adds a complete piece: the dashboard, then notifications, then billing. Complete means it works for a new user on the deployed app. You try each one and we adjust the next.
+### Pilot users
+As soon as the core is usable, your first few users go in. What they do in the first session reorders the remaining list more reliably than any planning meeting.
+### Launch and handover
+Production deploy on your domain, live payment keys, monitoring, and documents that explain how the system is put together.
+## What does each package realistically cover?
+The three packages are three depths of the same process, each at a fixed price for a written scope.
+### MVP Starter, from $250, 7 days
+A clickable, working first version of one core workflow. That means real screens, real data saved and one path that works from start to finish. It is for testing an idea with a handful of pilot users or showing something real in a pitch. It leaves out billing, multiple roles, an admin panel and anything outside that one path.
+### SaaS MVP, from $1,200, 21 days
+Auth, dashboard, database and payments for a launchable MVP. Customers can sign up, use the core workflow, see their data on a dashboard and pay through Stripe. Each customer's data is isolated from the start. This is the package for a founder with pilot users waiting who needs a product strangers can buy.
+### Full SaaS Platform, from $3,000, 45 days
+A multi-role platform with admin tools and integrations. This covers products where different kinds of users see different things, where your team needs an admin panel, or where the product has to talk to outside systems. Guardian MindCare, a therapy practice platform I built, has five user roles with a portal for each. SQWAD connects to Shopify and the Meta Ads API. Those are platform-sized features.
+Prices are "from" because the scope sets the number. I price the written scope before starting, and anything added later is priced before it is built.
+## How do I tell which package I need?
+Count the roles, the integrations and the money paths. Those three numbers predict the size of a product better than the number of screens does.
+- One kind of user, no payments yet, and the goal is to learn: MVP Starter.
+- One or two kinds of user, one subscription or checkout, no outside systems beyond payments and email: SaaS MVP.
+- Three or more roles, an admin side, or an integration your product depends on, such as a store, an ad platform or a calendar: Full SaaS Platform.
+If you are unsure, start one size down. The Starter is built on the same stack and structure as the larger packages, so it becomes the foundation of the MVP and is not thrown away.
+There are also cases where no package is right yet. If you have not spoken to prospective customers, do that first. If an existing product already covers what you need, use it. A custom build is worth it when your process is unusual enough that standard tools force workarounds. TheHoopGang's creator portal, which runs refundable gear gifting, is that kind of case.
+![The creator dashboard in the portal I built for TheHoopGang: status, videos posted, the chosen product and a journey timeline.](/images/hoopgang/creator-dashboard.png)
+## What do I need to provide?
+Decisions, accounts and users. I bring the engineering, and these three can only come from you.
+### Decisions
+- The core workflow, in your words.
+- Who the first customers are, specifically enough to name five.
+- How you will charge: per seat, per month, per use. A first guess is fine as long as there is one.
+- One person with the authority to say what is in and what waits.
+### Accounts in your name
+- GitHub, for the code.
+- Hosting and the database project.
+- Stripe. Opening an account involves identity and business verification, which can take a few days, so start it early.
+- Your domain and an email address on it for sign-up and notification emails.
+You own all of these, and I work in them as an invited member.
+### Users and content
+- Three to five pilot users who have agreed to try an early version.
+- Sample data that looks like the real thing, so screens are designed around actual cases.
+- Terms of service and a privacy policy. I add the pages and the consent checkbox. The text should come from a lawyer or a reviewed template, not from me.
+> Write the core workflow as steps a user takes, then cross out every step that does not have to exist for the first customer to get value. What is left is your MVP.
+## Firebase or Postgres, and what else is in the stack?
+I choose the database by the shape of your data and keep everything else standard. The front end and server code are Next.js and TypeScript in one project, deployed on Vercel, with Stripe for billing.
+Firebase suits products that need realtime updates and a fast start: sign-in, database, file storage and access rules come from one platform. I built SQWAD on it because creator portals need live updates. Postgres with Prisma suits data that is relational or reporting-heavy, where questions involve joining several kinds of record. TheHoopGang's portal is built that way.
+Either way, access is enforced where the data lives, in security rules or on the server, never only by hiding a button. And either way the stack is one that other developers know, so you are not tied to me.
+## What happens after launch?
+You have a product in your own accounts, documents that explain it, and a list of what to build next. Launch is the start of the useful feedback, not the end of the work.
+### Running costs
+Hosting and the database usually cost little at MVP scale and grow with usage, so set budget alerts. Stripe takes a fee from each payment, which at the time of writing is 2.9 percent plus 30 cents for a standard online card payment in the US. Email sending and any outside APIs bill separately.
+### Watching it
+I set up error monitoring and logging so a failure shows up as an alert and not as a customer complaint. In the first weeks, the things to watch are failed payments, failed sign-ups and any screen that errors for a new account.
+### What comes next
+The later list from week one comes back out, reordered by what pilot users actually did. Ongoing development is scoped the same way as the first build: a written slice, a fixed price, a deployed result. If you hire a team later, the handover documents and a standard stack mean they can pick it up.
+## The bottom line
+An MVP is one workflow a customer will pay for, built on a foundation that does not need replacing. Choose the package by counting roles, integrations and money paths, bring decisions and pilot users, and expect to see working software every week. That is how I built SQWAD, and it is how I build for clients.`,
     faqs: [
       { q: 'How long does an MVP take?', a: 'Most MVPs ship in 3 to 6 weeks depending on scope. We agree on the core workflow first so the timeline stays honest.' },
       { q: 'Who owns the code?', a: 'You do. Everything lives in your GitHub and your cloud accounts.' },
       { q: 'Firebase or Postgres?', a: 'Firebase for speed and realtime features, Postgres when the data is relational or reporting-heavy. I will recommend one based on your product.' },
       { q: 'Can you help with product decisions?', a: 'Yes. As a founder I can push back on scope and help you decide what to build first.' },
+      { q: 'Which MVP package do I need?', a: 'One workflow for pilot users is the MVP Starter from $250, a product with sign-up, dashboard and payments is the SaaS MVP from $1,200, and three or more roles, admin tools or integrations make it a Full SaaS Platform from $3,000.' },
+      { q: 'What do I need to provide for an MVP build?', a: 'The core workflow in your own words, a first guess at pricing, three to five pilot users, and accounts in your name for GitHub, hosting, Stripe and your domain.' },
     ],
   },
 ];

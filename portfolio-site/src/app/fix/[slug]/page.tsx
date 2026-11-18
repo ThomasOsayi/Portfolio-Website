@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Shell, JsonLd } from '@/components/seo/Shell';
+import { Shell, JsonLd, Prose } from '@/components/seo/Shell';
 import { CaseCards, Faqs, faqLd } from '@/components/seo/CaseCards';
 import { toolFixes, toolBySlug } from '@/data/landing';
 import { serviceBySlug, posts, SITE } from '@/data/seo';
@@ -40,6 +40,8 @@ export default async function FixPage({ params }: { params: Promise<{ slug: stri
 
       <h2>How I fix it</h2>
       <ol className="seo-prose">{t.process.map((s) => <li key={s}>{s}</li>)}</ol>
+
+      {t.guide && <Prose text={t.guide} />}
 
       <h2>Packages</h2>
       <div className="seo-pk">{svc.packages.map((p) => <div key={p.name}><strong>{p.name}</strong><div className="price">{p.price}</div><span className="label">{p.days}</span><p>{p.text}</p></div>)}</div>
