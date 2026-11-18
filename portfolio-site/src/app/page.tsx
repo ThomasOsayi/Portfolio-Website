@@ -1,6 +1,7 @@
 import Motion from '@/components/Motion';
 import Icon from '@/components/Icon';
 import GlassCube from '@/components/GlassCube';
+import { SiteFooter } from '@/components/SiteFooter';
 import { clients, experience, products, ringWords, stackCards } from '@/data/projects';
 import { CALENDLY_URL } from '@/data/inquiry';
 
@@ -174,15 +175,7 @@ export default function Home() {
               <span className="copied" id="copied" hidden>Email copied</span>
             </div>
           </div>
-          <footer className="foot">
-            <span className="label">© 2026 Thomas Osayi</span>
-            <nav className="label foot-links" aria-label="More">
-              {/* plain anchors on purpose: the homepage's animation layer rewrites DOM that React owns, so client-side navigation away from it crashes */}
-              {/* eslint-disable @next/next/no-html-link-for-pages */}
-              <a href="/services">Services</a> · <a href="/websites-for">Industries</a> · <a href="/fix">Fix AI-built apps</a> · <a href="/tools/website-cost-calculator">Cost calculator</a> · <a href="/projects">Case studies</a> · <a href="/blog">Writing</a>
-            </nav>
-            <span className="label">Los Angeles · LMU</span>
-          </footer>
+          <SiteFooter className="sitefoot-home" />
         </section>
       </main>
       <Motion />

@@ -324,3 +324,21 @@ footer.foot { margin-top: 16vh; display: flex; justify-content: space-between; g
 .cube-cta:hover .cube-label { background: var(--bone); color: var(--ink); border-color: var(--bone); }
 .cube-cta.no-gl .cube-stage { border-radius: 28%; background: radial-gradient(60% 60% at 30% 25%, rgba(255,255,255,.55), transparent 60%), linear-gradient(135deg, #6b73ff, #4b55ff 50%, #ff5fa2); transform: rotate(-8deg) scale(.8); }
 .foot-links a { text-decoration: none; } .foot-links a:hover { color: var(--fg); }
+
+/* shared footer (homepage + SEO pages) */
+.sitefoot { border-top: 1px solid var(--line); padding-top: 48px; padding-bottom: 32px; margin-top: 64px; color: var(--muted); }
+.sitefoot-home { margin-top: 16vh; }
+.sitefoot-top { display: grid; gap: 40px; }
+@media (min-width: 1000px) { .sitefoot-top { grid-template-columns: minmax(220px, 1fr) 3fr; gap: 64px; } }
+.sitefoot-brand p { margin: 12px 0 20px; max-width: 30ch; font-size: 15px; line-height: 1.5; }
+.sitefoot-name { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+.sitefoot-cta { display: inline-block; border: 1px solid var(--line); color: var(--fg); padding: 10px 16px; font-size: 14px; text-decoration: none; transition: background-color .25s, color .25s, border-color .25s; }
+.sitefoot-cta:hover { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.sitefoot-cols { display: grid; gap: 32px 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 700px) { .sitefoot-cols { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .sitefoot-cols { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.sitefoot-cols .label { margin: 0 0 14px; }
+.sitefoot-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.sitefoot-cols a { color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.35; transition: color .2s; }
+.sitefoot-cols a:hover, .sitefoot-name:hover { color: var(--fg); }
+.sitefoot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); }

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SiteFooter } from '@/components/SiteFooter';
 import Link from 'next/link';
 import '@/app/seo.css';
 
@@ -30,10 +31,7 @@ export function Shell({ children, crumbs }: { children: React.ReactNode; crumbs?
         </nav>
       )}
       <main className="gutter">{children}</main>
-      <footer className="seo-foot gutter">
-        <p>Thomas Osayi · Full-stack developer in Los Angeles</p>
-        <p><Link href="/start">Start a project</Link> · <Link href="/services">Services</Link> · <Link href="/websites-for">Industries</Link> · <Link href="/fix">Fix your AI-built app</Link> · <Link href="/tools/website-cost-calculator">Cost calculator</Link> · <Link href="/projects">Work</Link> · <Link href="/blog">Writing</Link></p>
-      </footer>
+      <SiteFooter className="gutter" />
     </div>
   );
 }

@@ -108,11 +108,15 @@ export default function Motion() {
       e.preventDefault();
       const go = () => (lenis ? lenis.scrollTo(target as HTMLElement, { immediate: true, force: true }) : target.scrollIntoView());
       if (reduced || !wipe) { go(); return; }
-      gsap.timeline()
-        .set(wipe, { yPercent: 100 })
-        .to(wipe, { yPercent: 0, duration: 0.5, ease: 'power4.inOut' })
-        .add(() => { go(); ScrollTrigger.refresh(); })
-        .to(wipe, { yPercent: -100, duration: 0.55, ease: 'power4.inOut', delay: 0.05 });
+      // GSAP reads the CSS translateY(100%) as y: 100vh in px, so y must be zeroed or yPercent: -100
+      // cancels it out and the overlay ends up covering the page (the solid purple screen).
+      const reveal = () => gsap.fromTo(wipe, { y: 0, yPercent: 0 }, { y: 0, yPercent: -100, duration: 0.55, ease: 'power4.inOut', delay: 0.05, overwrite: true });
+      gsap.fromTo(wipe, { y: 0, yPercent: 100 }, {
+        y: 0, yPercent: 0, duration: 0.5, ease: 'power4.inOut', overwrite: true,
+        onComplete: () => { try { go(); } finally { requestAnimationFrame(reveal); } },
+      });
+      // safety net: never leave the overlay over the page
+      window.setTimeout(() => { if (Number(gsap.getProperty(wipe, 'yPercent')) > -100) reveal(); }, 1800);
     }) as EventListener));
 
     // 3D ring of stack words: spaced by real width, faded as they turn away so every word reads cleanly
