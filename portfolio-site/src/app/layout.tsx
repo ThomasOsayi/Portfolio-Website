@@ -1,13 +1,21 @@
 import type { Metadata, Viewport } from 'next';
-import { Archivo_Black, Instrument_Serif, Inter_Tight, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
-const display = Inter_Tight({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--f-display', display: 'swap' });
-const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['normal', 'italic'], variable: '--f-serif', display: 'swap' });
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--f-mono', display: 'swap' });
+// Fonts are self-hosted (files in ./fonts, all SIL Open Font License) so builds never depend on
+// downloading from Google Fonts, which failed several production builds.
+const display = localFont({ src: './fonts/inter-tight-latin-wght-normal.woff2', weight: '100 900', variable: '--f-display', display: 'swap' });
+const serif = localFont({
+  src: [
+    { path: './fonts/instrument-serif-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/instrument-serif-latin-400-italic.woff2', weight: '400', style: 'italic' },
+  ],
+  variable: '--f-serif', display: 'swap',
+});
+const mono = localFont({ src: './fonts/jetbrains-mono-latin-wght-normal.woff2', weight: '100 800', variable: '--f-mono', display: 'swap' });
 // chunky letters for the hero texture and big numerals
-const heavy = Archivo_Black({ subsets: ['latin'], weight: '400', variable: '--f-heavy', display: 'swap' });
+const heavy = localFont({ src: './fonts/archivo-black-latin-400-normal.woff2', weight: '400', variable: '--f-heavy', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thomasosayi.com'),
