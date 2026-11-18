@@ -228,7 +228,7 @@
   in vec2 vUv; out vec4 o;
   uniform sampler2D uMask, uShade, uTex;
   uniform vec2 uRes, uTexSize, uShadeTexel, uMouse, uLight;
-  uniform float uTime, uGrow, uFont, uMouseOn;
+  uniform float uTime, uGrow, uFont, uMouseOn, uMR;
   uniform vec3 uBg, uTint;
   uniform int uKind, uStyle;
 
@@ -250,7 +250,7 @@
     float w = sin(q.x*3.1 + t*1.3)*sin(q.y*2.7 - t*1.1)*0.5
             + sin(q.x*5.3 - q.y*4.1 + t*1.7)*0.25
             + sin(q.x*1.7 + q.y*6.0 - t*0.9)*0.2;
-    float dm = length(px - uMouse)/uFont;
+    float dm = length(px - uMouse)/(uFont*uMR);
     float rip = sin(dm*20.0 - t*7.0)*exp(-dm*3.2)*uMouseOn;
     return s + (w*0.085 + rip*0.08)*smoothstep(0.15, 0.85, s);
   }
@@ -319,7 +319,7 @@
       float t = uTime*0.35;
       vec2 q = px/uFont;
       vec2 pile = vec2(sin(q.x*2.3 + q.y*1.1 + t) + 0.6*sin(q.y*4.1 - t*1.3), cos(q.y*2.7 - q.x*0.9 - t*0.8) + 0.6*cos(q.x*3.7 + t*1.1))*0.45;
-      float dm = length(px - uMouse)/uFont;
+      float dm = length(px - uMouse)/(uFont*uMR);
       pile += normalize(px - uMouse + 0.001)*exp(-dm*dm*6.0)*0.9*uMouseOn;
       vec3 N = normalize(n + vec3(pile, 0.0));
       vec3 L = normalize(vec3(uLight - px, uFont*0.9));
@@ -345,13 +345,16 @@
   const VS_HAIR = `#version 300 es
   in vec2 aRoot; in vec2 aDir; in float aLen; in float aSeed; in float aShade;
   uniform vec2 uRes, uMouse, uVel;
-  uniform float uTime, uGrow, uFont, uRadius, uSway, uWave, uSpeed, uDecay;
+  uniform float uTime, uGrow, uFont, uRadius, uSway, uWave, uSpeed, uDecay, uLift;
   uniform vec4 uTrail[24];
   uniform float uAge[24];
   out float vT; out vec2 vRoot; out float vSeed; out float vShade; out float vWave;
   void main(){
     float t = float(gl_VertexID);
     float len = aLen*uGrow;
+    // pile lifts (strands lengthen) under the cursor
+    vec2 dl0 = aRoot - uMouse;
+    len *= 1.0 + uLift*exp(-dot(dl0, dl0)/(uRadius*uRadius*1.4));
     vec2 perp = vec2(-aDir.y, aDir.x);
     float w = sin(uTime*2.0*uSpeed + aRoot.x*0.011 + aRoot.y*0.007 + aSeed*6.2831)*0.45
             + sin(uTime*0.6*uSpeed + aRoot.x*0.0035 - aRoot.y*0.002)*0.35;
@@ -571,9 +574,14 @@
       const rc = this._rc || (this._rc = this.canvas.getBoundingClientRect());
       const inside = e.clientX >= rc.left - 40 && e.clientX <= rc.right + 40 && e.clientY >= rc.top - 40 && e.clientY <= rc.bottom + 40;
       if (!inside) { this.target = [-1e5, -1e5]; return; }
-      const nx = (e.clientX - rc.left) * this.dpr, ny = (rc.bottom - e.clientY) * this.dpr;
+      this.lastReal = performance.now();
+      this.feed((e.clientX - rc.left) * this.dpr, (rc.bottom - e.clientY) * this.dpr);
+    }
+
+    // push a brush point (canvas px): combs strands along the path and moves the push target
+    feed(nx, ny) {
       const last = this.trail[this.trail.length - 1];
-      const step = this.font * 0.06;
+      const step = this.font * 0.06 * (this.opts.mouseR || 1) * 0.6;
       if (!last || Math.hypot(nx - last.x, ny - last.y) > step) {
         const dx = last ? nx - last.x : 0, dy = last ? ny - last.y : 0, dl = Math.hypot(dx, dy) || 1;
         if (last) this.trail.push({ x: nx, y: ny, vx: dx / dl, vy: dy / dl, t: performance.now() });
@@ -586,6 +594,14 @@
     draw(now) {
       this._rc = null;
       if (!this.ready) return;
+      // opts.drift: when the cursor is away, a slow phantom brush wanders over the surface so it never sits still
+      if (this.opts.drift && !reduced && this.target[0] < -1e4 && now - (this.lastReal || 0) > 1200) {
+        const s = now / 1000 * this.opts.drift;
+        this.feed(this.w * (0.5 + 0.42 * Math.sin(s * 0.53) * Math.cos(s * 0.21)), this.h * (0.5 + 0.38 * Math.sin(s * 0.37 + 1.3)));
+        this.drifting = true;
+      } else if (this.drifting && this.target[0] > -1e4 && now - (this.lastReal || 0) > 1200) {
+        this.drifting = false; this.target = [-1e5, -1e5];
+      }
       const { gl, mat } = this;
       const t = reduced ? 2.0 : (now - this.start) / 1000;
       const g = reduced ? 1 : 1 - Math.pow(1 - Math.min(1, Math.max(0, (t - 0.1) / 1.4)), 3);
@@ -598,7 +614,7 @@
         this.mouse = [nx, ny]; this.mouseOn += (1 - this.mouseOn) * 0.08;
       }
       this.vel[0] *= 0.94; this.vel[1] *= 0.94;
-      const vm = Math.hypot(this.vel[0], this.vel[1]), cap = this.font * 0.12;
+      const vm = Math.hypot(this.vel[0], this.vel[1]), cap = this.font * 0.12 * (this.opts.mouseR || 1);
       const vx = vm > cap ? this.vel[0] / vm * cap : this.vel[0], vy = vm > cap ? this.vel[1] / vm * cap : this.vel[1];
       // light: follows the cursor, otherwise drifts in a slow loop
       const orbit = [this.cx + Math.cos(t * 0.45) * this.w * 0.32, this.cy + Math.sin(t * 0.7) * this.h * 0.45];
@@ -621,7 +637,7 @@
       gl.uniform2f(B.u("uMouse"), mouseForSurface[0], mouseForSurface[1]);
       gl.uniform2f(B.u("uLight"), light[0], light[1]);
       gl.uniform1f(B.u("uTime"), t); gl.uniform1f(B.u("uGrow"), g); gl.uniform1f(B.u("uFont"), this.font);
-      gl.uniform1f(B.u("uMouseOn"), this.mouseOn);
+      gl.uniform1f(B.u("uMouseOn"), this.mouseOn); gl.uniform1f(B.u("uMR"), this.opts.mouseR || 1);
       const bgc = this.opts.bg || mat.bg; gl.uniform3f(B.u("uBg"), bgc[0], bgc[1], bgc[2]);
       gl.uniform1i(B.u("uKind"), mat.kind);
       gl.uniform1i(B.u("uStyle"), mat.style || 0);
@@ -639,8 +655,10 @@
         gl.uniform2f(H.u("uMouse"), this.mouse[0], this.mouse[1]);
         gl.uniform2f(H.u("uVel"), vx, vy);
         gl.uniform1f(H.u("uTime"), t); gl.uniform1f(H.u("uGrow"), g); gl.uniform1f(H.u("uFont"), this.font);
-        gl.uniform1f(H.u("uRadius"), this.font * 0.24);
-        gl.uniform1f(H.u("uSway"), mat.sway); gl.uniform1f(H.u("uWave"), mat.wave); gl.uniform1f(H.u("uSpeed"), mat.speed);
+        gl.uniform1f(H.u("uRadius"), this.font * 0.24 * (this.opts.mouseR || 1));
+        const mo = this.opts.motion || 1;
+        gl.uniform1f(H.u("uLift"), this.opts.lift || 0);
+        gl.uniform1f(H.u("uSway"), mat.sway * mo); gl.uniform1f(H.u("uWave"), mat.wave * mo); gl.uniform1f(H.u("uSpeed"), mat.speed * Math.sqrt(mo));
         gl.uniform1f(H.u("uDecay"), mat.decay); gl.uniform1f(H.u("uTip"), mat.tip); gl.uniform1f(H.u("uAlpha"), mat.alpha);
         const tr = new Float32Array(96), ages = new Float32Array(24).fill(1e9);
         this.trail.forEach((p, i) => { tr.set([p.x, p.y, p.vx, p.vy], i * 4); ages[i] = (now - p.t) / 1000; });

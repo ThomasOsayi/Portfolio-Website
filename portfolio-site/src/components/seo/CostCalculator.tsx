@@ -16,7 +16,7 @@ const TYPES: { id: string; label: string; hint: string; base: Range; pages?: num
 const FIX: { id: string; label: string; r: Range }[] = [
   { id: 'one', label: 'One bug or error', r: [60, 150, 2] },
   { id: 'few', label: 'A few bugs plus a feature', r: [200, 450, 5] },
-  { id: 'launch', label: 'Stuck, needs finishing and launch', r: [600, 1500, 10] },
+  { id: 'launch', label: 'Core features work, needs finishing and launch', r: [600, 1500, 10] },
 ];
 
 const FEATURES: { id: string; label: string; r: Range; sites?: boolean; apps?: boolean }[] = [

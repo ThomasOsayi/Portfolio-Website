@@ -359,3 +359,10 @@ footer.foot { margin-top: 16vh; display: flex; justify-content: space-between; g
 .frame-stage > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .card.is-framed .frame-stage { opacity: 1; }
 .contact-panel .big-cta { font-size: clamp(44px, 12.5vw, 200px); }
+
+/* live cost estimate in the /start flow */
+.iq-est { margin-top: 28px; padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--cobalt); display: grid; gap: 4px; max-width: 560px; }
+.iq-est strong { font-family: var(--f-display), sans-serif; font-weight: 600; font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.iq-est-days { color: var(--muted); font-size: 14px; }
+.iq-est p { margin: 6px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+.iq-est .iq-est-fine { font-size: 12px; opacity: 0.8; }

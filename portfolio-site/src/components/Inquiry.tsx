@@ -4,7 +4,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Icon from '@/components/Icon';
-import { CALENDLY_URL, INQUIRY_EMAIL, heardFrom, steps } from '@/data/inquiry';
+import { CALENDLY_URL, INQUIRY_EMAIL, estimate, heardFrom, steps } from '@/data/inquiry';
 
 type Answers = Record<string, string[]>;
 type Contact = { name: string; email: string; company: string; heard: string; details: string };
@@ -20,6 +20,19 @@ export default function Inquiry({ initialAnswers = {} }: { initialAnswers?: Answ
   const [touched, setTouched] = useState(false);
   const trap = useRef<HTMLInputElement>(null);
   const firstField = useRef<HTMLElement | null>(null);
+
+  const est = useMemo(() => estimate(answers), [answers]);
+  const money = (n: number) => '$' + n.toLocaleString('en-US');
+  const estText = est ? (est.hi ? `${money(est.lo)} to ${money(est.hi)}, about ${est.days} days` : 'Quoted after a call') : '';
+  const estBox = est && (
+    <div className="iq-est" aria-live="polite">
+      <span className="label">Estimated cost</span>
+      <strong>{est.hi ? <>{money(est.lo)} to {money(est.hi)}</> : 'Quoted after a call'}</strong>
+      {est.hi > 0 && <span className="iq-est-days">About {est.days} days from kickoff</span>}
+      {est.notes.map((n) => <p key={n}>{n}</p>)}
+      <p className="iq-est-fine">Based on my fixed packages. You get a firm quote before any work starts.</p>
+    </div>
+  );
 
   const total = steps.length;
   const step = steps[i];
@@ -63,6 +76,7 @@ export default function Inquiry({ initialAnswers = {} }: { initialAnswers?: Answ
     ['Stage', (answers.stage ?? []).join(', ')],
     ['Budget', (answers.budget ?? []).join(', ')],
     ['Timeline', (answers.timeline ?? []).join(', ')],
+    ['Estimate shown', estText || 'None'],
     ['Details', c.details.trim() || 'None'],
     ['Name', c.name.trim()],
     ['Email', c.email.trim()],
@@ -149,8 +163,9 @@ export default function Inquiry({ initialAnswers = {} }: { initialAnswers?: Answ
           <section className="iq-slide" key="review" data-dir={dir}>
             <span className="label">Last step</span>
             <h1 className="iq-title">Look right?</h1>
+            {estBox}
             <dl className="iq-review">
-              {summary().map(([k, v]) => (
+              {summary().filter(([k]) => k !== 'Estimate shown').map(([k, v]) => (
                 <div key={k}><dt>{k}</dt><dd>{v}</dd></div>
               ))}
             </dl>
@@ -215,6 +230,8 @@ export default function Inquiry({ initialAnswers = {} }: { initialAnswers?: Answ
                 <input ref={trap} type="text" name="_honey" tabIndex={-1} autoComplete="off" className="iq-trap" aria-hidden="true" />
               </div>
             )}
+
+            {(step.kind === 'multi' || step.kind === 'single') && estBox}
 
             {touched && !canNext && (
               <p className="iq-err" role="alert">{step.kind === 'contact' ? 'Add your name and a valid email.' : 'Pick at least one to continue.'}</p>

@@ -130,7 +130,7 @@ export default function Motion() {
         onComplete: () => { try { go(); } finally { requestAnimationFrame(reveal); } },
       });
       // safety net: never leave the overlay over the page
-      window.setTimeout(() => { if (Number(gsap.getProperty(wipe, 'yPercent')) > -100) reveal(); }, 1800);
+      window.setTimeout(() => { if (!gsap.isTweening(wipe) && Number(gsap.getProperty(wipe, 'yPercent')) > -100) gsap.set(wipe, { y: 0, yPercent: -100 }); }, 2200);
     }) as EventListener));
 
     // 3D ring of stack words: spaced by real width, faded as they turn away so every word reads cleanly
@@ -355,6 +355,7 @@ export default function Motion() {
           panel = new engine.TextureWord(panelStage, 'shag', withQ({
             shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 8 * dpr, 8 * dpr, w - 16 * dpr, h - 16 * dpr, 18 * dpr),
             unit: innerWidth < 700 ? 50 : 70, texMul: 3, bg: HERO_BG, maxDpr: 1, strandScale: innerWidth < 700 ? 0.3 : 0.35,
+            mouseR: innerWidth < 700 ? 3 : 4.5, motion: 1.9, lift: 0.9, drift: 0.55,
           }));
           panel.visible = false;
           panel.build('');
@@ -378,7 +379,7 @@ export default function Motion() {
             try {
               frame = new engine.TextureWord(fs, 'shag', withQ({
                 shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, 20 * dpr),
-                unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1, strandScale: 0.22,
+                unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1, strandScale: 0.22, mouseR: 3, motion: 1.6, lift: 0.7,
               }));
               frame.visible = false;
               frame.build(''); frameKey = sizeKey(fs);
