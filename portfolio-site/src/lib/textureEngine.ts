@@ -5,6 +5,12 @@
   // ---------- materials ----------
   // kind 0 = strands (fur family), 1 = scales surface, 2 = liquid metal surface
   export const MATERIALS = {
+    shag:   { kind: 0, bg: [0.043, 0.043, 0.047], texScale: 1.3, len: 0.11, density: 3.2, sway: 0.65, wave: 0.9, speed: 0.7, flowRand: 0.6, edgeOut: 0.8, alpha: 0.7, decay: 1.1, clump: 1.6, tip: 0.85, bevel: 0.1 },
+    moss:   { kind: 0, up: true, bg: [0.043, 0.047, 0.043], texScale: 0.9, len: 0.03, density: 1.6, sway: 0.2, wave: 0.8, speed: 0.6, flowRand: 0.5, edgeOut: 0.2, alpha: 0.95, decay: 3.5, clump: 1.4, tip: 0.5, bevel: 0.08 },
+    boucle: { kind: 0, bg: [0.06, 0.057, 0.052], texScale: 0.8, len: 0.018, density: 1.5, sway: 0.08, wave: 0.2, speed: 0.4, flowRand: Math.PI, edgeOut: 0.3, alpha: 0.95, decay: 7.0, clump: 2.2, tip: 0.3, bevel: 0.07 },
+    leopard:{ kind: 0, bg: [0.06, 0.052, 0.045], texScale: 1.9, len: 0.028, density: 2.8, sway: 0.25, wave: 1.1, speed: 1.2, flowRand: 0.3, edgeOut: 0.5, alpha: 0.82, decay: 0.9, clump: 0.0, tip: 0.3, bevel: 0.09 },
+    denim:  { kind: 3, bg: [0.043, 0.047, 0.06], texScale: 0.9, bevel: 0.08 },
+    suede:  { kind: 3, bg: [0.06, 0.05, 0.043], texScale: 1.2, bevel: 0.08 },
     snake:  { kind: 1, style: 0, bg: [0.090, 0.082, 0.067], texScale: 2.2 },
     croc:   { kind: 1, style: 1, bg: [0.070, 0.074, 0.062], texScale: 2.0, bevel: 0.1 },
     tiger:  { kind: 0, bg: [0.075, 0.066, 0.058], texScale: 1.7, len: 0.034, density: 3.0, sway: 0.3, wave: 1.25, speed: 1.5, flowRand: 0.35, edgeOut: 0.55, alpha: 0.78, decay: 0.9, clump: 0.0, tip: 0.35, bevel: 0.09 },
@@ -118,6 +124,73 @@
         let c = mixc(shadow, ivory, ss(0.2, 0.8, fine(u, v)));
         c = mixc(c, warm, ss(0.4, 0.7, lo(u, v)) * 0.5);
         return c;
+      };
+    } else if (name === "suede") {
+      const nap = fbm([3, 6, 12, 24], 271), fine = fbm([96, 192], 273), rub = fbm([2, 4], 277);
+      const deep = hex("#5a3519"), camel = hex("#a8693a"), light = hex("#d39a62");
+      px = (u, v) => {
+        let c = mixc(deep, camel, ss(0.25, 0.7, nap(u, v)));
+        c = mixc(c, light, ss(0.6, 0.85, rub(u, v)) * 0.45);
+        const f = 0.88 + 0.24 * fine(u, v);
+        return [c[0] * f, c[1] * f, c[2] * f];
+      };
+    } else if (name === "shag") {
+      const lo = fbm([3, 6, 12], 211), fine = fbm([32, 64], 213);
+      const deep = hex("#141a7a"), cob = hex("#4b55ff"), ice = hex("#9aa2ff");
+      px = (u, v) => {
+        let c = mixc(deep, cob, ss(0.2, 0.7, lo(u, v)));
+        c = mixc(c, ice, ss(0.7, 0.9, fine(u, v)) * 0.55);
+        return c;
+      };
+    } else if (name === "moss") {
+      const lo = fbm([3, 6, 12], 221), fine = fbm([48, 96], 223), lich = fbm([6, 12, 24], 227);
+      const deep = hex("#14260f"), mid = hex("#3e6b1f"), lime = hex("#a5c94a"), sage = hex("#b7c2a0");
+      px = (u, v) => {
+        let c = mixc(deep, mid, ss(0.2, 0.7, fine(u, v)));
+        c = mixc(c, lime, ss(0.62, 0.85, lo(u, v)) * 0.55);
+        c = mixc(c, sage, ss(0.74, 0.8, lich(u, v)) * 0.8);
+        return c;
+      };
+    } else if (name === "boucle") {
+      const loops = fbm([24, 48], 231), lo = fbm([4, 8], 233), fleck = fbm([96, 192], 237);
+      const shade = hex("#bfb39d"), cream = hex("#f2ece0"), oat = hex("#d9ccb2"), fl = hex("#6e6455");
+      px = (u, v) => {
+        let c = mixc(shade, cream, ss(0.3, 0.7, loops(u, v)));
+        c = mixc(c, oat, ss(0.45, 0.75, lo(u, v)) * 0.5);
+        c = mixc(c, fl, ss(0.82, 0.86, fleck(u, v)) * 0.8);
+        return c;
+      };
+    } else if (name === "leopard") {
+      const R = rng(241), C = 9, pts = [];
+      for (let j = 0; j < C; j++) for (let i = 0; i < C; i++) pts.push([(i + 0.15 + R() * 0.7) / C, (j + 0.15 + R() * 0.7) / C, 0.75 + R() * 0.5]);
+      const warp = fbm([6, 12], 243), fine = fbm([32, 64], 247), lo = fbm([3, 6], 251);
+      const gold = hex("#c9913f"), pale = hex("#e8c482"), ink = hex("#1a120a"), inner = hex("#9a5a22");
+      px = (u, v) => {
+        const wu = u + (warp(u, v) - 0.5) * 0.05, wv = v + (warp(u + 0.3, v + 0.7) - 0.5) * 0.05;
+        let best = 9, sc = 1;
+        for (const p of pts) {
+          let dx = Math.abs(wu - p[0]), dy = Math.abs(wv - p[1]);
+          dx = Math.min(dx, 1 - dx); dy = Math.min(dy, 1 - dy);
+          const dd = Math.hypot(dx, dy * 1.15) / p[2];
+          if (dd < best) { best = dd; sc = p[2]; }
+        }
+        const r = best * C;
+        let c = mixc(gold, pale, ss(0.3, 0.75, lo(u, v)));
+        c = mixc(c, inner, ss(0.3, 0.2, r) * 0.7);
+        c = mixc(c, ink, ss(0.22, 0.3, r) * ss(0.48, 0.38, r) * (0.7 + 0.3 * fine(u, v)));
+        const f = 0.88 + 0.24 * fine(u, v);
+        return [c[0] * f, c[1] * f, c[2] * f];
+      };
+    } else if (name === "denim") {
+      const fade = fbm([2, 4, 8], 261), slub = tileNoise(64, 263), fine = fbm([128, 256], 267);
+      const indigo = hex("#16244f"), mid = hex("#2f4a86"), worn = hex("#7f97c4"), weft = hex("#d8dde8");
+      px = (u, v) => {
+        const tw = 0.5 + 0.5 * Math.sin(2 * Math.PI * (u * 96 + v * 96 * 0.5) * 2);
+        let c = mixc(indigo, mid, ss(0.3, 0.75, fade(u, v)));
+        c = mixc(c, worn, ss(0.68, 0.86, fade(u + 0.4, v + 0.1)) * 0.6);
+        c = mixc(c, weft, ss(0.6, 1.0, tw) * 0.22 + ss(0.75, 0.9, slub(u * 64, v * 4)) * 0.18);
+        const f = 0.85 + 0.3 * fine(u, v);
+        return [c[0] * f, c[1] * f, c[2] * f];
       };
     } else {
       // python snakeskin (default)
@@ -399,17 +472,26 @@
       const mc = document.createElement("canvas"); mc.width = w; mc.height = h;
       const ctx = mc.getContext("2d", { willReadFrequently: true });
       const setSpacing = (v) => { if ("letterSpacing" in ctx) ctx.letterSpacing = v + "px"; };
+      // opts.shape(ctx, w, h, dpr) paints a custom white mask (panels, frames) instead of a word
+      let size, x, y, m;
+      if (this.opts.shape) {
+        ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = "#fff"; this.opts.shape(ctx, w, h, dpr);
+        size = (this.opts.unit || 60) * dpr; this.font = size; x = 0; y = 0;
+        m = { actualBoundingBoxLeft: 0, actualBoundingBoxRight: w, actualBoundingBoxAscent: 0, actualBoundingBoxDescent: h };
+      } else {
       ctx.font = `400 100px ${FONT}`; setSpacing(2);
-      let m = ctx.measureText(word);
+      m = ctx.measureText(word);
       const bw = m.actualBoundingBoxLeft + m.actualBoundingBoxRight, bh = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-      const size = 100 * Math.min((w * (this.opts.fitW || (rect.width < 700 ? 0.92 : 0.84))) / bw, (h * (this.opts.fitH || 0.74)) / bh);
+      size = 100 * Math.min((w * (this.opts.fitW || (rect.width < 700 ? 0.92 : 0.84))) / bw, (h * (this.opts.fitH || 0.74)) / bh);
       this.font = size;
       ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
       ctx.font = `400 ${size}px ${FONT}`; setSpacing(size * 0.035);
       m = ctx.measureText(word);
       const tw = m.actualBoundingBoxLeft + m.actualBoundingBoxRight, th = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
-      const x = (w - tw) / 2 + m.actualBoundingBoxLeft, y = h * (this.opts.cy || 0.52) - th / 2 + m.actualBoundingBoxAscent;
+      x = (w - tw) / 2 + m.actualBoundingBoxLeft, y = h * (this.opts.cy || 0.52) - th / 2 + m.actualBoundingBoxAscent;
       ctx.fillStyle = "#fff"; ctx.fillText(word, x, y);
+      }
       const px = ctx.getImageData(0, 0, w, h).data;
 
       // soft shade/height field at quarter resolution
@@ -526,7 +608,7 @@
       gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.colorTex);
       gl.uniform1i(B.u("uMask"), 0); gl.uniform1i(B.u("uShade"), 1); gl.uniform1i(B.u("uTex"), 2);
       gl.uniform2f(B.u("uRes"), this.w, this.h);
-      const ts = this.font * mat.texScale;
+      const ts = this.font * mat.texScale * (this.opts.texMul || 1);
       gl.uniform2f(B.u("uTexSize"), ts, ts);
       gl.uniform2f(B.u("uShadeTexel"), this.shadeTexel[0], this.shadeTexel[1]);
       gl.uniform2f(B.u("uMouse"), mouseForSurface[0], mouseForSurface[1]);

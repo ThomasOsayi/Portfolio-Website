@@ -322,7 +322,64 @@ export default function Motion() {
       const io = new IntersectionObserver(([en]) => { if (hero) hero.visible = en.isIntersecting; });
       io.observe(stage);
       cleanups.push(() => io.disconnect());
-      const loop = (now: number) => { engine!.instances.forEach((i) => i.visible && i.draw(now)); loopId = requestAnimationFrame(loop); };
+
+      // textured contact panel (cobalt shag), drawn only while on screen
+      const roundFill = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
+        ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h); ctx.fill();
+      };
+      const panelStage = $('.contact-stage');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let panel: any = null;
+      if (panelStage) {
+        try {
+          panel = new engine.TextureWord(panelStage, 'shag', {
+            shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 8 * dpr, 8 * dpr, w - 16 * dpr, h - 16 * dpr, 18 * dpr),
+            unit: innerWidth < 700 ? 50 : 70, texMul: 3, bg: HERO_BG, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.5 : 0.6,
+          });
+          panel.visible = false;
+          panel.build('');
+          engine.instances.push(panel);
+          const pio = new IntersectionObserver(([en]) => { if (panel) panel.visible = en.isIntersecting; }, { rootMargin: '100px' });
+          pio.observe(panelStage);
+          cleanups.push(() => pio.disconnect());
+        } catch { panel = null; }
+      }
+
+      // textured frame grows around a product card on hover: desktop, fine pointer, built lazily, freed after leaving
+      if (fine && !reduced && innerWidth >= 900) {
+        $$<HTMLElement>('.card').forEach((card) => {
+          const fs = card.querySelector('.frame-stage') as HTMLElement | null;
+          if (!fs) return;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          let inst: any = null, freeId = 0;
+          on(card, 'pointerenter', () => {
+            clearTimeout(freeId);
+            if (!inst && engine) {
+              try {
+                inst = new engine.TextureWord(fs, 'shag', {
+                  shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, 20 * dpr),
+                  unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1.25, strandScale: 0.3,
+                });
+                inst.build('');
+                engine.instances.push(inst);
+              } catch { inst = null; return; }
+            }
+            card.classList.add('is-framed');
+          });
+          on(card, 'pointerleave', () => {
+            card.classList.remove('is-framed');
+            freeId = window.setTimeout(() => {
+              if (!inst || !engine) return;
+              engine.instances.splice(engine.instances.indexOf(inst), 1);
+              inst.gl.getExtension('WEBGL_lose_context')?.loseContext();
+              inst.canvas.remove();
+              inst = null;
+            }, 700);
+          });
+        });
+      }
+
+      const loop =(now: number) => { engine!.instances.forEach((i) => i.visible && i.draw(now)); loopId = requestAnimationFrame(loop); };
       loopId = requestAnimationFrame(loop);
       if (reduced) setTimeout(() => engine!.instances.forEach((i) => i.draw(performance.now())), 50);
       let rt = 0, lastW = innerWidth;
@@ -333,6 +390,7 @@ export default function Motion() {
           if (innerWidth === lastW) return;
           lastW = innerWidth;
           if (hero) { hero.opts.fitW = fitW(); hero.build('THOMAS'); }
+          if (panel) panel.build('');
           layoutRing();
           ScrollTrigger.refresh();
         }, 200);

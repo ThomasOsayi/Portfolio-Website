@@ -105,12 +105,12 @@ export default function Home() {
                 );
                 return p.url ? (
                   <a className="card" key={p.title} href={p.url} target="_blank" rel="noopener" data-cursor="Visit">
-                    {media}
+                    <div className="card-frame"><div className="frame-stage" aria-hidden="true" />{media}</div>
                     {meta}
                   </a>
                 ) : (
                   <div className="card" key={p.title}>
-                    {media}
+                    <div className="card-frame"><div className="frame-stage" aria-hidden="true" />{media}</div>
                     {meta}
                   </div>
                 );
@@ -163,6 +163,8 @@ export default function Home() {
         </section>
 
         <section className="contact gutter" id="contact">
+          <div className="contact-panel">
+          <div className="contact-stage" aria-hidden="true" />
           <span className="label">Contact · Open to new projects</span>
           <h2 className="big-cta split">Let&apos;s <em>build</em><br />something.</h2>
           <div className="contact-row">
@@ -174,6 +176,7 @@ export default function Home() {
               <a href="https://github.com/ThomasOsayi" target="_blank" rel="noopener" data-cursor-link>GitHub <Icon name="arrow-up-right" /></a>
               <span className="copied" id="copied" hidden>Email copied</span>
             </div>
+          </div>
           </div>
           <SiteFooter className="sitefoot-home" />
         </section>
