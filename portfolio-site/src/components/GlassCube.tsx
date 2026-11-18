@@ -28,7 +28,7 @@ export default function GlassCube({ href }: { href: string }) {
         link.classList.add('no-gl');
         return;
       }
-      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
+      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.25));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       stage.appendChild(renderer.domElement);
@@ -51,10 +51,16 @@ export default function GlassCube({ href }: { href: string }) {
       scene.background = bgTex;
       const heavy = getComputedStyle(document.documentElement).getPropertyValue('--f-heavy').trim() || 'Arial Black';
       const WORD = 'START A PROJECT  ';
+      // the static layer (page color + dot grid) is drawn once; each frame only blits it and redraws the moving text
+      const base = document.createElement('canvas'); base.width = base.height = S;
+      const bctx = base.getContext('2d')!;
+      bctx.fillStyle = '#0b0b0c'; bctx.fillRect(0, 0, S, S);
+      bctx.fillStyle = 'rgba(233,230,223,0.16)';
+      for (let y = 8; y < S; y += 22) for (let x = 8; x < S; x += 22) bctx.fillRect(x, y, 2, 2);
+      const vign = bg.createRadialGradient(S / 2, S / 2, S * 0.3, S / 2, S / 2, S / 2);
+      vign.addColorStop(0, 'rgba(11,11,12,0)'); vign.addColorStop(1, 'rgba(11,11,12,1)');
       const paint = (t: number) => {
-        bg.fillStyle = '#0b0b0c'; bg.fillRect(0, 0, S, S);
-        bg.fillStyle = 'rgba(233,230,223,0.16)';
-        for (let y = 8; y < S; y += 22) for (let x = 8; x < S; x += 22) bg.fillRect(x, y, 2, 2);
+        bg.drawImage(base, 0, 0);
         bg.font = `400 46px ${heavy}`;
         bg.textBaseline = 'middle';
         const w = bg.measureText(WORD).width;
@@ -64,9 +70,7 @@ export default function GlassCube({ href }: { href: string }) {
           for (let x = -off; x < S; x += w) bg.fillText(WORD, x, y);
         });
         // fade the edges back to the page color so the canvas has no visible border
-        const v = bg.createRadialGradient(S / 2, S / 2, S * 0.3, S / 2, S / 2, S / 2);
-        v.addColorStop(0, 'rgba(11,11,12,0)'); v.addColorStop(1, 'rgba(11,11,12,1)');
-        bg.fillStyle = v; bg.fillRect(0, 0, S, S);
+        bg.fillStyle = vign; bg.fillRect(0, 0, S, S);
         bgTex.needsUpdate = true;
       };
 
@@ -111,12 +115,13 @@ export default function GlassCube({ href }: { href: string }) {
 
       // pointer tilt and hover swell
       let tx = 0, ty = 0, hover = 0, hoverT = 0;
+      let rect: DOMRect | null = null;
       const onMove = (e: PointerEvent) => {
-        const r = stage.getBoundingClientRect();
+        const r = rect || (rect = stage.getBoundingClientRect());
         tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
         ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
       };
-      const onEnter = () => (hoverT = 1);
+      const onEnter = () => { hoverT = 1; rect = null; };
       const onLeave = () => { hoverT = 0; tx = 0; ty = 0; };
       link.addEventListener('pointermove', onMove);
       link.addEventListener('pointerenter', onEnter);
@@ -133,6 +138,7 @@ export default function GlassCube({ href }: { href: string }) {
         cube.rotation.z += ((tx * -0.25) - cube.rotation.z) * 0.05;
         cube.position.y = Math.sin(t * 1.1) * 0.08;
         cube.scale.setScalar(1 + hover * 0.08);
+        rect = null;
         paint(t);
         renderer.render(scene, camera);
         if (visible && !reduced) raf = requestAnimationFrame(frame);

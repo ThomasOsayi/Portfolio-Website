@@ -21,6 +21,18 @@ export default function Motion() {
     };
     const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector(s) as T | null;
     const $$ = <T extends Element = HTMLElement>(s: string) => Array.from(document.querySelectorAll(s)) as T[];
+    // everything that moves per frame (cursor, preview, textures) runs in GSAP's single ticker. Layout
+    // reads are cached per frame so a 120-1000 Hz mouse never forces more than one layout per frame.
+    let frameNo = 0;
+    gsap.ticker.add(() => { frameNo++; });
+    const rectCache = new WeakMap<Element, { f: number; r: DOMRect }>();
+    const rectOf = (el: Element) => {
+      const c = rectCache.get(el);
+      if (c && c.f === frameNo) return c.r;
+      const r = el.getBoundingClientRect();
+      rectCache.set(el, { f: frameNo, r });
+      return r;
+    };
 
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -56,16 +68,18 @@ export default function Motion() {
     }) as EventListener, { passive: true });
     if (fine && !reduced) {
       document.body.classList.add('has-cursor');
-      let id = 0;
-      const loop = () => {
-        // ring trails the dot only slightly so it reads as one cursor
-        cx += (mx - cx) * 0.42; cy += (my - cy) * 0.42;
+      let lx = -1, ly = -1;
+      const cursorTick = () => {
+        // ring trails the dot only slightly so it reads as one cursor; skip DOM writes when nothing moved
+        cx += (mx - cx) * 0.5; cy += (my - cy) * 0.5;
+        if (Math.abs(mx - cx) < 0.05 && Math.abs(my - cy) < 0.05) { cx = mx; cy = my; }
+        if (cx === lx && cy === ly && mx === cx) return;
+        lx = cx; ly = cy;
         cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
         dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
-        id = requestAnimationFrame(loop);
       };
-      loop();
-      cleanups.push(() => { cancelAnimationFrame(id); document.body.classList.remove('has-cursor'); });
+      gsap.ticker.add(cursorTick);
+      cleanups.push(() => { gsap.ticker.remove(cursorTick); document.body.classList.remove('has-cursor'); });
       $$('a, button, [data-cursor], [data-cursor-link]').forEach((el) => {
         on(el, 'pointerenter', () => cursor.classList.add('is-link'));
         on(el, 'pointerleave', () => cursor.classList.remove('is-link'));
@@ -80,7 +94,7 @@ export default function Motion() {
     if (fine && !reduced) $$('[data-magnetic]').forEach((el) => {
       const inner = el.querySelector('span') as HTMLElement | null;
       on(el, 'pointermove', ((e: PointerEvent) => {
-        const r = el.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        const r = rectOf(el), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
         el.style.transition = 'background-color .3s, color .3s';
         el.style.transform = `translate(${dx * 0.35}px, ${dy * 0.35}px)`;
         if (inner) { inner.style.transition = ''; inner.style.transform = `translate(${dx * 0.18}px, ${dy * 0.18}px)`; }
@@ -168,6 +182,12 @@ export default function Motion() {
       return el.querySelectorAll('.split-line > span');
     };
 
+    // adaptive quality: if the page cannot hold ~55fps, textures step down in resolution and strand count
+    const LEVELS: [number, number][] = [[1, 1], [0.85, 0.75], [0.72, 0.55], [0.6, 0.4]];
+    let qLevel = 0;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const withQ = (o: any) => ({ ...o, baseDpr: o.maxDpr ?? 1.25, baseStrands: o.strandScale ?? 1, maxDpr: (o.maxDpr ?? 1.25) * LEVELS[qLevel][0], strandScale: (o.strandScale ?? 1) * LEVELS[qLevel][1] });
+
     // hero material switcher
     const stage = $('.hero-stage')!;
     const matName = $('#mat-name');
@@ -188,7 +208,8 @@ export default function Motion() {
       }
       try {
         // capped resolution and strand count keep the hero at a steady frame rate
-        hero = new engine.TextureWord(stage, key, { bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.6 : 0.55 });
+        hero = new engine.TextureWord(stage, key, withQ({ bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.6 : 0.55 }));
+        hero.word = 'THOMAS';
         hero.build('THOMAS');
         engine.instances.push(hero);
       } catch {
@@ -218,18 +239,18 @@ export default function Motion() {
     if (fine && !reduced) {
       const pv = document.createElement('div'); pv.className = 'preview'; pv.innerHTML = '<img alt="">'; document.body.appendChild(pv);
       const pimg = pv.querySelector('img')!;
-      let px = mx, py = my, id = 0;
-      $$('.row').forEach((r) => {
-        on(r, 'pointerenter', () => { pimg.src = r.dataset.img || ''; pv.classList.add('on'); });
-        on(r, 'pointerleave', () => pv.classList.remove('on'));
-      });
-      const loop = () => {
+      let px = mx, py = my, shown = false, hideT = 0;
+      const pvTick = () => {
+        if (!shown && performance.now() > hideT) return;
         const vx = mx - px; px += (mx - px) * 0.14; py += (my - py) * 0.14;
-        if (pv.classList.contains('on')) pv.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%) rotate(${Math.max(-12, Math.min(12, vx * 0.12))}deg)`;
-        id = requestAnimationFrame(loop);
+        pv.style.transform = `translate3d(${px}px, ${py}px, 0) translate(-50%, -50%) rotate(${Math.max(-12, Math.min(12, vx * 0.12))}deg)`;
       };
-      loop();
-      cleanups.push(() => { cancelAnimationFrame(id); pv.remove(); });
+      $$('.row').forEach((r) => {
+        on(r, 'pointerenter', () => { if (!shown && performance.now() > hideT) { px = mx; py = my; } pimg.src = r.dataset.img || ''; pv.classList.add('on'); shown = true; });
+        on(r, 'pointerleave', () => { pv.classList.remove('on'); shown = false; hideT = performance.now() + 400; });
+      });
+      gsap.ticker.add(pvTick);
+      cleanups.push(() => { gsap.ticker.remove(pvTick); pv.remove(); });
     }
 
     // intro + scroll choreography
@@ -268,7 +289,7 @@ export default function Motion() {
         gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: '.products .pin', pin: true, scrub: 1, end: () => '+=' + dist(), invalidateOnRefresh: true } });
         $$('.card').forEach((card) => {
           const media = card.querySelector('.card-media') as HTMLElement;
-          const move = ((e: PointerEvent) => { const r = media.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; media.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`; }) as EventListener;
+          const move = ((e: PointerEvent) => { const r = rectOf(media); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; media.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`; }) as EventListener;
           const leave = () => (media.style.transform = '');
           card.addEventListener('pointermove', move); card.addEventListener('pointerleave', leave);
           return () => { card.removeEventListener('pointermove', move); card.removeEventListener('pointerleave', leave); };
@@ -307,7 +328,6 @@ export default function Motion() {
     };
 
     // render loop for the texture engine
-    let loopId = 0;
     const start = async () => {
       engine = await import('@/lib/textureEngine');
       if (disposed) return;
@@ -332,10 +352,10 @@ export default function Motion() {
       let panel: any = null;
       if (panelStage) {
         try {
-          panel = new engine.TextureWord(panelStage, 'shag', {
+          panel = new engine.TextureWord(panelStage, 'shag', withQ({
             shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 8 * dpr, 8 * dpr, w - 16 * dpr, h - 16 * dpr, 18 * dpr),
             unit: innerWidth < 700 ? 50 : 70, texMul: 3, bg: HERO_BG, maxDpr: 1, strandScale: innerWidth < 700 ? 0.3 : 0.35,
-          });
+          }));
           panel.visible = false;
           panel.build('');
           engine.instances.push(panel);
@@ -356,10 +376,10 @@ export default function Motion() {
           if (!engine) return null;
           if (!frame) {
             try {
-              frame = new engine.TextureWord(fs, 'shag', {
+              frame = new engine.TextureWord(fs, 'shag', withQ({
                 shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, 20 * dpr),
                 unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1, strandScale: 0.22,
-              });
+              }));
               frame.visible = false;
               frame.build(''); frameKey = sizeKey(fs);
               engine.instances.push(frame);
@@ -391,8 +411,33 @@ export default function Motion() {
         });
       }
 
-      const loop = (now: number) => { engine!.instances.forEach((i) => i.visible && i.draw(now)); loopId = requestAnimationFrame(loop); };
-      loopId = requestAnimationFrame(loop);
+      let last = 0, ema = 16.7, slowSince = 0;
+      const t0 = performance.now();
+      const degrade = () => {
+        if (!engine || qLevel >= LEVELS.length - 1) return;
+        qLevel++;
+        const [d, sc] = LEVELS[qLevel];
+        engine.instances.forEach((i) => {
+          i.opts.maxDpr = (i.opts.baseDpr ?? 1.25) * d;
+          i.opts.strandScale = (i.opts.baseStrands ?? 1) * sc;
+          if (i.ready !== undefined) i.build(i.word || '');
+        });
+      };
+      const texTick = () => {
+        const now = performance.now();
+        let drew = false;
+        engine!.instances.forEach((i) => { if (i.visible) { i.draw(now); drew = true; } });
+        const dt = now - last; last = now;
+        // judge only frames where a texture drew, after the intro, ignoring tab switches
+        if (!drew || document.hidden || dt > 500 || now - t0 < 3500) { slowSince = 0; return; }
+        ema = ema * 0.92 + dt * 0.08;
+        if (ema > 18.5) {
+          if (!slowSince) slowSince = now;
+          else if (now - slowSince > 1500) { degrade(); slowSince = 0; ema = 16.7; }
+        } else slowSince = 0;
+      };
+      gsap.ticker.add(texTick);
+      cleanups.push(() => gsap.ticker.remove(texTick));
       if (reduced) setTimeout(() => engine!.instances.forEach((i) => i.draw(performance.now())), 50);
       let rt = 0, lastW = innerWidth;
       on(window, 'resize', () => {
@@ -412,7 +457,6 @@ export default function Motion() {
 
     return () => {
       disposed = true;
-      cancelAnimationFrame(loopId);
       ScrollTrigger.getAll().forEach((t) => t.kill());
       cleanups.forEach((f) => f());
       if (hero && engine) { engine.instances.splice(engine.instances.indexOf(hero), 1); hero.gl.getExtension('WEBGL_lose_context')?.loseContext(); hero.canvas.remove(); }

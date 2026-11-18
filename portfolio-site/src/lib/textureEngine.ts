@@ -566,7 +566,9 @@
     }
 
     pointer(e) {
-      const rc = this.canvas.getBoundingClientRect();
+      // layout is read at most once per frame (draw clears the cache); reading it on every
+      // pointermove forced a synchronous layout per event while GSAP was writing transforms
+      const rc = this._rc || (this._rc = this.canvas.getBoundingClientRect());
       const inside = e.clientX >= rc.left - 40 && e.clientX <= rc.right + 40 && e.clientY >= rc.top - 40 && e.clientY <= rc.bottom + 40;
       if (!inside) { this.target = [-1e5, -1e5]; return; }
       const nx = (e.clientX - rc.left) * this.dpr, ny = (rc.bottom - e.clientY) * this.dpr;
@@ -582,6 +584,7 @@
     }
 
     draw(now) {
+      this._rc = null;
       if (!this.ready) return;
       const { gl, mat } = this;
       const t = reduced ? 2.0 : (now - this.start) / 1000;
