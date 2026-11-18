@@ -52,7 +52,7 @@ export default function Motion() {
     let engine: typeof import('@/lib/textureEngine') | null = null;
     on(window, 'pointermove', ((e: PointerEvent) => {
       mx = e.clientX; my = e.clientY;
-      if (engine && !reduced) engine.instances.forEach((i) => i.pointer(e));
+      if (engine && !reduced) engine.instances.forEach((i) => i.visible && i.pointer(e));
     }) as EventListener, { passive: true });
     if (fine && !reduced) {
       document.body.classList.add('has-cursor');
@@ -334,7 +334,7 @@ export default function Motion() {
         try {
           panel = new engine.TextureWord(panelStage, 'shag', {
             shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 8 * dpr, 8 * dpr, w - 16 * dpr, h - 16 * dpr, 18 * dpr),
-            unit: innerWidth < 700 ? 50 : 70, texMul: 3, bg: HERO_BG, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.5 : 0.6,
+            unit: innerWidth < 700 ? 50 : 70, texMul: 3, bg: HERO_BG, maxDpr: 1, strandScale: innerWidth < 700 ? 0.3 : 0.35,
           });
           panel.visible = false;
           panel.build('');
@@ -345,41 +345,53 @@ export default function Motion() {
         } catch { panel = null; }
       }
 
-      // textured frame grows around a product card on hover: desktop, fine pointer, built lazily, freed after leaving
+      // textured frame around a product card on hover (desktop, fine pointer). One shared instance,
+      // built while the page is idle and moved between cards, so hovering never rebuilds anything.
       if (fine && !reduced && innerWidth >= 900) {
-        $$<HTMLElement>('.card').forEach((card) => {
-          const fs = card.querySelector('.frame-stage') as HTMLElement | null;
-          if (!fs) return;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          let inst: any = null, freeId = 0;
+        const cards = $$<HTMLElement>('.card').filter((c) => c.querySelector('.frame-stage'));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let frame: any = null, frameKey = '', hideId = 0;
+        const sizeKey = (el: HTMLElement) => { const r = el.getBoundingClientRect(); return `${Math.round(r.width)}x${Math.round(r.height)}`; };
+        const ensureFrame = (fs: HTMLElement) => {
+          if (!engine) return null;
+          if (!frame) {
+            try {
+              frame = new engine.TextureWord(fs, 'shag', {
+                shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, 20 * dpr),
+                unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1, strandScale: 0.22,
+              });
+              frame.visible = false;
+              frame.build(''); frameKey = sizeKey(fs);
+              engine.instances.push(frame);
+            } catch { frame = null; return null; }
+          } else if (frame.stage !== fs) {
+            fs.appendChild(frame.canvas);
+            frame.stage = fs;
+            const k = sizeKey(fs);
+            if (k !== frameKey) { frame.build(''); frameKey = k; }
+          }
+          return frame;
+        };
+        const idle = (fn: () => void) => { if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(fn, { timeout: 2000 }); else setTimeout(fn, 400); };
+        if (cards[0]) idle(() => { if (!disposed) ensureFrame(cards[0].querySelector('.frame-stage') as HTMLElement); });
+        cards.forEach((card) => {
+          const fs = card.querySelector('.frame-stage') as HTMLElement;
           on(card, 'pointerenter', () => {
-            clearTimeout(freeId);
-            if (!inst && engine) {
-              try {
-                inst = new engine.TextureWord(fs, 'shag', {
-                  shape: (ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number) => roundFill(ctx, 2 * dpr, 2 * dpr, w - 4 * dpr, h - 4 * dpr, 20 * dpr),
-                  unit: 34, texMul: 2, bg: HERO_BG, maxDpr: 1.25, strandScale: 0.3,
-                });
-                inst.build('');
-                engine.instances.push(inst);
-              } catch { inst = null; return; }
-            }
+            clearTimeout(hideId);
+            cards.forEach((c) => c !== card && c.classList.remove('is-framed'));
+            const f = ensureFrame(fs);
+            if (!f) return;
+            f.visible = true;
             card.classList.add('is-framed');
           });
           on(card, 'pointerleave', () => {
             card.classList.remove('is-framed');
-            freeId = window.setTimeout(() => {
-              if (!inst || !engine) return;
-              engine.instances.splice(engine.instances.indexOf(inst), 1);
-              inst.gl.getExtension('WEBGL_lose_context')?.loseContext();
-              inst.canvas.remove();
-              inst = null;
-            }, 700);
+            hideId = window.setTimeout(() => { if (frame) frame.visible = false; }, 550);
           });
         });
       }
 
-      const loop =(now: number) => { engine!.instances.forEach((i) => i.visible && i.draw(now)); loopId = requestAnimationFrame(loop); };
+      const loop = (now: number) => { engine!.instances.forEach((i) => i.visible && i.draw(now)); loopId = requestAnimationFrame(loop); };
       loopId = requestAnimationFrame(loop);
       if (reduced) setTimeout(() => engine!.instances.forEach((i) => i.draw(performance.now())), 50);
       let rt = 0, lastW = innerWidth;

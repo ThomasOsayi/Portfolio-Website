@@ -46,7 +46,10 @@
   const ss = (e0, e1, x) => { const t = Math.min(1, Math.max(0, (x - e0) / (e1 - e0))); return t * t * (3 - 2 * t); };
   const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
 
+  // generated colour textures are cached per material: building one is ~100ms of main-thread work
+  const TEX_CACHE = new Map();
   function makeTexture(name) {
+    if (TEX_CACHE.has(name)) return TEX_CACHE.get(name);
     const N = 512, cv = document.createElement("canvas");
     cv.width = cv.height = N;
     const ctx = cv.getContext("2d"), img = ctx.createImageData(N, N), d = img.data;
@@ -211,6 +214,7 @@
       d[i] = Math.min(255, c[0]); d[i + 1] = Math.min(255, c[1]); d[i + 2] = Math.min(255, c[2]); d[i + 3] = 255;
     }
     ctx.putImageData(img, 0, 0);
+    TEX_CACHE.set(name, cv);
     return cv;
   }
 
