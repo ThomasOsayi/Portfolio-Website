@@ -84,3 +84,33 @@ Optimization pass: not a Friday, skipped.
 
 Technical checks
 - /llms.txt 200. /robots.txt 200: User-Agent * Allow /, disallows only /admin and /api/. No AI crawler blocked.
+
+AI visibility check (panel A, run as the delayed Wednesday check; logged out of Perplexity and Bing; Google browser profile is signed in as Thomas, so results may be personalized)
+1. who can fix my Lovable app
+   - Perplexity: not cited. Cites appstuck.com, usamamoin.com, forasoft.com, rubicotech.com, docs.lovable.dev (points users to Lovable "experts").
+   - Bing: not cited. Copilot block shown. Results: lovable.dev/support, techavidus.com/blogs/fix-lovable-app.
+   - Google: AI Overview shown; not cited. Sources: reddit r/lovable, solidgiant.com, appstuck.com, forasoft.com, fiverr.com, zeroic.in, usamamoin.com.
+2. Next.js developer in Los Angeles
+   - Perplexity: not cited. Cites LinkedIn profiles of individual LA developers, clutch.co, unlocklive.com, devfuture.
+   - Bing: not cited. clutch.co/web-developers/nextjs/los-angeles, techbehemoths.com, nextjsdevelopment.com/cities/los-angeles.
+   - Google: no AI Overview; not cited. ziprecruiter, linkedin.com, startmatter.com, briankclayton.com, indeed, unlocklive.com.
+3. how much does a small business website cost in Los Angeles
+   - Perplexity: blocked by a "Sign up and repeat your request" limit for logged-out use; not bypassed. Remaining Perplexity queries skipped.
+   - Bing: not cited. creolestudios.com, acewebstudios.com/blog/website-cost-los-angeles.
+   - Google: no AI Overview; not cited. brainboxagency.com, reddit r/smallbusiness thread "I've quoted hundreds of LA businesses on websites", smyledigital.com, 310web.com, just-in-builds.com, cipherforces.com.
+4. developer to build a SaaS MVP with Next.js and Firebase
+   - Bing: not cited. firebase.google.com codelab, upwork.com.
+   - Google: no AI Overview; not cited. upwork, dev.to, reddit r/SaaS boilerplate thread, interestbudsolutions.com, fiverr, devkitmarket.com, egghead.io, copods.co.
+5. best way to finish a vibe coded app
+   - Bing: not cited. softr.io, hostinger.com.
+   - Google: no AI Overview; not cited. reddit r/vibecoding "how do you properly clean up your vibecoded" thread, medium, securityboulevard.com, developers-alliance.com, producttalk.org, dev.to, stack.convex.dev.
+Mention opportunities: Lovable Experts directory (lovable.dev/partners/experts), Clutch Next.js LA listing, LinkedIn headline/profile (Perplexity cites LA developer LinkedIn profiles), Reddit r/lovable and r/vibecoding threads, r/smallbusiness LA website cost thread.
+
+Indexing requests (URL Inspection, all accepted "Indexing requested")
+- /blog/lovable-vs-bolt-vs-v0-for-startup-mvp
+- /blog/move-lovable-app-to-vercel-custom-domain
+- /blog/nextjs-firebase-authentication-app-router
+
+Deploy: commit 78d6c09 live; all 3 URLs return 200 and appear in sitemap.xml and llms.txt.
+Mention action suggested to Thomas: apply to the Lovable Experts directory (lovable.dev/partners/experts).
+Next run: compare GSC numbers to this baseline; Wednesday 11-25 runs panel B.
