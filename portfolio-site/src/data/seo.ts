@@ -5,6 +5,7 @@
 import { morePosts } from './posts-more';
 import { postsBatch2 } from './posts-batch2';
 import { postsBatch3 } from './posts-batch3';
+import { postsBatch4 } from './posts-batch4';
 
 export const SITE = 'https://thomasosayi.com';
 
@@ -705,7 +706,7 @@ If you want to change layouts yourself every week, WordPress is reasonable. If y
   },
 ];
 
-export const posts: Post[] = [...postsBatch3, ...postsBatch2, ...morePosts, ...basePosts];
+export const posts: Post[] = [...postsBatch4, ...postsBatch3, ...postsBatch2, ...morePosts, ...basePosts];
 
 export const serviceBySlug = (s: string) => services.find((x) => x.slug === s);
 export const caseBySlug = (s: string) => caseStudies.find((x) => x.slug === s);

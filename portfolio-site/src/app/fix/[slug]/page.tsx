@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Shell, JsonLd } from '@/components/seo/Shell';
+import { Shell, JsonLd, Prose } from '@/components/seo/Shell';
 import { CaseCards, Faqs, faqLd } from '@/components/seo/CaseCards';
 import { toolFixes, toolBySlug } from '@/data/landing';
 import { serviceBySlug, posts, SITE } from '@/data/seo';
@@ -46,6 +46,8 @@ export default async function FixPage({ params }: { params: Promise<{ slug: stri
 
       <h2>Apps I have shipped</h2>
       <CaseCards slugs={['sqwad', 'guardian-mindcare', 'thehoopgang']} />
+
+      {t.guide ? <Prose text={t.guide} /> : null}
 
       <h2>Questions</h2>
       <Faqs items={t.faqs} />

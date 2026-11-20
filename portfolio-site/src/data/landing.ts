@@ -20,6 +20,7 @@ export interface Industry {
   service: string;
   packageHint: string;
   faqs: Faq[];
+  guide?: string; // long-form section in the body format, rendered on the page
 }
 
 const baseIndustries: Industry[] = [
@@ -213,6 +214,7 @@ export interface ToolFix {
   problems: { title: string; text: string }[];
   process: string[];
   faqs: Faq[];
+  guide?: string; // long-form section in the body format, rendered on the page
 }
 
 const baseToolFixes: ToolFix[] = [
@@ -235,7 +237,53 @@ const baseToolFixes: ToolFix[] = [
       { q: 'Can I keep using Lovable after you fix it?', a: 'Yes. Changes go through GitHub, so Lovable stays in sync and you can keep prompting afterwards.' },
       { q: 'Do I need to move off Supabase?', a: 'No. Supabase is a solid backend. Most problems come from configuration, not the platform.' },
       { q: 'How fast can you start?', a: 'Usually within a day or two. Small fixes are often done in 48 hours.' },
+      { q: 'Is the Supabase anon key in my Lovable app a secret?', a: 'No. The anon key is public by design, and row level security policies on each table are what actually protect your data.' },
+      { q: 'Does a developer need my Lovable login?', a: 'No. Access to the GitHub repository and the Supabase project is enough, so you never have to share your password.' },
+      { q: 'How much does it cost to fix a Lovable app?', a: 'Thomas Osayi fixes one bug from $60, up to three fixes plus a small feature from $200, and gets a Lovable app whose core already works launched from $600.' },
     ],
+    guide: `## How do I know my Lovable app needs a developer?
+When the same problem survives three or four prompts, or a fix in one place keeps breaking another, a developer reading the code directly is usually faster and cheaper than more credits.
+Lovable is very good at screens, flows and the first working version of a backend. Where it struggles is anything you cannot see in the preview: who may read which row, what happens when Stripe sends the same event twice, which values must stay secret, and how the app behaves on a real domain instead of the preview URL. Prompts describe what you want to see, and these problems are about what you should never see.
+Other signs it is time:
+- Sign-in, email confirmation or Google login works in the preview but fails on your domain.
+- A second test account can see data that belongs to the first.
+- Payments succeed in Stripe but nothing changes in the app.
+- The project has grown large enough that edits touch files you did not ask about.
+- You are about to invite real users, take real money or store anything personal.
+None of these mean the app is bad. They mean it has reached the part of the job that needs someone who can read the code line by line and test it as different users.
+## What does a Lovable fix actually involve?
+It starts with access, a reproduction of each problem and a written list, then the fixes go in through GitHub so Lovable stays in sync.
+The order matters. I fix security first, because an open table is a problem the moment the app is public. Payments come second, because a payment that does not unlock access becomes a refund and a support email. Then the deploy and domain setup, then the smaller bugs and rough edges.
+Because Lovable syncs both ways with GitHub, my commits show up in your Lovable project and you can keep prompting afterwards. The one habit to keep: after a developer has changed a file, describe changes to that area carefully in your prompts, or the AI may rewrite the fix while doing something else.
+At the end you get a short write-up of what was wrong, what changed and anything still worth doing later. If you ever hand the project to someone else, that document saves them hours.
+## What do I need to give a developer to fix my Lovable app?
+Three things: the GitHub repository, access to the Supabase project, and a clear list of what is broken.
+### Access
+Connect the Lovable project to GitHub if you have not already, then add the developer as a collaborator on that repository. For the backend, invite them to the Supabase organization, or, on Lovable Cloud, share the access Lovable offers for it. Do not send passwords or paste secret keys into chat or email.
+### A list of problems
+Write each problem in one sentence with the steps to reproduce it: "Sign up with a new email, click the confirmation link, land on a blank page." A two minute screen recording of the main workflow helps more than a long description.
+### What done looks like
+Say what must work before you launch. That keeps the job a fixed size and the quote honest.
+## Why does Supabase cause most Lovable problems?
+Because Supabase is where the access rules live, and the browser talks to it directly using a key that everyone can see.
+Every Lovable app that uses Supabase ships the project URL and the anon key inside its JavaScript. That is normal and by design. What protects the data is row level security: a policy on each table that decides, for every request, whether this user may read or change this row. If a table has row level security turned off, or a policy that simply says "true", anyone with the public key can read it.
+The opposite failure is just as common. Policies get so strict that nothing loads, so someone asks Lovable to "fix the permissions" and it loosens them all the way. I write policies that tie each row to its owner through auth.uid(), add separate rules for anything shared across a team, and test every table signed in as the owner, as a second user and signed out. My article on Supabase row level security for AI-built apps covers the patterns in detail.
+> Open the Supabase dashboard and look for tables marked as unrestricted or with row level security disabled. Any table holding user data that shows up there is the first thing to fix.
+## How long does it take and what does it cost?
+Most Lovable fixes take two to ten days, and the price depends on how many separate problems there are, not on how big the app looks.
+My fix packages:
+- Quick Fix, from $60, about 2 days: one bug or error in an app that otherwise works, fixed and explained.
+- Fix Plus Features, from $200, about 5 days: up to three fixes plus one small feature or integration.
+- Finish and Launch, from $600, about 10 days: for apps whose core features already work, fixing whatever blocks launch and shipping it to production.
+Fix pricing is for apps where the main workflow already works. I look at the code before quoting. If most of the product still needs building, the quote follows the SaaS MVP packages instead, usually less the parts your Lovable version already gets right. If you are unsure which side of that line you are on, my article on whether to fix or rebuild an AI-built app explains how I decide.
+## Can I keep my Lovable app on Lovable hosting?
+Yes. You can keep publishing from Lovable with a custom domain, or move the same code to a host such as Vercel or Netlify if you want more control.
+Staying on Lovable is simplest and keeps prompting and publishing in one place. Moving makes sense when you want preview deployments for every change, your own build settings, server routes for things like webhooks, or a team that works mostly in code. Either way, the domain setup has the same traps: Supabase auth redirect URLs and the site URL must match the production domain, environment variables must exist on the new host, and single page apps need a rewrite rule so deep links do not return a 404. The step by step version is in my article on moving a Lovable app to Vercel with a custom domain.
+## What should I avoid while waiting for a fix?
+Avoid prompting around the problem and avoid inviting real users until security is closed.
+Each prompt that "tries again" on a security or payment issue changes more code, which makes the eventual fix slower to find. Pause prompting in the areas the developer is working on, or at least tell them what you changed. Do not switch to a different AI builder to escape a bug, because the underlying issue usually comes along. And do not paste secret keys, such as a Stripe secret key or a Supabase service role key, into a prompt or a frontend file. Those belong in server-side environment variables or Supabase secrets only.
+## The bottom line
+Lovable gets you a working app quickly. The last stretch, access rules, payments, auth on your real domain and a clean deploy, is where a developer earns their fee. Give them the GitHub repo, the Supabase access and a one-sentence list of problems, fix security first, and keep building in Lovable afterwards. If that is where you are, send me the repo and I will tell you what it needs.`,
   },
   {
     slug: 'bolt',

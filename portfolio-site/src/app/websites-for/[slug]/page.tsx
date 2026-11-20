@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Shell, JsonLd } from '@/components/seo/Shell';
+import { Shell, JsonLd, Prose } from '@/components/seo/Shell';
 import { CaseCards, Faqs, faqLd } from '@/components/seo/CaseCards';
 import { industries, industryBySlug } from '@/data/landing';
 import { serviceBySlug, SITE } from '@/data/seo';
@@ -44,6 +44,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       <h2>Pricing</h2>
       <p className="seo-prose" style={{ margin: 0 }}>{i.packageHint} See the <Link href={svc ? `/services/${svc.slug}` : '/services'}>{svc?.title ?? 'services'}</Link> packages, or get a quick estimate with the <Link href="/tools/website-cost-calculator">website cost calculator</Link>.</p>
+
+      {i.guide ? <Prose text={i.guide} /> : null}
 
       <h2>Questions</h2>
       <Faqs items={i.faqs} />

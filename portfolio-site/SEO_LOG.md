@@ -40,9 +40,12 @@ Posts (slug: primary keyword)
 - website-maintenance-cost-small-business: website maintenance cost
 - fix-lovable-bolt-app-before-launch: fix Lovable app
 - nextjs-vs-wordpress-small-business: Next.js vs WordPress
+- fix-or-rebuild-ai-built-app: fix or rebuild vibe coded app
+- what-pages-does-a-small-business-website-need: what pages does a small business website need
 
 Industry pages (/websites-for/): restaurants, therapy-practices, medical-clinics, salons-and-spas, startups, local-service-businesses, dental-practices, law-firms, real-estate-agents, gyms-and-fitness-studios, ecommerce-brands, print-shops-and-manufacturers, nonprofits, coaches-and-consultants, med-spas, physical-therapy-and-chiropractic, event-venues, car-washes-and-auto-detailing, accountants-and-bookkeepers, tutoring-and-education, photographers, architects-and-interior-designers. None has a `guide` yet (Friday backlog).
-Tool fix pages (/fix/): lovable, bolt, v0, replit, cursor, windsurf, claude-code, base44, chatgpt. None has a `guide` yet (Friday backlog).
+Tool fix pages (/fix/): lovable, bolt, v0, replit, cursor, windsurf, claude-code, base44, chatgpt. Guides done: lovable (2026-11-20). Others still need a `guide` (Friday backlog).
+`guide` field: was not implemented in code before 2026-11-20; now on ToolFix and Industry types and rendered on /fix/[slug] and /websites-for/[slug] (before Questions). Service pages do not render a guide yet.
 Last new industry/tool page added: before 2026-11-19 (batch of Nov 17).
 
 ## AI visibility panel (rotate 5 per Wednesday, all 10 every 2 weeks)
@@ -114,3 +117,29 @@ Indexing requests (URL Inspection, all accepted "Indexing requested")
 Deploy: commit 78d6c09 live; all 3 URLs return 200 and appear in sitemap.xml and llms.txt.
 Mention action suggested to Thomas: apply to the Lovable Experts directory (lovable.dev/partners/experts).
 Next run: compare GSC numbers to this baseline; Wednesday 11-25 runs panel B.
+
+---
+
+## 2026-11-20 (Friday)
+
+Search Console (last 28 days; data through 11-18)
+- Clicks 0 (prev 0), impressions 373 (prev 1), avg position 12.5, CTR 0%. 42 queries.
+- Top query: "firebase best practices" 282 impressions, pos 6.2, 0 clicks, all to /blog/firebase-security-rules-checklist (284 imp, pos 6.3). Biggest opportunity on the site.
+- Other: how-much-does-a-saas-mvp-cost 28 imp pos 31 ("how much does an mvp cost" cluster); website-maintenance-cost-small-business 18 imp pos 36; how-to-get-your-business-mentioned-in-ai-search 9 imp pos 41; landing-page-vs-website 7 imp pos 41; "stripe webhook retry" pos 5.5 (post already answers it in a FAQ and section); local-seo checklist pos 14.5; /websites-for/event-venues 1 imp pos 4.
+- Generative AI report: shows 373 impressions, identical to the overall web totals and same query list, so it does not look AI-feature-specific yet. Logged as-is; compare next run.
+- Sitemaps: /sitemap.xml Success, last read Nov 19, 84 discovered. No resubmit.
+- Page indexing: 1 indexed, 65 "Crawled - currently not indexed" (report lags; pages above do get impressions). Response: only 2 new posts this run, plus strengthening (Lovable guide, Firebase section, titles).
+
+Published (2 new posts)
+- /blog/fix-or-rebuild-ai-built-app (1,916 words, fix-ai-built-app) target: "fix or rebuild vibe coded app". Comparison piece: keep prompting vs targeted fixes vs refactor vs rebuild. Figure: Guardian MindCare.
+- /blog/what-pages-does-a-small-business-website-need (1,805 words, nextjs-website-development) target: "what pages does a small business website need". Figures: Astiglow, New York Nook.
+
+Refresh / optimization (Friday pass)
+- /blog/firebase-security-rules-checklist: retitled "Firebase best practices before launch: the security rules checklist", new description, added keyword "Firebase best practices", new H2 "Which Firebase best practices matter beyond security rules?" (separate projects, budget alerts not caps, App Check enforcing, restricted API keys, unused providers incl. anonymous auth, more than one owner; source: Google's Firebase launch checklist, checked 2026-11-20). Now 2,200 words. updated 2026-11-20.
+- /blog/how-much-does-a-saas-mvp-cost: retitled "How much does an MVP cost? SaaS MVP prices and what drives them", new description with the $250 to $3,000 package range, keyword added. Metadata only, `updated` unchanged.
+- /fix/lovable: added `guide` (1,291 words, 8 H2s incl. bottom line, 1 tip) and 3 FAQs (now 6). Implemented `guide` rendering for fix and industry pages.
+- No post older than 30 days, so the standard refresh rule had nothing eligible (first eligible around 2026-12-17).
+- New industry/tool page: not added (last batch Nov 17; next allowed after Dec 1).
+
+Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallows only /admin and /api/). No AI crawler blocked.
+AI visibility: not Wednesday, skipped. Next: Wednesday 11-25, panel B.

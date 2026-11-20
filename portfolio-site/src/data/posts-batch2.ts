@@ -522,11 +522,11 @@ A hydration error is a disagreement between two renders of the same component. F
   },
   {
     slug: 'firebase-security-rules-checklist',
-    title: 'Firebase security rules checklist before you launch',
-    description: 'A practical checklist for Firestore and Storage security rules in an MVP or AI-built app, so user data is not readable by anyone.',
+    title: 'Firebase best practices before launch: the security rules checklist',
+    description: 'Firebase best practices for an MVP or AI-built app going live: Firestore and Storage security rules, server-only actions, App Check, budget alerts and separate projects, with the exact patterns to search for.',
     date: d,
-    updated: '2026-11-17',
-    keywords: ['Firebase security rules', 'Firestore rules checklist', 'Firebase test mode expired', 'secure Firebase app'],
+    updated: '2026-11-20',
+    keywords: ['Firebase best practices', 'Firebase security rules', 'Firestore rules checklist', 'Firebase test mode expired', 'secure Firebase app'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Before launch, make sure no Firestore or Storage rule allows reads or writes to everyone, every user-owned document checks request.auth.uid against the owner, writes validate the fields they accept, and admin actions run on the server with the Admin SDK instead of from the browser.',
     faqs: [
@@ -627,6 +627,15 @@ The final checklist:
 - Storage paths are checked by user ID, with size and type limits
 - Rules tested as a second user and as a signed-out visitor
 If you would rather have someone else do this pass, I review and fix Firebase rules as part of my work on AI-built apps. A single rules problem is a Quick Fix from $60, and a full pre-launch pass with auth, payments and deployment is the Finish and Launch package from $600.
+## Which Firebase best practices matter beyond security rules?
+Rules come first, but Google's own Firebase launch checklist adds a few project settings that take minutes and prevent the next most common disasters.
+- Separate projects. The checklist recommends different Firebase projects for development, testing and production. Testing a migration against live data is how real records get deleted.
+- Budget alerts. Set them in the Google Cloud console before launch. The checklist is clear that alerts are not budget caps, so a runaway loop can still spend money; alerts just tell you quickly.
+- App Check. Turn it on and move to enforcing for every service that supports it, so requests must come from your real app rather than a script using your config.
+- Restricted API keys. Limit each key to the APIs it actually needs.
+- Unused sign-in providers. Disable any you do not use, especially anonymous auth, and add only your production domains to the authorized domains list.
+- More than one owner. If the only owner account belongs to a contractor who disappears, so does your access.
+None of these replaces correct rules. App Check stops casual abuse of your config, but a determined attacker with a valid session is still limited only by what the rules allow.
 ## The bottom line
 Your Firebase config is public, so your rules are your security. Remove every open and test-mode rule, tie each document to its owner, name the fields users may change, move anything sensitive to server code using the Admin SDK, give Storage the same care as Firestore, and test as someone who should be refused. An afternoon spent here is far cheaper than explaining a data leak to your first customers.`,
   },
