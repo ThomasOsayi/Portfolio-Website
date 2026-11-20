@@ -143,3 +143,14 @@ Refresh / optimization (Friday pass)
 
 Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallows only /admin and /api/). No AI crawler blocked.
 AI visibility: not Wednesday, skipped. Next: Wednesday 11-25, panel B.
+
+Indexing requests (URL Inspection, all accepted "Indexing requested")
+- /blog/fix-or-rebuild-ai-built-app
+- /blog/what-pages-does-a-small-business-website-need
+- /blog/firebase-security-rules-checklist
+- /fix/lovable
+- /blog/how-much-does-a-saas-mvp-cost
+
+Deploy: commit 9d2704a live; all 5 URLs return 200; new posts appear in sitemap.xml and llms.txt; Firebase title and Lovable guide confirmed in live HTML.
+Mention action suggested to Thomas: answer the Product Hunt vibecoding discussion "has anyone found a good solution for keeping vibe coded apps stable after launch" (producthunt.com/p/vibecoding/...) with the fix vs refactor vs rebuild framing, linking /blog/fix-or-rebuild-ai-built-app.
+Next run: check whether the Firebase retitle lifts CTR on "firebase best practices" (baseline 282 imp, pos 6.2, 0 clicks); Wednesday 11-25 runs AI panel B.
