@@ -68,6 +68,7 @@ export const clients: Client[] = [
   { name: 'Pacific', accent: 'Harbor', desc: 'Medical group. Physician-led executive physicals in Torrance and the South Bay.', url: 'https://phmg-executive-physical.vercel.app', image: '/work/phmg.jpg' },
   { name: 'SCOPRO', accent: 'Creators', desc: 'Creator program for a coaching board brand. Buy, post one video, get refunded, earn on sales.', url: 'https://www.scoprocreatorportal.com', image: '/work/scopro.jpg' },
   { name: 'Serenity', accent: 'Institute', desc: 'Live, Zoom-based certification program for intervention professionals.', url: 'https://serenityintervention.com', image: '/work/serenity.jpg' },
+  { name: 'LACE', accent: 'UP', desc: 'Basketball apparel brand. Storefront with colorway filters, product pages and a Firebase admin dashboard.', url: 'https://laceup-store.vercel.app', image: '/work/laceup.jpg' },
   { name: 'New York', accent: 'Nook', desc: 'Russian restaurant, Hollywood. Reservations and pickup ordering.', url: 'https://new-york-nook.vercel.app', image: '/work/newyorknook.jpg' },
   { name: 'Artistic', accent: 'Printing', desc: 'Commercial printer. Quote management and client intake.', url: 'https://www.artisticprinting.com', image: '/work/artistic.jpg' },
   { name: 'Field', accent: 'Ops', desc: 'Job scheduling with Outlook Calendar sync for field teams.', url: 'https://fieldopapp.com', image: '/work/fieldops.jpg' },

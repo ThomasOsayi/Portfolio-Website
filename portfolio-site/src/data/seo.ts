@@ -278,6 +278,59 @@ Collect what you need to ship correctly inside the application, such as size and
 Give the team one table they can filter, so finding the creators who have not posted takes seconds.`,
   },
   {
+    slug: 'laceup',
+    name: 'LACEUP',
+    kind: 'E-commerce storefront + admin dashboard',
+    metaTitle: 'LACEUP Case Study: Next.js Apparel Store with Admin Dashboard',
+    description: 'Custom Next.js storefront for a basketball apparel brand, with colorway filtering, product pages, a Firebase admin dashboard and built-in store analytics.',
+    image: '/work/fiverr/laceup.jpg',
+    url: 'https://laceup-store.vercel.app',
+    stack: ['Next.js', 'TypeScript', 'Firebase', 'Vercel'],
+    service: 'nextjs-website-development',
+    body: `## The goal
+Give a new basketball apparel brand a storefront that looks like it belongs next to the big athletic labels, plus a back office the owner can run himself.
+LACEUP sells practice gear and everyday fits for hoopers. The first drop is fifteen products across tops, shorts, layers and accessories, most of them in more than one colorway. The brand wanted a launch-ready store to show people, without wiring up live payments yet.
+## What the brand needed
+- A home page, shop and product pages that feel premium, on desktop and on a phone
+- Filters that actually match the catalog: category, size and color
+- A contact form and newsletter signup that land somewhere the owner can see
+- A dashboard showing what people look at and add to their bag
+- A logo that fits the vibe of the store
+## How I approached it
+Study the brands people already compare you to. I worked from how Nike, Alo and Lululemon handle the same problems: big editorial photography, quiet type, generous spacing, and product cards that show the next colorway when you hover. A small brand gets taken seriously when the details match what shoppers are used to.
+The second principle was to keep the catalog as data. Every product, colorway, size and photo lives in one typed file, so the shop grid, filters, product pages and dashboard all read from the same source and never disagree.
+## What I built
+### A shop with honest filters
+![The LACEUP shop: category tabs, size and color filters with counts, and product cards.](/images/laceup/shop.jpg)
+Filters only offer options that exist in the current category, show a count next to each, and disable the ones that would return nothing. Colors are grouped into families like Charcoal and Court Orange, so a shopper is not choosing between six near-identical swatch names. Picking a color also switches each card to that colorway, and the category is kept in the URL so a filtered view can be shared.
+### Product pages
+![A LACEUP product page: gallery with both colorways and a hanging product shot, size picker and add to bag.](/images/laceup/pdp.jpg)
+Each product page shows the current colorway, the other colorway or a second pose, and a standalone shot of the product. The product photography was generated to stay consistent from shot to shot, so the same garment looks the same in every image instead of a random mix of stock photos.
+### Mobile first, not mobile later
+![The LACEUP shop and a product page on a phone.](/images/laceup/mobile.jpg)
+Every page was checked at phone width. The gallery swaps the wide product shot for a taller crop on mobile, so the product is never cut off.
+### Fast images
+Photos load with blurred placeholders generated at build time and are cached for a year, so the grid never flashes empty tiles. The hover colorway image only loads once a shopper actually points at a card.
+### An admin dashboard on Firebase
+![The LACEUP admin overview: visits, product views, adds to bag, checkout attempts, a daily chart and top products.](/images/laceup/admin.jpg)
+The owner signs in to a private dashboard with five sections. Overview shows visits, product views, adds to bag, checkout attempts, new subscribers and unread messages for 7, 30 or 90 days, with a daily chart, top products, traffic sources, devices and a live activity feed. Messages holds every contact form submission with search and read status, and Subscribers lists every newsletter signup with a CSV export.
+![The Products view: views, adds to bag and add rate for every product, with the most-added colorway and size.](/images/laceup/admin-products.jpg)
+The Products view ranks every product by views and adds to bag, so the owner can see which pieces and colorways people actually want before reordering.
+## Technical decisions and why
+- Next.js and TypeScript. Pages are pre-rendered and the catalog is typed, so a missing photo or a misspelled colorway fails the build and not the store.
+- Firebase. Firestore and Firebase Auth gave the brand a database, sign-in and live updates without a server to maintain. Security rules validate every write, keep submissions private to admins, and only allow anonymous activity events with no personal data.
+- First-party activity tracking. Visits, product views, adds to bag and checkout attempts are recorded straight to Firestore, which is what powers the dashboard. Vercel Analytics runs alongside it for page-level traffic.
+- No live payments yet. The brand asked for a showcase store first, so checkout is a demo flow. The catalog and bag are structured so Stripe can be added later without reworking the pages.
+## Result
+LACEUP launched with a storefront, a logo and an admin dashboard, delivered inside a 14-day window. The owner can see who is browsing, what they add to their bag and who wants to hear about the next drop, all from one login.
+## What I would tell a brand planning a similar store
+Keep products in one structured place. Filters, product pages and reporting stay accurate when they all read from the same data.
+Only show filters that return results. An empty grid after a click feels broken, even when it is technically correct.
+Photograph or generate product shots consistently. Mismatched images make a new brand look unfinished faster than anything else.
+Track adds to bag, not just visits. That is the number that tells you which products to restock.
+Launch before payments if you are not ready. A polished store you can share is worth more than a half-built checkout.`,
+  },
+  {
     slug: 'vencare',
     name: 'VenCare',
     kind: 'Health startup website',
