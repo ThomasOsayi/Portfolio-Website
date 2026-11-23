@@ -9,6 +9,7 @@ export const postsBatch4: Post[] = [
     title: 'Fix or rebuild your AI-built app? How to decide before you spend more',
     description: 'Four honest options for a Lovable, Bolt, v0 or Cursor app that is stuck: keep prompting, targeted fixes, a partial refactor or a full rebuild. What each costs, when each makes sense, and the signs that tell you which one you need.',
     date: d,
+    updated: '2026-11-22',
     keywords: ['fix or rebuild vibe coded app', 'rebuild AI generated app', 'refactor vs rebuild app', 'Lovable app rebuild', 'AI app rescue'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Fix the app when its core workflow already works and the problems are specific: security rules, payments, deploy errors or a few broken screens. Refactor when the data model is sound but the code around it is tangled, and rebuild only when the data model itself is wrong or most of the product still needs building.',
@@ -25,7 +26,12 @@ export const postsBatch4: Post[] = [
       { q: 'What does a code review before a fix cover?', a: 'It covers access rules, secrets, payments, the data model, build and deploy setup, and a list of what works, what is broken and what is missing.' },
       { q: 'How much does it cost to fix an AI-built app?', a: 'Thomas Osayi fixes single bugs from $60, up to three fixes plus a feature from $200, and gets apps whose core already works launched from $600; larger rebuilds follow his SaaS MVP pricing from $1,200.' },
     ],
-    body: `Every week someone sends me a repo with the same question in different words: is this worth saving, or should we start over? They have spent a month prompting in Lovable, Bolt, v0 or Cursor. The app mostly works. Then a payment does not unlock a plan, or a second test user can see the first user's data, and every new prompt seems to break something that used to work.
+    sources: [
+      { title: 'Row Level Security', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+      { title: 'Receive Stripe events in your webhook endpoint', publisher: 'Stripe Docs', url: 'https://docs.stripe.com/webhooks' },
+      { title: 'GitHub integration', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/integrations/github' },
+    ],
+    body: `When someone sends me a repo, it usually comes with the same question in different words: is this worth saving, or should we start over? They have spent a month prompting in Lovable, Bolt, v0 or Cursor. The app mostly works. Then a payment does not unlock a plan, or a second test user can see the first user's data, and every new prompt seems to break something that used to work.
 There are four ways forward, not two. Here is how I decide between them, what each one costs, and the signs that point to each.
 ## Should I fix or rebuild my AI-built app?
 In most cases fix it, because the parts that usually break are specific and the parts that usually work, the screens and the flows, are expensive to recreate.
@@ -77,7 +83,7 @@ A refactor pulls that logic into one place, for example a single function that d
 A rebuild is worth it when the data model does not fit the product, or when so little works that there is not much to keep.
 Data model problems look like this. Every user's records sit in one shared collection with no owner field, so access rules cannot be written safely. A team product was built as single-user, so there is no concept of an organization, and adding one touches every query. Money is stored as text, or bookings have no time zone. These decisions spread into every screen, and patching them one by one usually costs more than designing them properly once.
 Roles are the other common reason. Guardian MindCare, a therapy practice platform I built, has five user roles: therapists, supervisors, trainees, clients and admins. A permission model like that has to be designed into the data from day one. An app that was prompted as single-user and then told to "add supervisors" usually needs its foundation redone.
-![Guardian MindCare: a therapy practice platform I built with role-based portals for therapists, supervisors, trainees, clients and admins.](/work/fiverr/guardian.jpg)
+![Guardian MindCare, a therapy practice platform I built with role-based portals for therapists, supervisors, trainees, clients and admins.](/shots/guardian-home.jpg)
 The second case is simpler. If you have a landing page, a login and three half-working screens, there is little to save. A rebuild at that point is really just the first build.
 ## How do I find out which one my app needs?
 Get one written review of the code before you choose, because guessing in either direction is expensive.
@@ -95,9 +101,18 @@ This is an illustration, not a client. A founder builds a booking app for dog gr
 The review finds four problems. Row level security lets any signed-in owner read every booking. The Stripe webhook is not deployed, so deposits are taken but bookings stay "pending". Availability is stored without a time zone, so bookings made from another state land an hour off. And the production build fails on two type errors.
 The first two are classic fixes. The build errors are a fix. The time zone issue looks small, but it touches the availability table and every screen that reads it. That is a data model change, and it decides the plan: fix security, payments and the build now, then refactor the availability logic into one place that stores times in UTC with the groomer's zone attached. No rebuild. Screens, styling and bookings all stay.
 Had the app stored every groomer's bookings in one shared list with no owner at all, the answer would have changed to a rebuild of the data layer.
+## What can I check myself before paying for a review?
+You can check three things in under an hour, and the answers will tell you, and any reviewer, a lot about which option you are facing.
+### Is row level security on for every table?
+If you use Supabase, open the Table Editor and look for tables marked as unrestricted. Supabase's own documentation says a table in an exposed schema without row level security is readable and writable by any role with a grant on it. Write down which tables are open. Do not switch it on blindly in production, because with no policies the app will suddenly load nothing.
+### Did Stripe actually deliver the webhook?
+In the Stripe dashboard, open Workbench, then Webhooks, select your endpoint and look at the Event deliveries tab. Failed or pending deliveries with a 400 or 500 status explain most "paid but not activated" complaints. If there is no endpoint for your live domain at all, that is your answer.
+### Does the production build pass?
+Run npm run build locally or read the latest failed deploy log on your host. Copy the first error, not the last one.
+Bring those three notes to the review. They often turn a vague "it is broken" into a short list of fixes, which is the cheapest outcome there is.
 ## What mistakes make the decision harder?
 The most expensive mistake is deciding before anyone has read the code.
-Other mistakes I see often:
+Other mistakes that make it harder:
 - Rebuilding because the code "looks messy". Messy is normal for generated code, and it says little about whether the foundation is sound.
 - Prompting through a security fix. Rules and policies need someone who can read them line by line and test them as different users.
 - Adding big features to a broken base. Each new feature on a wrong data model raises the cost of fixing it later.
@@ -111,6 +126,7 @@ Fix the app when the main workflow works and the problems are specific. Refactor
     title: 'What pages does a small business website need? A page-by-page plan',
     description: 'The pages a small business website actually needs, the ones you can skip, and how many pages different kinds of businesses should start with, from a developer who builds them.',
     date: d,
+    updated: '2026-11-22',
     keywords: ['what pages does a small business website need', 'small business website pages', 'essential website pages', 'how many pages should a website have'],
     service: 'nextjs-website-development',
     shortAnswer: 'Most small business websites need five core pages: a homepage, a services page or one page per main service, an about page, a contact page with your address and hours, and a privacy policy. Add a booking, menu, quote or pricing page if customers expect to act online, and a separate page for each main service and location you want to rank for.',
@@ -127,6 +143,12 @@ Fix the app when the main workflow works and the problems are specific. Refactor
       { q: 'Do I need a privacy policy on my website?', a: 'If your site collects any personal information, such as a contact form, booking form or analytics, you should have one, and some laws and services require it; this is general information, not legal advice.' },
       { q: 'Is a one-page website bad for SEO?', a: 'Not for a business with one main service in one area, but separate pages rank better when you offer several services or serve several locations.' },
       { q: 'How much does a five-page small business website cost?', a: 'With Thomas Osayi, a Business Site of up to five pages with a booking or quote form and local SEO setup starts at $450 and takes about 14 days.' },
+    ],
+    sources: [
+      { title: 'Privacy Laws (California Online Privacy Protection Act)', publisher: 'State of California Department of Justice', url: 'https://oag.ca.gov/privacy/privacy-laws' },
+      { title: 'Spam policies for Google web search', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/essentials/spam-policies' },
+      { title: 'SEO Starter Guide', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/fundamentals/seo-starter-guide' },
+      { title: 'Guidelines for representing your business on Google', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/3038177' },
     ],
     body: `When a new client asks what pages their website should have, they usually expect a long list. The honest answer is shorter. Most small businesses need five or six pages at launch, plus one page that lets customers act. Everything else is optional, and some of it actively hurts.
 Here is the plan I use, page by page, with what goes on each one and what to skip.
@@ -148,8 +170,8 @@ Yes, if you want to be found for each service, because one page cannot rank well
 Search engines match a page to a query. Someone searching "brow waxing in Pasadena" wants a page about brow waxing, not a page that mentions brows once between bikini waxing and lash tints. A dedicated page for each main service can answer that search fully: what it is, how long it takes, the price or price range, who it suits, aftercare, and a booking button.
 A good rule: if a service has its own price, its own customers and its own search term, it deserves its own page. If it is a small add-on, list it on the main services page instead.
 Astiglow, a waxing studio site I built, shows the pattern well. The service menu and packages are laid out so a visitor can find their service, see the price and book in a couple of taps.
-![Astiglow: a waxing studio site I built with a service menu, packages and online booking.](/work/fiverr/astiglow.jpg)
-Do not go overboard. Five strong service pages beat thirty pages that differ by one word. Thin, near-duplicate pages can drag the whole site down in search.
+![The Astiglow services menu I built, listing each waxing service with its price and duration.](/shots/astiglow-services.jpg)
+Do not go overboard. Five strong service pages beat thirty pages that differ by one word. Thin, near-duplicate pages rarely rank, and a batch of them can look like doorway pages to search engines.
 ## What should each service page include?
 A service page should answer everything a customer asks before booking, so they never have to call just to find out the basics.
 Work through the questions you hear most on the phone and answer them on the page, in plain words:
@@ -167,7 +189,7 @@ A page built this way does double duty. It helps the customer decide, and it giv
 The page where customers take action, because it is the only one that turns a visit into money.
 For a restaurant, that is reservations or online ordering. For a salon or clinic, it is booking. For a contractor, printer or manufacturer, it is a quote request. For a lawyer or accountant, it is a consultation request or a phone call.
 New York Nook, a restaurant site I built in Hollywood, is built around two actions: reservations and pickup ordering. Everything else on the site supports those two buttons.
-![New York Nook: a restaurant site I built with reservation requests and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![The New York Nook homepage I built, with Reserve a table, Order takeout and View menu buttons in the first screen.](/shots/newyorknook-home.jpg)
 Make this page fast, short and obvious. Ask only for what you need to respond. If customers book online, put the booking flow on your own domain where possible, so the visit and the conversion stay on your site. "Online booking for small business websites" compares the main ways to do that.
 > Open your website on your phone and time how long it takes to book, order or request a quote from the homepage. If it takes more than three taps or thirty seconds, that is the first thing to fix.
 ## What pages can most small businesses skip?
@@ -201,7 +223,18 @@ Everything a customer needs to reach you without thinking, in the format they pr
 - Hours, including holiday hours when they change.
 - A map, if customers come to you.
 - What happens next, such as "We reply within one business day."
-Keep the form short. Name, a way to reply, and a message is enough for most businesses. Every extra required field loses some people. If you need more detail, such as a quote for a print job, ask for it on a dedicated quote form instead. Artistic Printing, a commercial printer I built a site for, uses a quote management tool for exactly that reason.
+Keep the form short. Name, a way to reply, and a message is enough for most businesses. Every extra required field loses some people. If you need more detail, such as a quote for a print job, ask for it on a dedicated quote form instead. Artistic Printing, a commercial printer I built a site for, uses a quote management tool for exactly that reason, and keeps its contact page to the address, phone, email and hours.
+![The Artistic Printing contact page I built, with the address, phone number, email and business hours.](/shots/artistic-contact.jpg)
+## What should a privacy policy page say?
+It should say plainly what personal information your site collects, why, who you share it with and how people can contact you about it. For most small businesses that is one short page linked in the footer.
+If you serve customers in California, the state's Online Privacy Protection Act (CalOPPA) requires commercial websites that collect personal information from California consumers to post a privacy policy conspicuously and follow it. According to the California Attorney General's office, the policy must describe the kinds of identifying information collected, the types of third parties it may be shared with, and how the site tracks visitors.
+For a typical service business, the page usually covers:
+- What your contact, booking or quote forms collect, such as name, phone, email and appointment details.
+- Which tools see that data, such as your booking provider, email service, payment processor and analytics.
+- Whether you use cookies or tracking pixels, and for what.
+- How long you keep form submissions and how someone can ask you to delete theirs.
+- A contact email and the date the policy was last updated.
+Write it to match what your site really does. A copied policy that mentions services you do not use, or misses the ones you do, is worse than a short honest one. This is general information, not legal advice, so have a lawyer review it if you handle health, financial or children's data.
 ## A worked example: a five-page site for a bakery
 This is an illustration, not a client. A bakery in Long Beach sells walk-in, takes custom cake orders, and caters office events.
 The plan: a homepage with a photo of the case, today's hours and a Order a cake button. A custom cakes page with flavors, sizes, starting prices, lead time and the order form. A catering page with sample menus and a request form. An about page with the owners and how long they have been baking. A contact page with the address, hours, parking and a map. A privacy policy in the footer.

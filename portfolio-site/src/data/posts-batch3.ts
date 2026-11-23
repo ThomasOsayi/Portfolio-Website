@@ -10,6 +10,7 @@ export const postsBatch3: Post[] = [
     title: 'Lovable vs Bolt vs v0 for a startup MVP: which one to use',
     description: 'An honest comparison of Lovable, Bolt and v0 for building a startup MVP: what each produces, current pricing, where each one gets stuck, and when to bring in a developer.',
     date: d,
+    updated: '2026-11-22',
     keywords: ['Lovable vs Bolt vs v0', 'best AI app builder for MVP', 'Lovable or Bolt', 'v0 vs Lovable', 'AI app builder comparison'],
     service: 'saas-mvp-development',
     shortAnswer: 'Lovable is the best fit for a non-technical founder who wants a working app with login and a database, Bolt suits founders who want more control over the code and stack, and v0 is strongest for polished Next.js interfaces when someone technical will wire up the backend. None of them reliably delivers secure permissions, payments and production setup on its own, so plan for a review before real users arrive.',
@@ -27,12 +28,19 @@ export const postsBatch3: Post[] = [
       { q: 'Can I move my app off Lovable, Bolt or v0 later?', a: 'Yes, all three let you get the code into GitHub, and from there a developer can host it on Vercel or another provider.' },
       { q: 'Should I build my MVP with AI or hire a developer?', a: 'Build the first version with AI if you need to test the idea cheaply, and hire a developer when real users, payments or private data are involved. Thomas Osayi builds a working first version of one core workflow from $250 and a launchable SaaS MVP from $1,200.' },
     ],
+    sources: [
+      { title: 'Plans and pricing', publisher: 'Lovable', url: 'https://lovable.dev/pricing' },
+      { title: 'Upgrade a project to TanStack Start', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/features/upgrade-to-tanstack-start.md' },
+      { title: 'GitHub integration', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/integrations/github' },
+      { title: 'Pricing', publisher: 'Bolt', url: 'https://bolt.new/pricing' },
+      { title: 'Pricing', publisher: 'v0 by Vercel', url: 'https://v0.app/pricing' },
+    ],
     body: `Should I build my MVP in Lovable, Bolt or v0? It is one of the most common questions founders ask once they have spent a weekend in one tool and started wondering whether the other two would have gone better.
 The honest answer is that the tool matters less than people think, but the differences are real, and they line up with one question: who is going to own this code after the AI is done? This guide compares the three on that basis, with current prices and the problems I see when founders bring these apps to me to finish.
 ## What is the short answer?
 Lovable fits non-technical founders, Bolt fits founders who like to tinker with code, and v0 fits teams that have a developer. That is the whole decision in one line, and the rest of this article explains why.
 All three turn a written prompt into a running web app in minutes. Where they differ is what they set up for you behind the screen and how much they expect you to understand.
-- Lovable sets up login, a database and hosting with very little input, so you can get to a working product without touching a terminal.
+- Lovable sets up login, a database and hosting with very little input, so you can get to a working product without touching a terminal. Projects created from May 13, 2026 use TanStack Start with server-side rendering; older ones are React and Vite single-page apps.
 - Bolt runs a full development environment in the browser, shows you the files and lets you choose more of the stack.
 - v0 comes from Vercel, the company behind Next.js, and produces clean Next.js and React interfaces that a developer can drop straight into a real project.
 If you are alone and non-technical, start with Lovable. If you can read code a little and want control, try Bolt. If you have a developer or are one, v0 will save the most time on the front end.
@@ -41,7 +49,7 @@ Each tool is strongest at a different layer of the app. Here is the comparison I
 ### Lovable
 - Best for: non-technical founders who need a working app with accounts and data.
 - Cost: a free plan with a small daily credit allowance, Pro at $25 a month with 100 monthly credits, Business at $50 a month.
-- Pros: the fastest path from idea to a logged-in app; a built-in backend; two-way GitHub sync on all plans; custom domains on Pro.
+- Pros: the fastest path from idea to a logged-in app; a built-in backend; two-way GitHub sync; custom domains on Pro; newer projects render pages on the server, which helps search engines and link previews.
 - Cons: credits disappear quickly when you prompt in circles on a bug; the generated access rules and edge cases need a human review.
 ### Bolt
 - Best for: founders who are comfortable seeing files, package names and error messages.
@@ -50,7 +58,7 @@ Each tool is strongest at a different layer of the app. Here is the comparison I
 - Cons: more decisions are left to you; large projects use tokens fast because the AI rereads more code with every change.
 ### v0
 - Best for: polished Next.js interfaces, landing pages and dashboards that a developer will connect to a backend.
-- Cost: a free plan with a daily message limit and a small monthly credit, Plus at $30 per user a month, Business at $100 per user. The old $20 Premium plan is closed to new users.
+- Cost: a free plan capped at a handful of messages a day, Plus at $30 per user a month with $30 of monthly credits, Business at $100 per user.
 - Pros: the cleanest React and Next.js output of the three; one-click deploys to Vercel; components that follow modern conventions.
 - Cons: the data model, permissions and business logic still need someone who knows what they are doing.
 ## Which one should a non-technical founder pick?
@@ -63,6 +71,8 @@ The reason is simple. A real app is mostly invisible plumbing: an account system
 - Create two test accounts and check that each one only sees its own data.
 ### Where it usually stalls
 The stall comes around the point where you add payments, roles or a second type of user. The AI starts fixing one bug by creating another, and every attempt costs credits. That is the moment to stop prompting and get the code read by a person. I wrote about the specific failure points in the post on what breaks when a Lovable or Bolt app goes live.
+Roles are the clearest example. Guardian MindCare, a therapy practice platform I built, has five user roles: therapists, supervisors, trainees, clients and admins. A permission model like that has to be designed into the data, not prompted on afterwards.
+![Guardian MindCare, a therapy practice platform I built with five user roles, showing the homepage provider search.](/shots/guardian-home.jpg)
 ## Which one is best if you can read some code?
 Bolt, because it shows you the project and lets you steer it. If you know what a package.json file is, can read an error in a terminal and have opinions about which database to use, Bolt gives you more room than Lovable.
 You can open files, see exactly what the AI changed and fix a small thing yourself instead of spending tokens on a prompt. That alone saves money on longer projects. It also makes the handoff to a developer smoother, because you will have seen the structure as it grew.
@@ -111,6 +121,7 @@ Use Lovable if you are a non-technical founder who needs a working app with acco
     title: 'How to move a Lovable app to Vercel and your own domain',
     description: 'A step-by-step guide to moving a Lovable app to Vercel: GitHub sync, build settings, environment variables, routing fixes, Supabase auth URLs and connecting your domain.',
     date: d,
+    updated: '2026-11-22',
     keywords: ['move Lovable app to Vercel', 'deploy Lovable to Vercel', 'Lovable custom domain', 'host Lovable app outside Lovable', 'Lovable Supabase redirect URL'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Connect the Lovable project to GitHub, import that repository into Vercel, copy every environment variable from the project into Vercel, add a rewrite to index.html if it is a Vite single-page app, then update the Site URL and Redirect URLs in Supabase before pointing your domain at Vercel. Most broken migrations come from missing environment variables or auth redirect URLs that still point at the old address.',
@@ -128,6 +139,13 @@ Use Lovable if you are a non-technical founder who needs a working app with acco
       { q: 'Do I need to move off Lovable to use a custom domain?', a: 'No. At the time of writing Lovable Pro includes custom domains, so moving to Vercel is a choice for control, cost or team workflow rather than a requirement.' },
       { q: 'Can I keep editing in Lovable after moving to Vercel?', a: 'Yes, because the GitHub sync is two-way: changes from Lovable land in the repo and Vercel redeploys them, as long as you edit only the synced branch.' },
       { q: 'How much does it cost to have someone move my Lovable app?', a: 'Thomas Osayi handles a straightforward move with domain and auth fixes as a Quick Fix from $60, and a move combined with launch blockers under Finish and Launch from $600.' },
+    ],
+    sources: [
+      { title: 'Deploying and hosting outside Lovable', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/tips-tricks/external-deployment-hosting.md' },
+      { title: 'Upgrade a project to TanStack Start', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/features/upgrade-to-tanstack-start.md' },
+      { title: 'GitHub integration', publisher: 'Lovable Docs', url: 'https://docs.lovable.dev/integrations/github' },
+      { title: 'Redirect URLs', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/auth/redirect-urls' },
+      { title: 'Adding and configuring a custom domain', publisher: 'Vercel Docs', url: 'https://vercel.com/docs/domains/working-with-domains/add-a-domain' },
     ],
     body: `Lovable is a good place to build an app and a perfectly fine place to host one. Still, a lot of founders reach a point where they want the code on their own infrastructure: a developer joins and works in Git, the company already uses Vercel, or they simply want the app on their domain under accounts they control.
 The move itself takes an hour or two when it goes well. When it goes badly, it is almost always for the same three reasons: missing environment variables, routes that 404, and login redirects that still point at the old address. This guide walks through the steps in order, with the exact settings that trip people up.
@@ -147,7 +165,7 @@ You need GitHub, a Vercel account, access to the backend and a list of every sec
 - Access to your domain's DNS settings at the registrar.
 - Logins for every connected service, such as Stripe, Resend or Google Cloud, because some of them need the new URL added.
 ### Check which stack you have
-Open package.json in the code view. Lovable's own hosting documentation separates two cases. Newer projects that list @tanstack/react-start run a server, so the host has to run that server; Vercel handles this without extra configuration. Older projects built with React and Vite produce a static build in a dist folder, which needs a routing rewrite. The steps below cover both.
+Open package.json in the code view. Lovable's own hosting documentation separates two cases. Newer projects, created from May 13, 2026, that list @tanstack/react-start run a server, so the host has to run that server; Vercel handles this without extra configuration. Older projects built with React and Vite produce a static build in a dist folder, which needs a routing rewrite. The steps below cover both.
 ## Step 1: How do you connect the project to GitHub?
 Use Lovable's built-in GitHub sync, which creates a new private repository and keeps it in sync both ways. In Lovable, open Project settings, then Git, then GitHub, and click Connect next to your GitHub connection. If you have not linked GitHub yet, add a connection under Workspace settings, Git, GitHub.
 A few details from Lovable's documentation matter here:
@@ -172,7 +190,7 @@ Older React and Vite projects are single-page apps with only one real HTML file,
 The fix is a file named vercel.json in the root of the repository with a rewrite rule that sends every path to /index.html. Lovable's hosting documentation names vercel.json as the place for this on Vercel. Commit the file, let Vercel redeploy and test a refresh on a deep link.
 TanStack Start apps do not need this, because the server handles each route itself.
 ## Step 3: Which environment variables does it need?
-It needs every variable from the project's .env file, entered in Vercel before the first real build. Lovable's documentation lists the backend ones: VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY and VITE_SUPABASE_PROJECT_ID for code that runs in the browser, and SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY for server code in TanStack Start apps. Add any others your app uses, such as a Stripe publishable key.
+It needs every variable from the project's .env file, entered in Vercel before the first real build. Lovable's documentation lists the backend ones: VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY and VITE_SUPABASE_PROJECT_ID for code that runs in the browser, and SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY and SUPABASE_PROJECT_ID for server code in TanStack Start apps. Add any others your app uses, such as a Stripe publishable key.
 Two rules catch almost everyone:
 - In a Vite app, only variables that start with VITE_ reach the browser code. A variable named SUPABASE_URL without the prefix will be undefined in the browser.
 - Browser variables are baked in at build time. If you add or change one, you must redeploy for it to take effect.
@@ -195,6 +213,15 @@ If the domain currently points at Lovable, plan the switch for a quiet hour. DNS
 Here is an illustration with a made-up business. A small tutoring company built a booking app in Lovable with student logins and Supabase, and wants it on Vercel at book.example.com.
 They connect GitHub, import the repository into Vercel and deploy. The site loads, but login fails with a redirect error and refreshing the schedule page returns a 404. Two fixes solve it: a vercel.json rewrite to index.html, and adding the new domain to Supabase's Site URL and Redirect URLs. Then a parent reports that password reset emails link to the old lovable.app address, which the Site URL change also fixes. Finally, the booking deposit stops confirming because the Stripe webhook still points at the old address; registering a live endpoint for the new domain and adding the signing secret to the edge function settles it.
 None of those steps is hard. Each one is invisible until a real user hits it, which is why sign-up, login, password reset, a deep link refresh and a live payment should all be tested after any move.
+## Should you upgrade an older Vite project to TanStack Start before moving?
+Upgrade first if search traffic or link previews matter to you, because a TanStack Start app sends finished HTML for every page while an older Vite app sends a mostly empty page and builds it in the browser. Lovable made TanStack Start the default for new projects on May 13, 2026, and older React and Vite projects are not upgraded automatically.
+According to Lovable's documentation, the upgrade runs inside your existing project, carries over your design, content and backend, and moves your SEO tags and analytics scripts. Your live site does not change until you publish again, you can revert from version history, and at the time of writing it typically costs 10 to 35 credits.
+The order matters when you are also changing hosts. I would do it like this:
+- Run the upgrade in Lovable while the app is still hosted there, then test sign-in, a deep link refresh and any payment on the Lovable preview.
+- Publish it on Lovable and let real users use it for a day or two.
+- Only then import the repository into Vercel, using the TanStack Start settings from Step 2 and the server environment variables from Step 3.
+- Remove any vercel.json rewrite you added for the old single-page build, since the server now handles each route itself.
+Doing both at once means that when something breaks, you cannot tell whether the upgrade or the new host caused it. One change at a time keeps every problem traceable.
 ## When should you get help with the move?
 Get help if the app handles payments or private data, or if the move is blocking a launch date. A wrong setting here does not usually crash the app; it quietly breaks one flow, like password resets or paid upgrades, and you find out from an annoyed customer.
 I do these moves as part of my work fixing AI-built apps. A straightforward move with domain and auth fixes fits the Quick Fix at $60 and about 2 days. If the app also has launch blockers such as open database rules or missing webhooks, the Finish and Launch package from $600 over about 10 days covers the move and the fixes together. My Lovable fix page lists the other problems I see most often, and the guide to Supabase row level security is worth reading before any launch.
@@ -206,6 +233,7 @@ Moving a Lovable app to Vercel comes down to six steps: connect GitHub, import t
     title: 'Firebase Authentication in the Next.js App Router: how to do it properly',
     description: 'How to set up Firebase Authentication in a Next.js App Router app: client sign-in, server session cookies, protecting routes, roles with custom claims, and the mistakes AI-generated code makes.',
     date: d,
+    updated: '2026-11-22',
     keywords: ['Next.js Firebase authentication', 'Firebase auth App Router', 'Firebase session cookie Next.js', 'protect routes Next.js Firebase', 'Firebase custom claims roles'],
     service: 'saas-mvp-development',
     shortAnswer: 'Sign users in with the Firebase client SDK in the browser, exchange their ID token for a session cookie created by the Firebase Admin SDK on the server, and verify that cookie in server components and route handlers before returning private data. Hiding a page with client-side checks is not protection; every server action and Firestore rule must check the user again.',
@@ -224,8 +252,15 @@ Moving a Lovable app to Vercel comes down to six steps: connect GitHub, import t
       { q: 'Why does my Firebase user show as null on first load?', a: 'The client SDK restores the session asynchronously, so code that reads currentUser before onAuthStateChanged fires sees null; wait for the first callback before deciding the user is signed out.' },
       { q: 'Can someone set up Firebase auth and roles for my Next.js app?', a: 'Thomas Osayi builds Next.js and Firebase apps with auth, roles and dashboards, with launchable SaaS MVPs starting at $1,200.' },
     ],
+    sources: [
+      { title: 'Manage session cookies', publisher: 'Firebase Documentation', url: 'https://firebase.google.com/docs/auth/admin/manage-cookies' },
+      { title: 'Control access with custom claims and security rules', publisher: 'Firebase Documentation', url: 'https://firebase.google.com/docs/auth/admin/custom-claims' },
+      { title: 'Build unit tests for Security Rules', publisher: 'Firebase Documentation', url: 'https://firebase.google.com/docs/rules/unit-tests' },
+      { title: 'proxy.js file convention', publisher: 'Next.js Docs', url: 'https://nextjs.org/docs/app/api-reference/file-conventions/proxy' },
+    ],
     body: `Firebase Authentication is one of the quickest ways to add sign-in to a product. The Next.js App Router is one of the best ways to build the product around it. Put the two together without a plan, though, and you get an app where the login button works but the server has no idea who anyone is.
 I have built two production platforms on Next.js and Firebase, SQWAD and Guardian MindCare, and I fix AI-generated apps that use the same pair. The pattern below is the one I use. It is not the only valid approach, but it holds up when you add roles, server actions and a second type of user.
+![SQWAD's multi-step creator sign-up form, part of a Next.js and Firebase platform I built.](/shots/sqwad-creators-join.jpg)
 ## Why is Firebase auth tricky in the App Router?
 Because Firebase signs users in inside the browser, while the App Router renders most of your app on the server. The Firebase client SDK keeps the signed-in user in the browser's storage. Server components, route handlers and server actions run on the server and cannot see that storage.
 In the old Pages Router days, many apps simply rendered everything in the browser and checked auth there. In the App Router, pages are server components by default. If a server component loads a user's invoices, it needs to know which user is asking, on the server, before it touches the database.
@@ -241,7 +276,7 @@ The browser signs in with Firebase, sends the ID token to your server once, and 
 - On each request, server code reads the cookie with the cookies function from next/headers and calls verifySessionCookie. If it is valid, you get the user's uid and claims.
 - On sign out, the client signs out of Firebase and calls a route that deletes the cookie, and the server can revoke the user's refresh tokens if you want every device signed out.
 ### Details from the Firebase documentation worth knowing
-Session cookies can last from 5 minutes to 2 weeks. Creating one expects a recent sign-in, so create the cookie right after the user signs in rather than hours later. Passing true as the second argument to verifySessionCookie also checks whether the session was revoked, at the cost of an extra lookup.
+Session cookies can last from 5 minutes to 2 weeks. Firebase recommends issuing one only if the user signed in recently, by checking the auth_time on the ID token, so create the cookie right after the user signs in rather than hours later. Passing true as the second argument to verifySessionCookie also checks whether the session was revoked, at the cost of an extra lookup.
 ## Where should you check the session?
 Check it everywhere data is read or changed on the server, not only at the edge of the app. This is the part generated code most often gets wrong.
 ### The three places that matter
@@ -249,7 +284,7 @@ Check it everywhere data is read or changed on the server, not only at the edge 
 - Route handlers and server actions that change data: verify again, even if the page that calls them was already protected.
 - Firestore security rules: the browser can talk to Firestore directly, so the rules must check request.auth on every read and write.
 ### What about proxy or middleware?
-Next.js 16 renamed middleware to proxy, and either can redirect signed-out visitors away from private sections, which is a nice experience. Treat it as a convenience, not a lock. A redirect decides which page loads; it does not stop someone calling your server action or reading Firestore directly. Many teams also keep that layer light and leave full verification to server code, because the Admin SDK is built for the Node.js runtime.
+Next.js 16 renamed middleware to proxy, and either can redirect signed-out visitors away from private sections, which is a nice experience. Treat it as a convenience, not a lock. A redirect decides which page loads; it does not stop someone calling your server action or reading Firestore directly. Since Next.js 16, proxy runs on the Node.js runtime by default, so the Admin SDK can work there. Even so, the Next.js documentation says to verify authentication inside each server function rather than relying on proxy alone, because a matcher change can quietly remove its coverage.
 I keep one helper, something like getCurrentUser, in a server-only file. It reads the cookie, verifies it and returns the user or null. Every page, action and route handler that needs a user calls it, so the check is one line and nobody forgets it.
 > Add import 'server-only' at the top of any file that uses the Admin SDK. If a client component ever imports it by mistake, the build fails instead of shipping your service account to the browser.
 ## How should you handle roles like admin, staff and client?
@@ -257,7 +292,7 @@ Store roles as custom claims set by trusted server code, and check them on the s
 The mistake I see most in AI-generated apps is storing the role as a field in the user's own profile document, such as role: admin in users/{uid}, and then letting the user update their own profile. Anyone who opens the browser console can promote themselves. If you do store roles in Firestore, the rules must stop users from writing that field, and only server code should set it.
 ### How roles look in a real platform
 Guardian MindCare, a therapy practice platform I built, has five user roles: therapists, supervisors, trainees, clients and admins. Each role sees a different portal, and a supervisor can see their trainees' work but not other supervisors'. That kind of rule cannot live only in the interface. It is enforced on the server and in the database rules, so a client account cannot read another client's records even with a direct request.
-![Guardian MindCare: a therapy practice platform with separate role-based portals for therapists, supervisors, trainees, clients and admins.](/work/fiverr/guardian.jpg)
+![Guardian MindCare, a therapy practice platform I built with separate portals for therapists, supervisors, trainees, clients and admins.](/shots/guardian-home.jpg)
 One practical note: after you change a user's custom claims, their existing token still holds the old ones until it refreshes. Force a token refresh on the client and create a fresh session cookie, or the new role will not appear until the next sign-in.
 ## Where do the Admin SDK credentials go?
 In server-only environment variables on your host, never in code and never with a NEXT_PUBLIC_ prefix. The Admin SDK needs a service account: a project ID, a client email and a private key.
@@ -281,6 +316,16 @@ Here is an illustration with a made-up company. A small marketing agency wants a
 - Upload action: verifies the session and the staff claim before writing.
 - Firestore rules: clients can read reports with their clientId; only staff can write; nobody can change claims from the browser.
 Built this way, the agency can add a third role later, such as a contractor with limited access, by adding a claim and a few rule lines rather than rewriting the app.
+## How do you test that your auth actually protects data?
+Test it as an attacker would, with automated tests that sign in as different users and try to read what they should not. Clicking through the app as yourself proves only that the happy path works.
+Firebase provides the Local Emulator Suite and the @firebase/rules-unit-testing library for exactly this. You run Firestore and Auth locally, load your firestore.rules file, and write tests that act as a signed-out visitor, a client and a staff member. Each test calls assertSucceeds for what should work and assertFails for what should not. Nothing touches your live project.
+The cases I always write, using the agency portal above as the model:
+- A signed-out visitor cannot read any report.
+- Client A cannot read Client B's reports, even by guessing the document ID.
+- A client cannot write to the reports collection at all.
+- A client cannot change their own role or clientId field.
+- A staff member can upload, and loses that ability once the staff claim is removed.
+For the server side, call each server action and route handler without a cookie and with another user's cookie, and confirm both return an error instead of data. Run these tests in CI on every push, so a later prompt or refactor that weakens a rule fails the build instead of reaching users.
 ## When should you use something other than Firebase Auth?
 Use something else when your data already lives in Postgres or you need enterprise sign-in features out of the box. Firebase Auth pairs best with Firestore, where the security rules read the same identity.
 If your app is relational and reporting-heavy, Supabase or Postgres with an auth library can be a better fit; I compare the two in my Firebase vs Supabase guide. If you sell to large companies that require SAML single sign-on from day one, a dedicated auth provider may save time. For most MVPs with a few roles and a document-shaped data model, Firebase Auth is fast, cheap at small scale and well understood.

@@ -11,6 +11,12 @@ export const morePosts: Post[] = [
     updated: '2026-11-17',
     keywords: ['how much does a website cost', 'small business website cost', 'website design cost 2026', 'custom website price'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Vercel Pricing: Hobby, Pro, and Enterprise plans', publisher: 'Vercel', url: 'https://vercel.com/pricing' },
+      { title: 'Pricing and Plans', publisher: 'Netlify', url: 'https://www.netlify.com/pricing/' },
+      { title: 'Wix Pricing Information', publisher: 'Wix', url: 'https://www.wix.com/plans' },
+      { title: 'Pricing & Fees', publisher: 'Stripe', url: 'https://stripe.com/pricing' },
+    ],
     shortAnswer: 'A custom small business website from a freelance developer usually costs a few hundred to a few thousand dollars, depending on pages and features. Thomas Osayi builds one-page sites from $150, five-page business sites from $450 and custom multi-page builds from $1,200.',
     faqs: [
       { q: 'What is the cheapest way to get a professional website?', a: 'A one-page site from a freelancer is usually the cheapest option that still looks custom; Thomas Osayi builds them from $150 in about 7 days.' },
@@ -57,9 +63,9 @@ One long page with a clear headline, your services, a few photos, reviews or oth
 Home, services, about, contact and one more, often a gallery, pricing or FAQ page. Separate service pages matter for search because each one can match what a customer types, such as a service plus a city. This level includes local SEO setup and a booking or quote form.
 ### Custom build
 This is any site that does work for the business instead of only describing it. One example from my own clients is a restaurant site where guests reserve a table or place a pickup order without calling.
-![New York Nook: a restaurant site I built with online reservations and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook: the pickup ordering page I built, with menu categories, a cart and pickup time slots.](/shots/newyorknook-order.jpg)
 Another is a commercial printer whose site collects job details from clients and lets the shop manage quotes in one place.
-![Artistic Printing: a commercial printer's site I built with quote management and client intake.](/work/fiverr/artistic.jpg)
+![Artistic Printing: the home page I built for a commercial printer in LA, with a Get your quote button that feeds the shop's quote management tool.](/shots/artistic-home.jpg)
 ## Is a DIY builder, a freelancer or an agency the better deal?
 For most small businesses, a freelancer with a portfolio in your category is the best value, but each option fits a different situation.
 ### DIY builder
@@ -116,9 +122,14 @@ A small business website costs what its pages and features cost to design and bu
     title: 'Freelance web developer vs agency: which should a small business hire?',
     description: 'A side-by-side look at cost, speed, communication and risk when choosing between a freelance developer and a web agency.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['freelance web developer vs agency', 'hire web developer or agency', 'freelancer vs agency website'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Transferring a repository', publisher: 'GitHub Docs', url: 'https://docs.github.com/en/repositories/creating-and-managing-repositories/transferring-a-repository' },
+      { title: 'Adding & Configuring a Custom Domain', publisher: 'Vercel', url: 'https://vercel.com/docs/domains/add-a-domain' },
+      { title: 'Get started with Google Business Profile', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/3038169' },
+    ],
     shortAnswer: 'Most small businesses get better value from a freelance developer: lower cost, faster turnaround and direct communication with the person writing the code. An agency makes more sense for large projects that need several specialists working at once.',
     faqs: [
       { q: 'Is a freelance developer cheaper than an agency?', a: 'Usually yes, because a freelancer has no account managers or office overhead built into the price.' },
@@ -179,7 +190,7 @@ A written scope lists the pages, the features, the number of revision rounds, th
 Look at live work first, then ask a few direct questions. Ten minutes of checking tells you most of what you need.
 ### Open the portfolio on your phone
 Most of your customers will see the site on a phone, so that is where to judge it. Tap through the menu. Fill in a form. See how fast the pages load on mobile data. Look for a business like yours. A developer who has already solved your kind of problem, such as online booking for an appointment-based business, will ask better questions and make fewer wrong turns.
-![Astiglow: a waxing studio site I built with online booking and service packages.](/work/fiverr/astiglow.jpg)
+![Astiglow: the first step of the booking flow I built for a waxing studio, where clients choose a service with its price.](/shots/astiglow-book.jpg)
 ### Questions worth asking
 - Did you do the design as well as the build on these sites?
 - Who will own the domain, the code and the hosting account?
@@ -213,6 +224,14 @@ Choose by the size and shape of the project, not by which sounds more profession
 - You want one vendor responsible for marketing results every month after launch
 ### When you are unsure
 Ask a freelancer and an agency to scope the same written brief. The conversations will tell you a lot. If the freelancer says the project is too big for one person, believe them. If the agency's proposal is mostly process for a five-page site, that tells you something too.
+## What do you do if your developer disappears mid-project?
+You take over the accounts you already own, hand them to a new developer and pick up from the last working version. This is where the ownership checklist pays for itself, so here is the order I would work in.
+- Log in to the domain registrar and confirm the domain is in your name, renews automatically and has a current card on file.
+- Open the GitHub repository and check the latest commits. If the code sits in the old developer's account, ask them to transfer it to yours. GitHub's transfer setting moves the code, history and issues together, and old links redirect to the new location.
+- Open the hosting account and note which deployment is live, so nothing changes by accident while you look for help.
+- Remove the old developer from the registrar, hosting, Stripe, analytics and your Google Business Profile, where you can add and remove managers yourself.
+- Give the new developer the handoff note, or write one now: every account, what it does and what was still unfinished.
+If the code was never in your account and the developer stops replying, you may be paying for parts of the site again. That risk is the same with a small agency that closes. The fix in both cases is the one that costs nothing: put every account in your name before work starts.
 ## The bottom line
 Most small businesses get better value from a freelance developer: lower cost, faster turnaround and direct communication with the person writing the code. An agency earns its price on large projects that need several specialists at once. Whichever you hire, look at the portfolio first. A freelancer who has already built a site for a business like yours will usually beat an agency that has not, and the reverse is true as well. Keep every account in your own name and you can change your mind later without losing the site.`,
   },
@@ -221,9 +240,14 @@ Most small businesses get better value from a freelance developer: lower cost, f
     title: 'How long does it take to build a website?',
     description: 'Realistic timelines for one-page sites, business sites, custom builds and web apps, and the things that cause most delays.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['how long to build a website', 'website development timeline', 'how long does a website take'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Adding & Configuring a Custom Domain', publisher: 'Vercel', url: 'https://vercel.com/docs/domains/add-a-domain' },
+      { title: 'Accessing Deployments through Generated URLs', publisher: 'Vercel', url: 'https://vercel.com/docs/deployments/generated-urls' },
+      { title: 'Build and Submit a Sitemap', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap' },
+    ],
     shortAnswer: 'A one-page site takes about a week, a five-page business site about two weeks, and a custom multi-page build about three weeks. Web apps and SaaS MVPs take three to six weeks. Most delays come from waiting on content, not from development.',
     faqs: [
       { q: 'Can a website be built in a week?', a: 'Yes, a focused one-page site can launch in about 7 days once the copy and photos are ready.' },
@@ -293,7 +317,7 @@ The launch usually takes less than a day, and most of that is waiting for DNS. C
 ### If you have an old site
 Replacing an existing site adds one job: redirects. Every old address that people or Google might still visit should forward to the matching new page. That keeps the search rankings you already have and stops visitors from landing on an error page.
 ### Showing up on Google
-Being live and being found are different events. After launch I submit the sitemap in Google Search Console so Google knows the pages exist. New sites are typically picked up within days to a few weeks. Ranking well for a competitive search takes longer and depends on content, reviews and links, not on the launch date.
+Being live and being found are different events. After launch I submit the sitemap in Google Search Console so Google knows the pages exist. Google describes a sitemap as a hint, not a guarantee, so the pages still need to be worth crawling. New sites are typically picked up within days to a few weeks. Ranking well for a competitive search takes longer and depends on content, reviews and links, not on the launch date.
 ## Can a website be built faster?
 Rush work is possible. It costs more because other work gets moved, and it only helps if your content is ready to go. A rush cannot shorten the time you take to write your service descriptions.
 There is a better way to go faster that costs nothing: cut the first version. If something is not ready, launch without it and add it later. A live site that is 90 percent done beats a perfect one next month. In practice that might mean:
@@ -305,8 +329,17 @@ A site that is live can be shared, collect inquiries and start being indexed by 
 ## How long does a web app or SaaS MVP take?
 Most SaaS MVPs take three to six weeks, because an app has moving parts a website does not: user accounts, a database, permissions and payments. My SaaS MVP package, with auth, a dashboard, a database and payments, runs about 21 days. A working first version of one core workflow can be done in about 7 days, and a full platform with several user roles and integrations takes about 45 days.
 What stretches an app timeline is almost always integrations and roles. Each outside system has its own login flow, limits and edge cases. A scheduling app that syncs with a calendar has to handle events edited on either side, time zones and expired connections.
-![FieldOps: a job scheduling app I built with Outlook Calendar sync for field teams.](/work/fieldops.jpg)
+![FieldOps: the sign-in page of a job scheduling app I built for field teams, listing its Outlook Calendar sync, documents and contacts features.](/shots/fieldops-login.jpg)
 Each added user role multiplies the screens and the permission rules to test. The way to keep an MVP inside six weeks is the same as for a website: agree on the one workflow that must work on day one, and write down everything else as phase two.
+## What does a one-week, one-page site look like day by day?
+A one-page site fits in seven days when the content is ready on day one and you review twice. Here is how the week runs, using a made-up mobile dog grooming business as the illustration.
+- Day 1: kickoff. I confirm the one action, in this case "text us to book", and collect the logo, ten photos, the service list with prices and the service area.
+- Day 2: structure and design. I lay out the sections in order: headline and button, services with prices, photos, reviews, area served, hours and contact. You see the mobile design first.
+- Days 3 to 4: build. The page goes up on a preview link. Every push I make gets its own address on Vercel, so you can check progress on your phone whenever you like.
+- Day 5: your review. You send one list of changes.
+- Day 6: polish and SEO setup. I make the changes, write the page title and description, add structured data for the business details and test the call and text buttons on real phones.
+- Day 7: launch. The domain is connected and the sitemap is submitted in Search Console.
+Your part is about two hours across the week: the content on day one and one careful review on day five. If the review slips by three days, so does the launch. The same pattern scales to the two-week business site described above.
 ## The bottom line
 A one-page site takes about a week, a five-page business site about two weeks, and a custom multi-page build about three weeks. Web apps and SaaS MVPs take three to six weeks. Those numbers hold when the content arrives at kickoff, one person makes the decisions and feedback comes in one message per round. If you want your site sooner, the fastest lever is not a rush fee. It is having your text, photos and logins ready on day one, and being willing to launch a smaller first version.`,
   },
@@ -315,9 +348,16 @@ A one-page site takes about a week, a five-page business site about two weeks, a
     title: 'Next.js vs Webflow vs Wix: which is right for your business site?',
     description: 'A comparison of three ways to build a business website by cost, speed, editing, SEO and flexibility, with a recommendation for each type of business.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['Next.js vs Webflow', 'Webflow vs Wix', 'Next.js vs Wix', 'best website builder for small business'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Wix Pricing Information', publisher: 'Wix', url: 'https://www.wix.com/plans' },
+      { title: 'Plans & pricing', publisher: 'Webflow', url: 'https://webflow.com/pricing' },
+      { title: 'Vercel Pricing: Hobby, Pro, and Enterprise plans', publisher: 'Vercel', url: 'https://vercel.com/pricing' },
+      { title: 'Terms of Service', publisher: 'Vercel', url: 'https://vercel.com/legal/terms' },
+      { title: 'Image Optimization', publisher: 'Next.js', url: 'https://nextjs.org/docs/app/getting-started/images' },
+    ],
     shortAnswer: 'Wix is best for a simple site you build yourself, Webflow for designers who want visual control without code, and Next.js for businesses that need custom features, top speed and full ownership of the code.',
     faqs: [
       { q: 'Is Webflow better than Wix?', a: 'Webflow gives far more design control and cleaner output; Wix is easier for a beginner building a simple site alone.' },
@@ -359,7 +399,7 @@ Next.js is right for a business whose site has to do work, or one that expects t
 ### Where it works well
 Because it is code, there is no list of features to stay inside. The same project can hold a marketing site, a booking flow with your exact rules, a customer login and an admin panel. Pages are pre-built and very fast, and the code lives in your own repository.
 One of my clients is a commercial printer. Their site is not only a brochure. It takes in job details from customers and gives the shop a tool to manage quotes, and it was built for the way that shop works.
-![Artistic Printing: a commercial printer's site I built with quote management and client intake.](/work/fiverr/artistic.jpg)
+![Artistic Printing: the home page I built for a commercial printer, where the Get your quote button starts the shop's own client intake and quote tool.](/shots/artistic-home.jpg)
 ### Where it runs out
 You need a developer to build it and to make structural changes later. Editing needs a CMS or admin panel added by the developer. If nobody plans for that, every text change becomes a request, which gets old quickly.
 > If you choose Next.js, list the things you will change yourself, such as prices, hours, menu items and blog posts, and ask for an editing screen for exactly those. Everything else can stay in code.
@@ -382,6 +422,15 @@ A site plan every month, higher if you need the CMS, plus a designer's fee to bu
 ### Next.js
 A one-time build fee, then the domain and light hosting. For reference, I build one-page sites from $150, business sites of up to five pages from $450 and full custom builds from $1,200. A small Next.js site costs little to host, and there is no platform subscription. You pay again only when you want something changed or added.
 The honest comparison is three years of subscription and your own hours against one build fee and occasional updates. For a site that will exist for years, the custom route is often cheaper than it first looks.
+## What do the plans cost at the time of writing?
+At the time of writing, Wix runs from about $18 to $40 a month for its main plans, Webflow from $15 to $25 a month per site, and a small Next.js site can be hosted for $0 to $20 a month. All of these are list prices billed yearly or monthly as stated on each pricing page, and they change, so treat them as a snapshot.
+### Wix
+The paid plans shown on the Wix pricing page are Light at $17.77 a month, Core at $29.77 and Business at $39.77, billed yearly and paid up front, with prices that vary by location. Over three years, the Business plan alone comes to roughly $1,430 before any paid apps.
+### Webflow
+Site plans start at $15 a month billed yearly for a site without the CMS, and $25 a month for the plan that includes it, with a cap of 20,000 CMS items. A designer's fee to build the site sits on top.
+### Next.js on Vercel
+Vercel's Hobby plan is free, but its terms limit it to personal or non-commercial use, so a business site belongs on the Pro plan at $20 a month, which includes $20 of usage credit. A light brochure site is built to stay inside that credit. Over three years that is about $720 in hosting, plus the one-time build.
+The comparison that matters is your own: multiply the plan you would actually need by 36 months, add apps or designer fees, and set it beside a build quote.
 ## How do you edit content and what if you want to leave?
 Wix and Webflow make editing easy and leaving hard, while Next.js makes leaving easy and needs editing to be planned.
 ### Day-to-day editing
@@ -404,7 +453,7 @@ A few common cases:
 - A service business that wants a page per service and city: Next.js
 - Any site that will later need customer logins: Next.js, so you do not rebuild
 A restaurant that wants reservations and pickup orders on its own site, without sending guests to a third-party page, is also a Next.js case. I built exactly that for a restaurant in Hollywood.
-![New York Nook: a restaurant site I built with online reservations and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook: the pickup ordering page I built for a Hollywood restaurant, with menu categories, a cart and pickup time slots.](/shots/newyorknook-order.jpg)
 ## The bottom line
 Wix is best for a simple site you build yourself, Webflow for designers who want visual control without code, and Next.js for businesses that need custom features, top speed and full ownership of the code. None of them is wrong in general. The mistake is picking a builder for a site that needs custom logic, or paying for a custom build when a weekend on Wix would have done the job. Write down what the site has to do in a year, not only at launch, and the choice usually makes itself.`,
   },
@@ -413,9 +462,13 @@ Wix is best for a simple site you build yourself, Webflow for designers who want
     title: 'Shopify vs a custom Next.js store: when does custom make sense?',
     description: 'When a brand should stay on a Shopify theme, when to go headless with Next.js, and what each option costs in time and money.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['Shopify vs custom website', 'headless Shopify Next.js', 'custom ecommerce site', 'Shopify alternative'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'About headless commerce', publisher: 'Shopify', url: 'https://shopify.dev/docs/storefronts/headless' },
+      { title: 'Storefront API reference', publisher: 'Shopify', url: 'https://shopify.dev/docs/api/storefront' },
+    ],
     shortAnswer: 'Most new online stores should start on a Shopify theme because checkout, payments and inventory work on day one. A custom Next.js storefront on top of Shopify makes sense once the brand needs a unique experience, faster pages or features a theme cannot handle.',
     faqs: [
       { q: 'What is headless Shopify?', a: 'Shopify keeps running products, checkout and orders, while a custom frontend such as Next.js shows the store to customers.' },
@@ -458,7 +511,7 @@ Wanting the store to feel more premium is usually a design problem, not a platfo
 ## How does headless Shopify with Next.js work?
 Headless means Shopify stays the back office while a custom site becomes the shop window. The Next.js site reads products from Shopify through its API and shows them in a fully custom design. When a customer checks out, they go to Shopify's checkout. Orders, inventory and payouts stay in the Shopify admin you already know.
 ### The moving parts
-- Storefront API: Shopify's GraphQL API for public store data. The site uses it to fetch products, collections, prices and availability.
+- Storefront API: Shopify's GraphQL API for public store data, which Shopify offers only in GraphQL, with no REST version. The site uses it to fetch products, collections, prices and availability.
 - Access token: created in the Shopify admin through the Headless channel or a custom app, and stored as an environment variable in the hosting account.
 - Cart: the site creates a cart through the API, adds line items to it and receives a checkout URL back.
 - Checkout: the buy button sends the customer to that URL, which is Shopify's own checkout, usually on a subdomain of your store.
@@ -486,8 +539,8 @@ Yes, and it is the one I know best. Many brands keep the theme for the store and
 The store stays on its theme, with every app still working. The custom tool lives on its own address and does one job that no app did well.
 TheHoopGang is a basketball streetwear brand that gifts gear to creators. The portal I built lets creators sign up, claim gear, submit their content and get refunded once they post, and it manages more than 50 creators.
 ![TheHoopGang creator portal: the dashboard creators use to track their gear and submit content.](/images/hoopgang/creator-dashboard.png)
-SQWAD does a similar job as a product that any Shopify brand can use. Each brand gets a branded portal for applications, shipping, content, competitions and payouts, and sales are traced back to the creator whose content drove them. It now tracks more than $500K in creator-driven sales.
-![SQWAD: the SaaS I founded for Shopify brands running creator programs.](/work/fiverr/sqwad.jpg)
+SQWAD does a similar job as a product that any Shopify brand can use. Each brand gets a branded portal for applications, shipping, content, competitions and payouts, and sales are traced back to the creator whose content drove them. SQWAD's published TheHoopGang case study reports more than $500K in revenue attributed to creator videos.
+![SQWAD: the feature grid on the homepage of the SaaS I founded, covering revenue attribution per video, competitions and leaderboards, smart retainers, cohorts, creator share links and a branded portal.](/shots/sqwad-home-s3.jpg)
 Other tools that fit this pattern include a wholesale order form with customer-specific prices, a returns portal, a quiz that recommends products, and an internal dashboard that pulls orders into one view. Each can be built and launched without touching the storefront.
 ## How do you decide?
 Decide by naming the specific problem, then choosing the smallest change that solves it. These questions sort most cases.
@@ -498,6 +551,13 @@ Decide by naming the specific problem, then choosing the smallest change that so
 - Does your team rely on the theme editor every week? Then budget for a CMS in the custom build, or stay on the theme.
 - Is revenue steady enough that a few weeks of rebuild will not hurt? If not, wait.
 If you answer these and still land on custom, you will also have most of the brief a developer needs.
+## What does one custom product page actually involve?
+A custom product page is one query for the product, one design for its options and one call to add it to a cart. Walking through it shows where the build time goes.
+The page asks the Storefront API for a product by its handle: title, description, images, price, and each variant with its size, color and availability. Next.js builds the page ahead of time from that data, so it loads fast, and a webhook rebuilds it when the product changes in the admin.
+The design work is the part a theme normally gives you for free. Size and color selectors have to show which combinations are sold out, the price has to update when a variant with a different price is picked, and the images should switch to the chosen color. Then the add to cart button creates or updates a cart through the API and keeps its ID in the browser, so the bag survives a page reload.
+I built the same front-end pieces, with a Firebase admin in place of Shopify, for LACEUP, a basketball apparel storefront with colorway filters and custom product pages. The brand asked for a showcase store first, so checkout is a demo flow for now and the bag is structured so payments can be added later.
+![LACEUP: a product page I built for a basketball apparel storefront, with a size selector and an add to bag button.](/shots/laceup-products-reversible-mesh-jersey.jpg)
+Multiply that by collection pages, search, the cart drawer and every storefront app you replace, and the weeks in a headless quote make sense.
 ## The bottom line
 Start on a Shopify theme, because it gets a store selling in days and handles the parts that are costly to get wrong. Move to a custom Next.js storefront when the brand needs a unique experience, faster pages or features a theme cannot handle, and go in knowing that some apps will need replacing and design changes will need a developer. In between sits the option many brands should look at first: keep the theme, and build the one custom tool the business is missing beside it.`,
   },
@@ -506,9 +566,16 @@ Start on a Shopify theme, because it gets a store selling in days and handles th
     title: 'Firebase vs Supabase for your MVP: how to choose',
     description: 'A founder-friendly comparison of Firebase and Supabase for an MVP: data model, auth, security rules, realtime, pricing behavior and lock-in.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['Firebase vs Supabase', 'best backend for MVP', 'Supabase or Firebase for startup', 'MVP database choice'],
     service: 'saas-mvp-development',
+    sources: [
+      { title: 'Firebase Pricing', publisher: 'Firebase', url: 'https://firebase.google.com/pricing' },
+      { title: 'Supabase Pricing', publisher: 'Supabase', url: 'https://supabase.com/pricing.md' },
+      { title: 'Row Level Security', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+      { title: 'Access data offline', publisher: 'Firebase', url: 'https://firebase.google.com/docs/firestore/manage-data/enable-offline' },
+      { title: 'Realtime', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/realtime' },
+    ],
     shortAnswer: 'Choose Firebase when your data is document-shaped, you want realtime updates and the fastest start. Choose Supabase when your data is relational, you need SQL reporting, or you want a standard Postgres database you can move later.',
     faqs: [
       { q: 'Is Supabase a Firebase alternative?', a: 'Yes. Both provide auth, a database, storage and serverless functions; Supabase is built on Postgres while Firestore is a NoSQL document database.' },
@@ -568,6 +635,13 @@ The free Spark plan includes a daily allowance of document reads, writes and del
 The free plan covers a small database, and at the time of writing it pauses projects that go unused for about a week, which matters for a demo you only show now and then. Paid plans are a flat monthly fee per project plus usage beyond the included amounts. A query that reads ten thousand rows costs the same as one that reads ten, as long as the database can handle it.
 ### What to do about it
 On Firestore, paginate lists, avoid reading whole collections and store counts on a parent document so you do not have to count children. On Supabase, add indexes for the columns you filter by and keep an eye on database size. On both, set a budget alert on the first day.
+## How far does each free tier go for a real MVP?
+Further than most founders expect, as long as screens read only what they show. At the time of writing, Firebase's free Spark plan includes 50,000 Firestore document reads, 20,000 writes and 20,000 deletes per day, with 1 GiB of stored data. Supabase's free plan covers a small Postgres database and pauses a project after one week of inactivity, and its Pro plan starts at $25 a month.
+Here is a worked example. Picture a booking tool with 200 active users a day. Each opens a dashboard that lists their 20 most recent bookings and makes two changes.
+- On Firestore, that is about 4,000 reads and 400 writes a day, well inside the free allowance.
+- Now suppose the dashboard was written to load all 5,000 bookings in the collection and filter them in the browser. The same 200 visits cost about a million reads a day. The free allowance runs out after about ten visits, and from then on the app either stops reading data for the day or, on Blaze, pays for every read.
+- On Supabase, both versions of the dashboard cost the same in money, because billing follows database size and compute. The badly written one is simply slower.
+The lesson cuts both ways. Firestore punishes careless queries with a bill, which at least makes them visible. Postgres hides them until the database runs slowly. Either way, paginate from day one and check usage weekly during the first month.
 ## How hard is it to leave?
 Supabase is easier to leave. Supabase is standard Postgres, so you can move the database almost anywhere. Firestore is proprietary.
 With Supabase, a pg_dump of your database restores on any Postgres host, whether that is a cloud provider's managed Postgres or your own server. Your SQL, your schema and most of your application queries carry over. The pieces that are specific to Supabase are auth, storage and its realtime layer, and those would need replacements.
@@ -587,7 +661,7 @@ Pick by the shape of your data and where the app runs, and use the lists below a
 - You want the option to move the database later
 ### What I use
 I built SQWAD on Firebase because creator portals need realtime updates, and TheHoopGang's portal on Postgres because its data is relational.
-![SQWAD: the SaaS I founded for Shopify brands running creator programs, built on Firebase.](/work/fiverr/sqwad.jpg)
+![SQWAD: the creator competitions page of the SaaS I founded on Firebase, describing sales and volume competitions with live leaderboards.](/shots/sqwad-creator-competitions.jpg)
 TheHoopGang's portal tracks creators, the gear they claim, the content they submit and the refunds that follow, and the brand's team needs to filter and total across all of it. That is relational data, so it runs on Postgres with Prisma.
 ## When should you get help?
 Get help at two points: before you commit to a data model, and before real users sign up. An hour spent on the schema or document structure up front prevents the kind of rework that costs weeks later. A review of rules and policies before launch prevents the worst outcome an MVP can have, which is leaking user data.
@@ -605,9 +679,15 @@ Firebase gets a realtime or mobile-first product in front of users fastest. Supa
     title: 'How much does an MVP cost? SaaS MVP prices and what drives them',
     description: 'How much it costs to build an MVP or SaaS MVP, from a $250 single workflow to a $3,000 multi-role platform, what drives the price, and what to leave out of version one.',
     date: '2026-11-17',
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['SaaS MVP cost', 'how much does an MVP cost', 'how much to build an MVP', 'MVP development price', 'cost to build a web app'],
     service: 'saas-mvp-development',
+    sources: [
+      { title: 'Vercel Pricing: Hobby, Pro, and Enterprise plans', publisher: 'Vercel', url: 'https://vercel.com/pricing' },
+      { title: 'Supabase Pricing', publisher: 'Supabase', url: 'https://supabase.com/pricing.md' },
+      { title: 'Firebase Pricing', publisher: 'Firebase', url: 'https://firebase.google.com/pricing' },
+      { title: 'Pricing & Fees', publisher: 'Stripe', url: 'https://stripe.com/pricing' },
+    ],
     shortAnswer: 'A SaaS MVP with auth, a dashboard, a database and payments typically costs from about $1,200 with a freelance developer, and a multi-role platform with admin tools from about $3,000. The biggest cost driver is how many workflows version one includes.',
     faqs: [
       { q: 'What should a SaaS MVP include?', a: 'One core workflow done well, plus sign-up, login, billing and the minimum admin you need to support the first customers.' },
@@ -692,8 +772,8 @@ Same idea, three budgets. The right one depends on what you already know. If nob
 ## Should you build in stages or all at once?
 Build in stages: the workflow first, then real users, then billing and polish.
 
-Staging protects you from the most expensive mistake in software, which is building the full product around a workflow that turns out to be wrong. When I built SQWAD, the first version did one thing: let a brand see which creator drove a sale. Everything else came later, including creator applications, product shipping, competitions and payouts. Today SQWAD tracks more than $500K in creator-driven sales, and the feature list grew from what brands asked for after they used that first workflow.
-![SQWAD: my own SaaS platform, which Shopify brands use to run creator programs from applications to payouts.](/work/fiverr/sqwad.jpg)
+Staging protects you from the most expensive mistake in software, which is building the full product around a workflow that turns out to be wrong. When I built SQWAD, the first version did one thing: let a brand see which creator drove a sale. Everything else came later, including creator applications, product shipping, competitions and payouts. Today SQWAD's published TheHoopGang case study reports more than $500K in revenue attributed to creator videos, and the feature list grew from what brands asked for after they used that first workflow.
+![SQWAD: the revenue attribution page of my own SaaS, where every Meta ad is traced to the creator and video behind it, the first workflow the product was built around.](/shots/sqwad-creator-revenue-attribution.jpg)
 A staged build also spreads the cost. You pay for the Starter, learn from it, and put the next budget into the things users actually tripped over. The code carries forward, as long as the first stage is built on the stack the product will stay on. I use Next.js and TypeScript with Firebase or Postgres for this reason: the prototype and the production app are the same codebase.
 
 The case for building everything at once is narrow. It fits when you have already sold the product, for example a signed pilot customer with a fixed list of requirements.
@@ -732,6 +812,12 @@ A SaaS MVP costs what its first version asks for. One workflow is from $250 and 
     updated: '2026-11-17',
     keywords: ['Supabase row level security', 'Lovable app security', 'Supabase RLS not working', 'AI built app data leak'],
     service: 'fix-ai-built-app',
+    sources: [
+      { title: 'Row Level Security', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+      { title: 'API keys', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/api/api-keys' },
+      { title: 'Advisors', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/database/database-advisors' },
+      { title: 'Storage Access Control', publisher: 'Supabase Docs', url: 'https://supabase.com/docs/guides/storage/security/access-control' },
+    ],
     shortAnswer: 'If row level security is off on a Supabase table, anyone with your public anon key can read every row in it. Check that RLS is enabled on every table and that each policy limits rows to the signed-in user, for example with auth.uid() = user_id.',
     faqs: [
       { q: 'Is the Supabase anon key a secret?', a: 'No. It is meant to be public, which is exactly why row level security has to protect every table.' },
@@ -851,6 +937,11 @@ Your Supabase anon key is public, so your policies are your security. Enable RLS
     updated: '2026-11-17',
     keywords: ['Stripe webhook not working', 'Stripe payment not updating app', 'Stripe webhook Next.js', 'Stripe signature verification failed'],
     service: 'fix-ai-built-app',
+    sources: [
+      { title: 'Receive Stripe events in your webhook endpoint', publisher: 'Stripe Docs', url: 'https://docs.stripe.com/webhooks' },
+      { title: 'Using webhooks with subscriptions', publisher: 'Stripe Docs', url: 'https://docs.stripe.com/billing/subscriptions/webhooks' },
+      { title: 'Environment variables', publisher: 'Vercel', url: 'https://vercel.com/docs/projects/environment-variables' },
+    ],
     shortAnswer: 'When Stripe charges the card but the app never unlocks the plan, the webhook is the problem: it is missing in production, points at the wrong URL, uses the test-mode signing secret, or fails signature verification because the body was parsed before checking it.',
     faqs: [
       { q: 'Why does my Stripe webhook work locally but not in production?', a: 'Locally the Stripe CLI forwards events with its own signing secret; production needs a separate endpoint in the Stripe dashboard and its own secret in your host settings.' },
@@ -890,7 +981,7 @@ There are six common causes, and the first three are configuration, not code.
 AI-built apps hit the first and third most often. The builder writes a correct handler and the app passes a local test, but nobody registers the production URL in Stripe or copies the new secret into the host's environment variables. The code is fine and the wiring was never done.
 
 I run Stripe billing in SQWAD, my own SaaS, so this is a flow I maintain as well as one I debug for other people.
-![SQWAD: my own SaaS for Shopify brands running creator programs, built with Next.js, Firebase and Stripe.](/work/fiverr/sqwad.jpg)
+![SQWAD: the pricing tiers of my own SaaS, Starter, Pro and Scale, which are billed through Stripe.](/shots/sqwad-home-s4.jpg)
 ## How do you find the failure in the Stripe dashboard?
 Open the webhook endpoint in the Stripe dashboard and read its recent deliveries; each failed attempt shows the HTTP status your server returned.
 
@@ -986,6 +1077,10 @@ When the payment succeeds and the app does not update, look at the webhook. Read
     updated: '2026-11-17',
     keywords: ['website project checklist', 'what to give web developer', 'website brief template', 'website content checklist'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Adding & Configuring a Custom Domain', publisher: 'Vercel', url: 'https://vercel.com/docs/domains/add-a-domain' },
+      { title: 'Get started with Google Business Profile', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/3038169' },
+    ],
     shortAnswer: 'Before a website project starts, send your developer the goal of the site, a page list, your logo and brand colors, photos, written copy or notes for each page, two or three sites you like, and access to your domain registrar. Having these ready can cut weeks off the timeline.',
     faqs: [
       { q: 'Do I need to write all the website text myself?', a: 'Not always; rough notes per page are enough for a developer or copywriter to shape, but the facts about your business have to come from you.' },
@@ -1035,7 +1130,7 @@ Write the list, and under each page write one line on what it must say or do. Th
 Then note any feature that needs logic: a booking form, a quote request with specific fields, online ordering, a gallery you update yourself. Features affect price and time more than page count does, so they need to be on the list from the start.
 
 Think about the form fields as well. Artistic Printing, a commercial printer I built a site and quote tool for, needed every quote request to arrive with the specs the shop requires, and that only works when the fields are decided before the form is built. Knowing what you need to be told by a customer is part of the page list.
-![Artistic Printing: a commercial printer's website I built with a quote intake and management tool.](/work/fiverr/artistic.jpg)
+![Artistic Printing: the quote call to action and footer I built for a commercial printer, where each request starts the shop's quote intake.](/shots/artistic-home-s4.jpg)
 ## What brand assets should you send?
 Send your logo in the best format you have, your brand colors if they exist, and the names of any fonts you already use.
 ### Logo
@@ -1071,7 +1166,7 @@ Real photos are the fastest way to make a small business site feel trustworthy. 
 - Label the files or folders, so I know which photo is which dish, job or team member.
 
 For a restaurant, the photos carry the site. New York Nook, a restaurant site I built with online reservations and pickup ordering, has a full menu with photography, and the food images do most of the persuading.
-![New York Nook: a restaurant site I built with a photographed menu, reservation requests and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook: the signature dishes carousel on a restaurant site I built, where the food photography does the selling.](/shots/newyorknook-home-s1.jpg)
 If you have no usable photos, do not hold the project for a shoot. Launch with a clean typographic design or carefully chosen stock images, and swap in real photos when you have them. Make sure you have the right to use anything you send: photos taken by a professional photographer may need their permission for web use.
 ## Why send websites you like?
 Because two or three examples with a reason for each tell a developer more about your taste than any description.
@@ -1127,6 +1222,12 @@ Send the goal, the page list, your logo and colors, the facts for each page, ori
     updated: '2026-11-17',
     keywords: ['local SEO checklist', 'small business local SEO', 'rank in Google Maps', 'local SEO website'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Tips to improve your local ranking on Google', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/7091' },
+      { title: 'Prohibited & restricted content', publisher: 'Maps User Generated Content Policy Help', url: 'https://support.google.com/contributionpolicy/answer/7400114?hl=en' },
+      { title: 'Local Business (LocalBusiness) Structured Data', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/appearance/structured-data/local-business' },
+      { title: 'Spam policies for Google web search', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/essentials/spam-policies' },
+    ],
     shortAnswer: 'For local search, the highest-impact steps are a complete and verified Google Business Profile, steady real reviews, the same name, address and phone number everywhere, a fast website with a clear page per service and area, and LocalBusiness schema on the site.',
     faqs: [
       { q: 'What matters most for ranking in Google Maps?', a: 'Google says local results are based mainly on relevance, distance and prominence, so a complete profile, real reviews and a strong website all count.' },
@@ -1203,7 +1304,7 @@ The site needs a clear page for each main service, your contact details on every
 A single "Services" page listing ten things gives Google one weak signal for each. A page per main service, each with its own heading, description, photos, price guidance and common questions, gives it a strong signal for each. Name the city or area naturally in the page title, the main heading and the text, the way you would say it to a customer.
 
 Astiglow, a waxing studio site I built, lays out its services and packages with prices and takes bookings online, which gives both visitors and search engines a clear picture of what the studio offers.
-![Astiglow: a waxing studio website I built with a service menu, packages and online booking.](/work/fiverr/astiglow.jpg)
+![Astiglow: the services menu I built for a waxing studio, with prices and durations for each service.](/shots/astiglow-services.jpg)
 ### Contact details on every page
 Put the name, address, phone and hours in the footer of every page, as real text, not inside an image. Make the phone number a tap-to-call link. Add an embedded map on the contact page.
 ### Speed and mobile layout
@@ -1233,7 +1334,7 @@ Twenty pages that differ only in the city name are doorway pages. Google's spam 
 A useful area page has content that could only be about that place: jobs you have done there with photos, the neighborhoods you cover, travel or parking details, local requirements such as permits, and reviews from customers in that area. If you cannot write three true, specific paragraphs about serving a city, name it in a service area list instead of giving it a page.
 
 For a business serving a region from one location, it is often enough to state the area plainly. The Pacific Harbor Medical Group site I built presents physician-led executive physicals in Torrance and the South Bay, which tells a searcher in two place names whether the practice is near them.
-![Pacific Harbor Medical Group: a site I built for physician-led executive physicals in Torrance and the South Bay.](/work/phmg.jpg)
+![Pacific Harbor Medical Group: the home page I built for physician-led executive physicals in Torrance and the South Bay.](/shots/phmg-home.jpg)
 ## What content earns local trust and long-tail searches?
 Content drawn from real jobs and real customer questions: photos of work, short case studies, and answers to what people ask on the phone.
 
@@ -1263,7 +1364,8 @@ Track calls, direction requests and website clicks from your profile, and search
 
 The Business Profile has a performance view showing how many people found the profile, which searches triggered it, and how many called, asked for directions or clicked through. Search Console is free; once your site is verified it shows the queries you appear for, your average position and your clicks. Check both monthly, not daily.
 
-Expect two speeds. Fixes to the profile and the site, such as the right category, complete details, service pages and schema, can show within weeks. Reviews, mentions and content build over months.> Ask every new customer how they found you and write it down. That list tells you more about what is working than any ranking report.
+Expect two speeds. Fixes to the profile and the site, such as the right category, complete details, service pages and schema, can show within weeks. Reviews, mentions and content build over months.
+> Ask every new customer how they found you and write it down. That list tells you more about what is working than any ranking report.
 ## The bottom line
 Local search rewards businesses that are complete, consistent and well reviewed. Verify and fill in your Google Business Profile, ask for reviews every week, make your details match everywhere, and give your website a clear page per service with contact details, schema and fast mobile loading. Then keep adding real photos, answers and local mentions. None of it is a one-time trick, and most of it is free except for your time.`,
   },
@@ -1275,6 +1377,12 @@ Local search rewards businesses that are complete, consistent and well reviewed.
     updated: '2026-11-17',
     keywords: ['website maintenance cost', 'small business website monthly cost', 'website hosting cost', 'website upkeep'],
     service: 'nextjs-website-development',
+    sources: [
+      { title: 'Vercel Pricing: Hobby, Pro, and Enterprise plans', publisher: 'Vercel', url: 'https://vercel.com/pricing' },
+      { title: 'Terms of Service', publisher: 'Vercel', url: 'https://vercel.com/legal/terms' },
+      { title: 'Next.js Support Policy', publisher: 'Next.js', url: 'https://nextjs.org/support-policy' },
+      { title: 'Updating WordPress', publisher: 'WordPress.org Documentation', url: 'https://wordpress.org/documentation/article/updating-wordpress/' },
+    ],
     shortAnswer: 'A small business website\'s ongoing costs are a yearly domain renewal, hosting, any paid tools it connects to, and developer time for changes. Sites without plugins, such as a custom Next.js site, need far less maintenance than a plugin-heavy WordPress site.',
     faqs: [
       { q: 'Do I need a monthly maintenance plan?', a: 'Not always; a static or framework site with no plugins can go months without changes, so paying per change is often cheaper.' },
@@ -1338,10 +1446,10 @@ A custom Next.js site has no plugins to patch. On a host like Vercel, the pages 
 What it does need:
 - Security updates to the framework and its dependencies. When a serious flaw is announced in Next.js or a package the site uses, it should be updated promptly. This is occasional work, not weekly work.
 - Attention to connected services. If the site uses a booking tool, a form email service, a maps key or a payment provider, those services change their APIs and pricing over time, and an integration can stop working quietly.
-- A larger upgrade every few years, when the framework's old version stops receiving fixes.
+- A larger upgrade every few years, when the framework's old version stops receiving fixes. Next.js publishes a support policy that keeps each major version in maintenance for two years after its release.
 
 Sites with real features need a little more. New York Nook, a restaurant site I built, takes reservation requests and pickup orders, so the things worth checking there are the things that carry revenue: that an order placed today still arrives where the restaurant expects it.
-![New York Nook: a restaurant site I built with online reservations and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook: the pickup ordering page I built for a restaurant, with menu categories, a cart and pickup time slots.](/shots/newyorknook-order.jpg)
 ## Do you need a monthly maintenance plan?
 Not always; it depends on what the site runs on and what it does.
 

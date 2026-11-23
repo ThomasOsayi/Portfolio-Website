@@ -28,6 +28,12 @@ export const postsBatch2: Post[] = [
       'Keep every URL that gets traffic or 301 redirect it to its new address so rankings carry over.',
       'Gather photos, prices and service details before the build starts, since content is what delays most redesigns.',
     ],
+    sources: [
+      { title: 'About PageSpeed Insights', publisher: 'Google for Developers', url: 'https://developers.google.com/speed/docs/insights/v5/about' },
+      { title: 'Web Vitals', publisher: 'web.dev', url: 'https://web.dev/articles/vitals' },
+      { title: 'Site Moves and Migrations', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes' },
+      { title: 'Redirects and Google Search', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/301-redirects' },
+    ],
     body: `A redesign costs money, but the bigger cost is your attention: weeks of decisions about copy, photos and structure while you still have a business to run. So before you commit, it is worth being sure the site is the problem, and that a rebuild is the right size of answer.
 I build and rebuild websites for small businesses from Los Angeles, and these are the seven signs I look for, followed by how to decide between fixing what you have and starting again.
 ## How do I know my website needs a redesign and not just a fix?
@@ -60,7 +66,7 @@ Steady traffic with few calls or forms almost always means the next step is uncl
 ### Sign 5: traffic but no inquiries
 Check your analytics for the last three months and compare visits with calls, forms and bookings. If the gap is wide, start with the homepage. Can a stranger tell within five seconds what you do, where you do it, and what to do next? Is there one obvious button, or five competing ones? Does the contact form ask for ten fields when three would do? Does the booking or ordering step happen on your site, or on a third-party page that looks nothing like it?
 When I built the site for New York Nook, a Russian restaurant in Hollywood, the goal was to keep those steps short: guests can see the menu, book a table or order pickup from their phone in under a minute.
-![New York Nook: a restaurant site I built with online reservations and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook's pickup ordering page: menu categories, a cart and pickup time slots.](/shots/newyorknook-order.jpg)
 ### Sign 6: it looks like a template
 In categories where a customer opens four tabs and compares, such as salons, clinics, restaurants and contractors, a site that looks like the other three gives no reason to choose you. Template sites share the same stock photos, the same row of three icons and the same opening sentence. The cure is not decoration. It is real photos of your work, your actual prices or price ranges, and a layout built around what your customers need to know before they decide.
 ## Is an old plugin-based site a security risk?
@@ -123,7 +129,7 @@ A website needs a redesign when the problems are built into its structure: slow 
     title: 'Core Web Vitals explained for small business owners',
     description: 'What LCP, INP and CLS measure, what good scores look like, and the usual fixes for a slow small business website.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['Core Web Vitals', 'LCP INP CLS', 'website speed small business', 'improve page speed'],
     service: 'nextjs-website-development',
     shortAnswer: 'Core Web Vitals are Google\'s three measures of page experience: LCP (how fast the main content appears, good under 2.5 seconds), INP (how fast the page responds to taps, good under 200 milliseconds) and CLS (how much the layout jumps, good under 0.1).',
@@ -141,6 +147,12 @@ A website needs a redesign when the problems are built into its structure: slow 
       'Third-party scripts such as chat widgets, booking embeds and tracking tags are the usual cause of a poor INP.',
       'Setting width and height on images and reserving space for embeds and banners fixes most layout shift.',
       'Speed is a tie-breaker in rankings, not a substitute for pages that answer what customers search for.',
+    ],
+    sources: [
+      { title: 'Web Vitals', publisher: 'web.dev', url: 'https://web.dev/articles/vitals' },
+      { title: 'Interaction to Next Paint (INP)', publisher: 'web.dev', url: 'https://web.dev/articles/inp' },
+      { title: 'Understanding Core Web Vitals and Google search results', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/appearance/core-web-vitals' },
+      { title: 'About PageSpeed Insights', publisher: 'Google for Developers', url: 'https://developers.google.com/speed/docs/insights/v5/about' },
     ],
     body: `"Is my site fast?" used to be a matter of opinion. The owner said yes, because it loaded instantly on the office computer, and a customer on a phone in a parking lot said no. Core Web Vitals replaced the argument with three numbers that Google measures from real visits.
 You do not need to be technical to use them. You need to know what each number measures, what counts as good, and which few fixes move it. That is what this article covers, in the order I work through a slow site myself.
@@ -210,12 +222,19 @@ Work in this order, because the first items give the biggest gain for the least 
 - Turn on caching and a content delivery network if your host offers them
 After each change, rerun PageSpeed Insights on the same page so you know which fix did what. Field data takes up to 28 days to catch up, so do not expect Search Console to turn green the next morning.
 This is also where the platform matters. I build in Next.js because pages are pre-built and served from a global network, the image component sizes and reserves space for images automatically, and there is no plugin layer adding scripts. Fast Core Web Vitals are part of every build, not an extra.
-![VenCare: a health startup marketing site I built in Next.js and deployed on Vercel.](/work/fiverr/vencare.jpg)
+![VenCare's homepage hero, from a health startup marketing site I built in Next.js and deployed on Vercel.](/shots/vencare-home.jpg)
 ## Can I fix my current site, or does it need a rebuild?
 Fix the current site when the problems are images, scripts and embeds, and rebuild when the weight comes from the theme or page builder itself.
 A worked example. A salon's homepage scores an LCP of 5.8 seconds on phones. PageSpeed Insights shows a 2.9 MB hero photo, a slider script, a chat widget and four fonts. Replacing the slider with one resized image, delaying the chat and dropping two fonts are changes to content and settings, and they can bring a page like that under the threshold without touching the platform.
 Now take the same score where the report lists hundreds of kilobytes of unused CSS and JavaScript from the theme and a slow first server response. Those come from the foundation. You can install a caching plugin and gain a little, but you are tuning around the cause.
 When a rebuild is the answer, my fixed-price packages are a Starter Site from $150 in 7 days, a Business Site of up to 5 pages from $450 in 14 days, and a Full Custom Build from $1,200 in 21 days.
+## How do I measure INP when the lab test cannot?
+Measure it from real interactions: your own taps in Chrome's developer tools, and your visitors' taps through a small reporting script.
+Because a simulated page load never taps anything, the PageSpeed lab score cannot tell you whether your menu or booking button feels slow. Three ways fill that gap:
+- Chrome DevTools: open the Performance panel and it shows live LCP, CLS and INP values as you use the page yourself. Turn on CPU throttling to feel what a mid-range phone feels, then tap the menu, open the booking widget and submit the form. The slowest interaction is the one to fix.
+- The field section of PageSpeed Insights and the Search Console report, once your site has enough Chrome traffic to appear in the Chrome User Experience Report.
+- Your own measurement. Google's open source web-vitals library reports INP, LCP and CLS from each real visit, and in Next.js the useReportWebVitals hook does the same. Send the values to your analytics and you have field data even for a low-traffic site.
+> Test INP on the pages where people act, such as booking, ordering and contact, not only the homepage. That is where the heavy third-party widgets usually live.
 ## The bottom line
 Core Web Vitals are three thresholds: main content in 2.5 seconds, a response to taps in 200 milliseconds, and a layout shift score of 0.1 or less, for three out of four real visits. Check them in Search Console and PageSpeed Insights, fix the hero image first, cut the scripts you do not use, and reserve space for everything that loads late. Then spend the rest of your effort on pages worth loading quickly.`,
   },
@@ -224,7 +243,7 @@ Core Web Vitals are three thresholds: main content in 2.5 seconds, a response to
     title: 'How to get your business mentioned in ChatGPT, Perplexity and Google AI answers',
     description: 'What makes AI search tools cite or recommend a business, and the practical steps a small business can take to show up in AI answers.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['AI search optimization', 'get mentioned in ChatGPT', 'AI Overviews small business', 'generative engine optimization'],
     service: 'nextjs-website-development',
     shortAnswer: 'AI search tools mention businesses that are described consistently across many trusted websites and that publish clear, specific answers to the questions customers ask. Mentions on other sites, answer-first pages, comparisons and fresh, factual content matter more than technical tricks.',
@@ -242,6 +261,11 @@ Core Web Vitals are three thresholds: main content in 2.5 seconds, a response to
       'Open every page and section with a direct answer and keep each section able to stand alone, because AI tools often quote one section.',
       'Prices, timelines, locations and named examples give an AI something concrete to repeat, and vague copy gives it nothing.',
       'Allow AI crawlers in robots.txt and make sure your content is in the page HTML, then let content and mentions do the real work.',
+    ],
+    sources: [
+      { title: 'AI Features and Your Website', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/appearance/ai-features' },
+      { title: "Google's common crawlers", publisher: 'Google for Developers', url: 'https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers' },
+      { title: 'Overview of OpenAI Crawlers', publisher: 'OpenAI', url: 'https://developers.openai.com/api/docs/bots' },
     ],
     body: `Ask ChatGPT, Perplexity or Google "who should I call for this in my area" and you get a short list of names with reasons. Nobody scrolls ten blue links. The business either is in the answer or is not, and owners are starting to ask me how that list gets made.
 There is no secret switch. AI search tools answer a question by reading many sources and summarizing them. To be in the answer, your business has to be in the sources, described clearly enough that the tool can repeat it with confidence. Here is how that works and what a small business can do about it.
@@ -282,6 +306,8 @@ Prices, timelines, locations, quantities and named examples give an AI something
 - A real example with details
 - Who the service is not right for
 Vague marketing copy gives the tool nothing to work with. A page that says a one-page site starts at $150 and takes 7 days can be repeated word for word. A page that says "affordable solutions, fast turnaround" cannot.
+Artistic Printing, a commercial printer's site I built, has a printing guides section where each guide answers a question buyers ask before they order.
+![The printing guides section on the Artistic Printing site I built, a content hub of practical answers.](/shots/artistic-guides.jpg)
 ## Does it matter how fresh my content is?
 Yes, tools that retrieve live results lean toward recent, clearly dated pages for anything that changes over time, such as prices, regulations and recommendations.
 Update a page when something real changes: a new price, a new service, a rule that changed, a better example. Show the date it was last updated on the page, and make sure the date in your structured data matches. A page with last year's prices is a liability twice over, because the tool may repeat the old number to a customer who then feels misled.
@@ -310,6 +336,17 @@ Anything aimed at tricking the tool instead of informing the reader.
 - Fake reviews or made-up statistics. They are a risk to the business well beyond search.
 - Refreshing dates on unchanged content.
 - Treating a single technical file as the answer while the site still says nothing specific.
+## What does Google say it takes to appear in AI Overviews?
+Google's own documentation says there are no extra requirements: a page that is indexed and eligible to show with a snippet in normal search can be used in AI Overviews and AI Mode.
+That is worth knowing because a lot of what is sold as "AI optimization" contradicts it. At the time of writing, Google's page on AI features states that you do not need new machine-readable files, AI-specific text files or special schema markup. What it does recommend is the ordinary list:
+- Allow crawling in robots.txt, and check that your host or CDN is not blocking Googlebot
+- Keep important content in text, not only in images or video
+- Link between your own pages so they can be found
+- Give visitors a good page experience
+- Make structured data match what is visible on the page
+- Keep your Business Profile details current
+Google also says meeting these does not guarantee a page will be shown. And the Google-Extended control in robots.txt, which governs use of your content for Gemini models, does not affect whether you appear in Google Search.
+For a small business, that means the work in this article is the work. There is no separate AI checklist for Google.
 ## The bottom line
 AI answers are built from sources, so the work is to be a good source and to be mentioned by other good sources. Describe your business the same way everywhere, earn mentions on the sites your category relies on, open each page and section with a plain answer, fill your pages with specific facts, keep them current, and let the crawlers in. It is slower than a trick, and it is the only approach that keeps working when the tools change.`,
   },
@@ -336,6 +373,10 @@ AI answers are built from sources, so the work is to be a good source and to be 
       'Environment variables in a local .env file do not exist on Vercel until you add them for the right environment and redeploy.',
       'Vercel builds on Linux, where file names are case-sensitive, so an import must match the file name letter for letter.',
       'Turning off type checks or lint to force a deploy moves the failure from the build log to your users.',
+    ],
+    sources: [
+      { title: 'Environment variables', publisher: 'Vercel', url: 'https://vercel.com/docs/environment-variables' },
+      { title: 'How to use environment variables in Next.js', publisher: 'Next.js', url: 'https://nextjs.org/docs/app/guides/environment-variables' },
     ],
     body: `The app runs on your laptop. You push to GitHub, Vercel starts a deployment, and a minute later you get the email: build failed. Nothing changed between the two, except everything about how the code was run.
 I fix this for founders, usually on apps started in Lovable, Bolt, v0 or Cursor. The fastest way to debug it is to run the same production build locally with npm run build. Most of the time the error appears there too, with a clearer message and no waiting. The causes are a short list, and this article goes through each one with the error text you will see.
@@ -420,7 +461,7 @@ A failed Vercel build is almost never mysterious. Run npm run build locally, rea
     title: 'How to fix "Hydration failed" errors in Next.js',
     description: 'What a hydration mismatch is, the common causes in Next.js and React apps, and how to fix each one properly.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['Next.js hydration error', 'hydration failed because the server rendered HTML', 'React hydration mismatch fix'],
     service: 'fix-ai-built-app',
     shortAnswer: 'A hydration error means the HTML rendered on the server differs from what React renders first in the browser. The usual causes are dates, random values or browser-only data used during render, invalid HTML nesting, and browser extensions that change the page.',
@@ -438,6 +479,10 @@ A failed Vercel build is almost never mysterious. Run npm run build locally, rea
       'Marking a component with "use client" does not skip server rendering, so window and localStorage still have to be read inside an effect.',
       'Invalid nesting such as a div inside a p makes the browser repair the HTML, and the error message names the offending elements.',
       'If only some visitors see the error, test in a private window with extensions off before changing any code.',
+    ],
+    sources: [
+      { title: 'Text content does not match server-rendered HTML', publisher: 'Next.js', url: 'https://nextjs.org/docs/messages/react-hydration-error' },
+      { title: 'hydrateRoot', publisher: 'React', url: 'https://react.dev/reference/react-dom/client/hydrateRoot' },
     ],
     body: `Hydration errors have a reputation for being cryptic, and the red overlay does not help. The cause, though, is always the same kind of thing, and once you know the five places it comes from you can usually find it in a few minutes.
 React renders your page on the server, sends the HTML, then "hydrates" it in the browser by rendering again and attaching event handlers. If the two renders disagree, you get a hydration error. Everything below is about finding where they disagree and making them agree properly.
@@ -517,6 +562,14 @@ My order of checks:
 - If it only fails when deployed, compare time zones first
 A worked example. An order page shows "Text content does not match" with the diff "Nov 17, 6:05 PM" against "Nov 17, 10:05 AM". The component calls toLocaleString() on the order date. The server formatted it in UTC and the browser in Pacific time. The fix is to format with an explicit time zone in a server component if every visitor should see the same time, or to render the time after mount if each visitor should see their own.
 If you have worked through the list and it still fails, send me the route and the repo. A single bug like this is a Quick Fix from $60, usually within 2 days, with a write-up of the cause.
+## Should I turn off server rendering to make the error go away?
+Only for a small widget that cannot work without the browser, never for a whole page or layout.
+Loading a component with next/dynamic and ssr set to false does remove the mismatch, because the server sends nothing for that component and the browser draws it alone. Applied to a map or a chart, that is the right tool. In the App Router, that call has to sit inside a client component.
+Applied to a page, it costs more than the error did:
+- The HTML the server sends no longer contains that content, so search engines and AI crawlers that do not run JavaScript see an empty space
+- The visitor waits for the JavaScript to download and run before anything appears, which hurts Largest Contentful Paint
+- The real cause, usually a date or a localStorage read, is still in the code and will surface again somewhere else
+The two-pass pattern, rendering a neutral value first and switching after mount, has a cost too. React's documentation notes that it makes hydration slower, because those components render twice. That is why I keep it to the few elements that truly differ, and leave everything else rendered once on the server.
 ## The bottom line
 A hydration error is a disagreement between two renders of the same component. Find the value or the markup that differs: a date or random value, something read from the browser during render, invalid nesting, a typeof window branch, or an extension editing the page. Make the first browser render match the server and move anything browser-specific to after mount, and the error goes away for the right reason.`,
   },
@@ -543,6 +596,12 @@ A hydration error is a disagreement between two renders of the same component. F
       'Users must never be able to write their own role, plan or balance, so list exactly which fields each update may change.',
       'Role changes, payments and anything across users belong on the server with the Admin SDK, not in browser code.',
       'Before launch, test every collection as the owner, as a second user and as a signed-out visitor.',
+    ],
+    sources: [
+      { title: 'Avoid insecure rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/rules/insecure-rules' },
+      { title: 'Firebase launch checklist', publisher: 'Firebase', url: 'https://firebase.google.com/support/guides/launch-checklist' },
+      { title: 'Firebase App Check', publisher: 'Firebase', url: 'https://firebase.google.com/docs/app-check' },
+      { title: 'Control Access with Custom Claims and Security Rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/auth/admin/custom-claims' },
     ],
     body: `Firebase is safe when its rules are right. The config in your frontend is public, so the rules are the only thing standing between a stranger and your data.
 That sentence is the whole security model, and it is the part AI app builders most often leave unfinished. The app works, sign-in works, data saves and loads, and the rules file still says anyone may read and write everything. This checklist is the pass I do on every Firebase app before it goes live, written so you can do it yourself.
@@ -644,7 +703,7 @@ Your Firebase config is public, so your rules are your security. Remove every op
     title: 'Vibe coding vs hiring a developer: what makes sense for your app?',
     description: 'When building with AI tools like Lovable, Bolt or Cursor is enough, when to bring in a developer, and how to combine both without wasting money.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['vibe coding vs developer', 'should I hire a developer', 'AI app builder or developer', 'Lovable vs hiring developer'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Vibe coding is great for prototypes, internal tools and testing an idea quickly. Bring in a developer before real users, real data or real money touch the app, because security, payments and reliability are where AI-built apps most often fail.',
@@ -662,6 +721,11 @@ Your Firebase config is public, so your rules are your security. Remove every op
       'Bring in a developer before real users, real data or real money touch the app.',
       'A working prototype makes a developer faster and cheaper, because the product decisions are already visible.',
       'Fixing what exists is usually far less work than starting over, and a rebuild should come with a cost comparison.',
+    ],
+    sources: [
+      { title: 'Avoid insecure rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/rules/insecure-rules' },
+      { title: 'Row Level Security', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+      { title: 'Using webhooks with subscriptions', publisher: 'Stripe', url: 'https://docs.stripe.com/billing/subscriptions/webhooks' },
     ],
     body: `AI app builders changed who can make software. They did not remove the need for someone to own the hard parts.
 I work on both sides of this. I use AI tools in my own development, and a large part of my freelance work is taking over apps that founders started in Lovable, Bolt, v0, Replit, Cursor, Windsurf or Claude and got stuck on. So this is not an argument for one side. It is a practical account of what each approach is good for, where the line sits, and how to spend the least money getting a real product live.
@@ -699,8 +763,8 @@ The cost of waiting is not symmetrical. Bringing a developer in a week early cos
 > Before you launch, create a second account in your own app and try to see the first account's data by changing IDs in the URL. If you can, so can a stranger, and that is the first thing to get fixed.
 ## What does a production app need that a prototype does not?
 It needs the unglamorous systems around the features: access control, payment handling, error handling, backups, monitoring and a deploy process you can repeat.
-I know this list from the inside, because I founded and built SQWAD, a SaaS platform that Shopify brands use to run creator programs. The visible product is a branded portal where creators apply, receive product, submit content and get paid. Under it sit the parts nobody demos: who is allowed to see which brand's data, how payouts are recorded, and how every Meta ad is traced back to the creator whose content made the sale. SQWAD now tracks more than $500K in creator-driven sales, and none of that would be trustworthy if those parts were approximate.
-![SQWAD: my own SaaS platform for Shopify brands running creator programs, built with Next.js, TypeScript, Firebase and Stripe.](/work/fiverr/sqwad.jpg)
+I know this list from the inside, because I founded and built SQWAD, a SaaS platform that Shopify brands use to run creator programs. The visible product is a branded portal where creators apply, receive product, submit content and get paid. Under it sit the parts nobody demos: who is allowed to see which brand's data, how payouts are recorded, and how every Meta ad is traced back to the creator whose content made the sale. SQWAD's published TheHoopGang case study reports more than $500K in revenue attributed to creator videos, and none of that would be trustworthy if those parts were approximate.
+![SQWAD's revenue attribution page: every Meta ad traced back to the creator and the video behind it.](/shots/sqwad-creator-revenue-attribution.jpg)
 For a typical first product, the production checklist looks like this:
 - Database rules or server checks so each user reads and writes only their own data
 - Roles enforced on the server, not just hidden in the interface
@@ -733,6 +797,19 @@ Fix it in almost every case, and rebuild only when the structure cannot support 
 A rebuild is justified when the data model is wrong at the root, for example a multi-company product where every record was stored without any link to a company, or when the app was built on a platform that cannot do something the product requires. It is not justified because the code is untidy or because it was written by an AI. Untidy code that works can be cleaned up one area at a time.
 If a developer recommends a rebuild, ask for the comparison: what fixing would cost, what rebuilding would cost, and what specifically cannot be fixed. A clear answer to the third question is the test.
 A worked example. A founder builds a booking tool for fitness studios in Lovable. It works in the preview, the build fails on deploy, the Firestore rules are in test mode, and Stripe checkout opens but nothing records the payment. None of that needs a rebuild. It is a build fix, a rules rewrite with ownership checks, a webhook and a deploy, which is Finish and Launch work. The screens and the booking logic the founder built stay as they are.
+## Which problems can I fix myself, and which should I hand over?
+Keep prompting for anything you can see and check on screen, and hand over anything where a mistake is invisible until a stranger or a payment finds it.
+Safe to keep doing yourself with the AI tool:
+- Wording, layout, colors and images
+- New screens that only display data the app already has
+- Small form changes, such as a new optional field
+- Adding a missing environment variable in your hosting dashboard when the error message names it
+Worth a developer's eyes, even if the AI tool says it fixed them:
+- Database rules or row level security. Firebase's own documentation warns that open rules let anyone who finds your project read, change or delete your data, and Supabase warns never to put a secret key in the browser.
+- Sign-in, password reset and anything that decides who sees what
+- Payment webhooks, since Stripe's subscription documentation treats them as required for keeping accounts in step with payments
+- Changes to how data is stored, because they affect every record already saved
+A useful test: if you cannot tell from clicking around whether the change worked, it belongs in the second list. Those are exactly the areas the Quick Fix and Finish and Launch packages are built around.
 ## The bottom line
 Use AI tools for what they do best: getting an idea on screen quickly and cheaply. Then apply a simple rule. If losing the data or charging someone wrong would hurt your business, have a developer look before launch. Build the prototype yourself, have the security, payments and deployment done properly, and keep prompting on top of a foundation that holds.`,
   },
@@ -741,7 +818,7 @@ Use AI tools for what they do best: getting an idea on screen quickly and cheapl
     title: '10 questions to ask before hiring a web developer',
     description: 'The questions that reveal whether a web developer is the right fit: ownership, process, pricing, timelines and what happens after launch.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['questions to ask a web developer', 'how to hire a web developer', 'hiring a freelance developer'],
     service: 'nextjs-website-development',
     shortAnswer: 'Ask who owns the code and accounts, what exactly the price includes, how many revision rounds you get, how long it will take, which platform they build on and why, how you will edit content later, and what support looks like after launch.',
@@ -759,6 +836,10 @@ Use AI tools for what they do best: getting an idea on screen quickly and cheapl
       'Ask for a live preview link during the build so you can react to real pages on your own phone.',
       'Find out how you will change text and photos after launch before the site is built, not after.',
       'Judge a developer by live sites similar to what you need, tested on a phone, not by screenshots.',
+    ],
+    sources: [
+      { title: 'FAQs for Registrants: Transferring Your Domain Name', publisher: 'ICANN', url: 'https://www.icann.org/resources/pages/name-holder-faqs-2017-10-10-en' },
+      { title: 'Inviting collaborators to a personal repository', publisher: 'GitHub Docs', url: 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository' },
     ],
     body: `Most bad website projects do not fail because the developer could not code. They fail because two people had different pictures of the job: what was included, who would own it, when it would be done, and what happens afterward. Ten questions asked before you sign will surface nearly all of that.
 A good developer will be glad you asked these. Vague answers are a warning sign. I have grouped the ten by topic, with what a solid answer sounds like and how I answer each one for my own clients, so you have something to compare against.
@@ -830,7 +911,7 @@ Ask for links, not just screenshots. Then on each site:
 - Look for the things your own site needs, such as a menu, a booking flow or a quote form
 - Check whether the site is still live and current
 Most of all, check that the developer has built something similar to what you need. A beautiful portfolio of landing pages says little about whether they can build an ordering system. If your business runs on quote requests, look for a quote tool. One of mine is the site for Artistic Printing, a commercial printer, where I built quote intake and management so every request arrives with the specs the shop needs.
-![Artistic Printing: a website and quote management tool I built for a commercial printer.](/work/fiverr/artistic.jpg)
+![The Artistic Printing homepage I built, with Get your quote as the main action.](/shots/artistic-home.jpg)
 If you can, ask one past client two things: did the project finish on the date agreed, and are they able to make changes on their own?
 ## How do I compare quotes and spot red flags?
 Compare what each quote includes line by line, because two totals rarely describe the same job.
@@ -844,6 +925,18 @@ Red flags worth acting on:
 - A promised ranking position on Google, which nobody controls
 - An instant yes to everything, with no questions about your business
 The last one is easy to miss. A developer who asks you nothing about your customers is going to build a generic site.
+## What should the written agreement cover?
+It should put the answers to the ten questions on one page that both of you accept before work starts.
+It does not need to be long or written by a lawyer for a small site, but it should name:
+- The scope: pages, features and anything you are supplying, such as copy and photos
+- The price, the payment split and what triggers each payment
+- The timeline, with the content you owe and the date you owe it
+- Revision rounds, and how work outside the scope is quoted
+- Ownership: the code, domain, hosting and analytics accounts in your name, handed over by launch
+- What happens after launch: the bug-fix window and how changes are priced
+- What happens if either side stops, including what you receive for what you have paid
+Domain ownership deserves a line of its own. ICANN's guidance for domain holders explains that changing the registrant's details can lock a domain against transfer to another registrar for 60 days, so getting it registered in your name from the start saves a slow fix later.
+This is general guidance, not legal advice. For anything large or unusual, have a lawyer read the agreement.
 ## The bottom line
 Ask who owns the code and accounts, what the price includes, how many revision rounds you get, how payment is split, how long it takes and what you must supply, how you will see progress, which platform and why, how you will edit later, and what happens after launch. Get the answers in writing, look at live work on your phone, and choose the developer whose answers were specific. Clear answers before the project are the best predictor of a calm project.`,
   },
@@ -870,6 +963,13 @@ Ask who owns the code and accounts, what the price includes, how many revision r
       'WCAG 2.1 AA is the benchmark most often used, with a contrast ratio of 4.5 to 1 for normal text.',
       'Automated checkers find only some issues, so also test with the keyboard alone and at 200 percent zoom.',
       'Overlay widgets do not change the underlying code, so the fixes have to be made in the site itself.',
+    ],
+    sources: [
+      { title: 'Web Content Accessibility Guidelines (WCAG) 2.1', publisher: 'W3C', url: 'https://www.w3.org/TR/WCAG21/' },
+      { title: "What's New in WCAG 2.2", publisher: 'W3C Web Accessibility Initiative', url: 'https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/' },
+      { title: 'Guidance on Web Accessibility and the ADA', publisher: 'ADA.gov', url: 'https://www.ada.gov/resources/web-guidance/' },
+      { title: 'Fact Sheet: New Rule on the Accessibility of Web Content and Mobile Apps Provided by State and Local Governments', publisher: 'ADA.gov', url: 'https://www.ada.gov/resources/2024-03-08-web-rule/' },
+      { title: 'WAVE Web Accessibility Evaluation Tools', publisher: 'WebAIM', url: 'https://wave.webaim.org/' },
     ],
     body: `Accessibility is about making sure every customer can read your site, use your forms and book with you. It also tends to improve the site for everyone.
 Owners usually meet the topic through a worrying email about lawsuits or a sales pitch for a widget. Both make it sound more mysterious than it is. For a typical small business site, accessibility comes down to a short list of concrete things in the design and the code, most of which you can check yourself in half an hour. This article goes through that list. It is general information, not legal advice.
@@ -908,7 +1008,7 @@ Videos need captions, and audio should never start on its own. Avoid content tha
 ## How do I make forms and booking flows accessible?
 Give every field a visible label, make errors specific, and make sure the whole flow can be completed with a keyboard.
 Forms are where accessibility turns into money, because the contact form or the booking flow is where a visitor becomes a customer. On a site like Astiglow's, a waxing studio site I built with online booking and service packages, the booking flow is the reason most people visit, so it has to work for everyone who arrives.
-![Astiglow: a waxing studio website I built with online booking and service packages.](/work/fiverr/astiglow.jpg)
+![Step one of the Astiglow booking flow I built: choose a service, with prices shown.](/shots/astiglow-book.jpg)
 ### Labels
 Each field needs a label that stays visible and is connected to the input in the code. Placeholder text inside the box is not a label. It vanishes as soon as someone types, it is usually too pale to read, and some screen readers do not announce it.
 ### Errors
@@ -970,6 +1070,11 @@ An accessible website is one every customer can read, navigate and book through.
       'Custom booking is worth building only when a booking depends on rules a standard tool cannot hold.',
       'Put the booking button on every service page, next to the price.',
     ],
+    sources: [
+      { title: 'Script Component', publisher: 'Next.js', url: 'https://nextjs.org/docs/app/api-reference/components/script' },
+      { title: "Save a customer's payment method without making a payment", publisher: 'Stripe', url: 'https://docs.stripe.com/payments/save-and-reuse' },
+      { title: 'Web Vitals', publisher: 'web.dev', url: 'https://web.dev/articles/vitals' },
+    ],
     body: `Online booking is one of the most useful things a service business can add to its website. A client who can pick a time at 11pm, without waiting for you to answer the phone, is a client who books with you and not with the next search result.
 
 There are three ways to do it: a request form, an embedded booking tool, or a booking system built into the site. I have built all three for clients, and the right one depends less on budget than on how complicated your scheduling rules are.
@@ -993,7 +1098,7 @@ It costs nothing per month, it works on any site, and it lets you screen request
 - Nothing lands in your calendar unless you put it there
 The fix for most of this is wording. Call the button "Request a time", not "Book now", and say on the confirmation screen exactly when you will reply. A form that promises a confirmed booking and then delivers an email thread loses trust.
 New York Nook, a restaurant site I built in Hollywood, takes this approach for tables: guests send a reservation request from their phone and the restaurant confirms it.
-![New York Nook: a restaurant site I built with reservation requests and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![The New York Nook homepage I built, with Reserve a table, Order takeout and View menu up front.](/shots/newyorknook-home.jpg)
 
 ## Which booking tool should a small business embed?
 Embed the tool your industry already uses, because your clients have probably booked through it before and your staff may already know it.
@@ -1032,7 +1137,7 @@ Signs you are there:
 - Bookings must connect to your own systems, such as invoices, client records or a team calendar
 - You are paying for workarounds, like staff re-entering bookings from one tool into another
 FieldOps is an example from my own work: a job scheduling app for field teams that syncs with Outlook Calendar. Assigning jobs to people in the field and keeping each work calendar in step is a different problem from the one a salon scheduler was designed for.
-![FieldOps: a job scheduling app I built for field teams, with Outlook Calendar sync.](/work/fieldops.jpg)
+![The FieldOps sign-in page, listing its Outlook Calendar sync, documents and contacts features.](/shots/fieldops-login.jpg)
 ### What a custom build has to get right
 - Double bookings: two people tapping the same slot at the same second must not both succeed, which means the slot check and the save happen in one database transaction
 - Time zones and daylight saving: store times in UTC and display them in the business's zone
@@ -1062,7 +1167,7 @@ Reminders do most of the work. One email at booking, one message the day before,
 ## Where should the booking button go so people actually use it?
 Put it wherever someone might decide, which means the header, every service page and the end of every page, not only the contact page.
 Astiglow, a waxing studio site I built, pairs the service menu and packages with online booking, so a client can read what a service costs and book it in the same visit.
-![Astiglow: a waxing studio site I built with a service menu, packages and online booking.](/work/fiverr/astiglow.jpg)
+![The Astiglow services menu I built, with a price and duration beside each service.](/shots/astiglow-services.jpg)
 The details that raise bookings:
 - Show prices or starting prices next to each service, so nobody has to book to find out the cost
 - Link each service's button straight to that service in the scheduler, not to the top of a generic list
@@ -1110,6 +1215,11 @@ Start with the tool your industry already uses, embedded on a fast booking page 
       'Each main service gets a short card on the homepage and its own page behind it.',
       'Measure calls, forms and bookings, not visits, and change one thing at a time.',
     ],
+    sources: [
+      { title: 'Local Business (LocalBusiness) Structured Data', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/appearance/structured-data/local-business' },
+      { title: 'Guidelines for representing your business on Google', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/3038177' },
+      { title: 'About PageSpeed Insights', publisher: 'Google for Developers', url: 'https://developers.google.com/speed/docs/insights/v5/about' },
+    ],
     body: `A new visitor gives your homepage a few seconds before deciding whether to stay. In that time they are asking a short list of questions in a predictable order: is this what I need, is it near me, can I trust them, what does it cost, what do I do next. A homepage that answers those in that order does well. One that opens with a slideshow and a mission statement does not.
 
 This is the order I use when I build sites for clinics, studios, restaurants and trades, with what each section has to do.
@@ -1131,7 +1241,7 @@ The headline should say what you do, who it is for and where, in words a custome
 ### Writing the headline
 A simple pattern works: service, audience or benefit, place. "Emergency plumbing in Pasadena, at your door within the hour." "Physical therapy for runners in Santa Monica." Compare those with "Welcome to our website" or "Excellence in every detail", which could belong to any business in any city.
 VenCare is a good example of a first screen with a hard job. The company places wall-mounted epinephrine stations in venues, a product most visitors have never seen, so the site had to explain a new kind of medical device to venue operators and investors within seconds.
-![VenCare: a health startup site I built to explain wall-mounted epinephrine stations for venues.](/work/fiverr/vencare.jpg)
+![VenCare's first screen: "Like an AED, but for severe allergic reactions," with a venue, guest and insurer switch.](/shots/vencare-home.jpg)
 ### The main action
 Pick the one action that starts a sale for your business: book, call, get a quote, order. Make it a button with a specific label. "Book an appointment" beats "Learn more", and "Get a free quote" beats "Submit". Put the same action in the header so it follows the visitor down the page.
 ### What else belongs on the first screen
@@ -1162,7 +1272,7 @@ The homepage is a summary. Three to six cards is enough, with a "see all service
 The separate pages matter for search. One page per service gives Google a specific page to rank for each thing you do, in a way a single long list cannot. The homepage cards send visitors and search engines to those pages.
 On prices: I recommend showing starting prices wherever you can. Visitors who cannot afford you leave without taking your time, and visitors who can are reassured that there will be no surprise. If every job is quoted, say so and say how fast the quote comes back.
 Artistic Printing, a commercial printer I built a site for, quotes every job, so the site leads into a structured quote request where clients enter the specs the shop needs.
-![Artistic Printing: a commercial printer's site I built with a quote intake and management tool.](/work/fiverr/artistic.jpg)
+![The Artistic Printing homepage I built, leading with a Get your quote button.](/shots/artistic-home.jpg)
 
 ## Does the homepage need "how it works" and examples of the work?
 Yes, because first-time buyers hesitate over the unknown, and these two sections replace the unknown with something they can picture.
@@ -1261,6 +1371,11 @@ A service business homepage is a sales conversation in a fixed order: what you d
       'Most growing businesses use both: a website for search and research, and landing pages for campaigns.',
       'A one-page site built on your own domain can grow into a full website without starting over.',
     ],
+    sources: [
+      { title: 'About Quality Score for Search campaigns', publisher: 'Google Ads Help', url: 'https://support.google.com/google-ads/answer/6167118' },
+      { title: 'How to specify a canonical URL with rel="canonical" and other methods', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls' },
+      { title: 'Block Search Indexing with noindex', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/block-indexing' },
+    ],
     body: `People use "landing page" and "website" as if they meant the same thing, and that causes real confusion when you are trying to get a quote or plan a launch. The difference is focus. A landing page does one job for one audience. A website does many jobs for everyone who might look you up.
 
 Which one you need depends on where your visitors come from and what you want them to do. Here is how I think it through with clients.
@@ -1287,7 +1402,7 @@ Choose a landing page when you know exactly who is arriving and exactly what you
 - A new business that needs to be online this week
 - A program inside a larger brand, such as hiring, wholesale or a creator program
 The last case is common. TheHoopGang, a basketball streetwear brand I work with, has a creator portal whose landing page speaks to one audience, creators, and asks for one thing, an application to the program. It does not try to sell clothes to shoppers. The store does that.
-![TheHoopGang creator portal landing page: one audience, creators, and one main action, applying to the program.](/images/hoopgang/landing-page.png)
+![TheHoopGang creator portal homepage, "Get it free. Post it. Get paid.": one audience and one main action, applying.](/shots/hoopgang-home.jpg)
 A landing page is also the cheapest honest test of an idea. If nobody joins the waitlist after you have put the offer in front of a few hundred of the right people, you have learned something for the price of one page.
 
 ## What goes on a landing page that converts?
@@ -1348,7 +1463,7 @@ A typical setup for a growing business:
 - Shared logo, colors and proof, so a visitor who clicks through to the main site feels they are in the same place
 - One analytics property and one set of conversion events across both
 Serenity Institute shows how far focus can go inside a normal site. It is a site I built for a live, Zoom-based certification program for intervention professionals, so the whole site serves one audience considering one program.
-![Serenity Institute: a site I built for a live, Zoom-based certification program for intervention professionals.](/work/serenity.jpg)
+![Serenity Institute's program format (live Zoom, evenings and weekends, 12 seats) beside its waitlist form.](/shots/serenity-home-s3.jpg)
 Keeping landing pages on your own domain, in the same codebase as the site, has practical benefits. They load as fast as the rest of the site, they reuse the same components, and nobody pays a separate monthly fee for a landing page tool. When a campaign ends, the page redirects to the relevant service page instead of going dead.
 
 ## How much does each cost, and how long does it take?
@@ -1379,7 +1494,7 @@ If visitors arrive from one source with one intent, build a landing page. If the
     title: 'Do I need a website if my business already has Instagram?',
     description: 'What a website does that Instagram and Google Business Profile cannot, and when a social-only presence is enough for a small business.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['do I need a website', 'website vs Instagram for business', 'is social media enough for business', 'small business website necessary'],
     service: 'nextjs-website-development',
     shortAnswer: 'Instagram is great for showing your work, but you do not control its reach and most search traffic never reaches it. A website gives you a place you own that ranks in Google, answers detailed questions, takes bookings or orders and makes the business look established.',
@@ -1397,6 +1512,10 @@ If visitors arrive from one source with one intent, build a landing page. If the
       'A Google Business Profile is essential and works better with a website behind it.',
       'Social-only is reasonable while testing demand or when fully booked through referrals.',
       'A first site can be one fast page with services, prices, proof, location and one button.',
+    ],
+    sources: [
+      { title: 'Guidelines for representing your business on Google', publisher: 'Google Business Profile Help', url: 'https://support.google.com/business/answer/3038177' },
+      { title: 'Local Business (LocalBusiness) Structured Data', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/appearance/structured-data/local-business' },
     ],
     body: `Social media is where people discover you. A website is where they decide. If your business already has an active Instagram, you have the harder half, attention. The question is where that attention goes when someone is ready to book, buy or ask a real question.
 
@@ -1444,7 +1563,7 @@ The setup is simple:
 - The site links back to your Instagram, so visitors can see recent work
 Now every channel ends in one place that you control and can measure. Add UTM tags to the bio link and your analytics will show how many visitors came from Instagram and how many of them booked.
 New York Nook, a Russian restaurant in Hollywood, is a site I built with this job in mind. Whatever sends a guest there, they can see the full menu with photos, request a reservation or order pickup from their phone.
-![New York Nook: a restaurant site I built with the full menu, reservation requests and pickup ordering.](/work/fiverr/newyorknook.jpg)
+![New York Nook's pickup ordering page: menu categories, a cart and pickup time slots, all on the restaurant's own site.](/shots/newyorknook-order.jpg)
 You can also bring Instagram into the site, with care. A few of your best photos placed by hand load faster than a live embedded feed, and they never show a post you would not have chosen for that spot.
 > Point your bio link at your own domain, even if that page is only a short list of buttons. If you change booking tools later, you update one page and every old link still works.
 
@@ -1477,7 +1596,7 @@ You do not need ten pages to start. A first site needs:
 - Links to Instagram and your other profiles
 Technical basics matter as much as content: a real domain name, a title and description for search, local business details in structured data, a layout made for phones, and quick loading on mobile data.
 Astiglow, a waxing studio site I built, follows this idea. Clients see the services and prices, pick a package and book online, with no call or message needed.
-![Astiglow: a waxing studio site I built with a service menu, packages and online booking.](/work/fiverr/astiglow.jpg)
+![The Astiglow packages page I built: 11 sessions for the price of 9, ready to book.](/shots/astiglow-packages.jpg)
 Most of the material for a first site is already on your profile. Your best photos, your highlights and your most asked questions are a draft of the page.
 
 ## What does a first website cost compared with staying social-only?
@@ -1501,6 +1620,18 @@ The most common mistake is treating the site as a formality and not as the place
 - Adding a live feed, a chat widget and a pop-up to a page that should load in a second
 A site needs far less upkeep than a feed. Update it when prices, hours or services change, and check the booking path on your phone once a month. That is enough.
 
+## What should I do in the first week after the site goes live?
+Connect it to every place customers already find you, so the new site starts collecting visits from day one.
+A simple launch week:
+- Day one: change your Instagram bio link to the site, with a UTM tag so analytics can tell those visits apart
+- Day one: add the website to your Google Business Profile, and check that the name, address, phone and hours match the site exactly, as Google's profile guidelines ask
+- Day two: post about the site and pin it, pointing to one useful thing, such as the price list or online booking
+- Day two: add the site to your other profiles: Facebook, TikTok, Yelp and any industry directory
+- Day three: set up Google Search Console, submit the sitemap and request indexing for the homepage
+- Day five: book something through your own site on your phone, as a stranger would
+- Day seven: look at analytics. Which pages did people open, and did anyone click book or call?
+After that, change one thing at a time. If people read the prices and leave, look at the booking step. If nobody reaches the prices, look at the first screen.
+
 ## The bottom line
 Keep Instagram for discovery and build a simple site for decisions. Start with one fast page that says what you do, shows your work and prices, and has one button to book or get in touch, then link it from your bio and your Google Business Profile. If you are still testing an idea, you can wait. Once you want customers who search, you need a place they can find.`,
   },
@@ -1509,7 +1640,7 @@ Keep Instagram for discovery and build a simple site for decisions. Start with o
     title: 'How to move from Wix or Squarespace without losing your Google rankings',
     description: 'A step-by-step migration plan for switching website platforms: URL mapping, 301 redirects, content, metadata and Search Console checks.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['migrate from Wix', 'move from Squarespace', 'website migration SEO', '301 redirects new website'],
     service: 'nextjs-website-development',
     shortAnswer: 'To switch platforms without losing rankings, list every URL on the old site, keep or improve the content that ranks, redirect each old URL to its new equivalent with a 301 redirect, carry over titles and descriptions, then submit the new sitemap in Google Search Console and watch for errors.',
@@ -1527,6 +1658,12 @@ Keep Instagram for discovery and build a simple site for decisions. Start with o
       'Give each old URL one permanent redirect to its closest matching new page, never a blanket redirect to the homepage.',
       'Download images from the old platform, because they stop loading when the old plan ends.',
       'Submit the new sitemap in Search Console and watch for 404 errors for about a month.',
+    ],
+    sources: [
+      { title: 'Site Moves and Migrations', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes' },
+      { title: 'Redirects and Google Search', publisher: 'Google Search Central', url: 'https://developers.google.com/search/docs/crawling-indexing/301-redirects' },
+      { title: 'redirects (next.config.js)', publisher: 'Next.js', url: 'https://nextjs.org/docs/app/api-reference/config/next-config-js/redirects' },
+      { title: 'FAQs for Registrants: Transferring Your Domain Name', publisher: 'ICANN', url: 'https://www.icann.org/resources/pages/name-holder-faqs-2017-10-10-en' },
     ],
     body: `Most ranking losses after a platform move come from broken URLs and missing content, not from the new platform. Google does not rank you lower for leaving Wix or Squarespace. It ranks you lower when the page it knew at one address disappears and nothing tells it where that page went.
 
@@ -1598,7 +1735,7 @@ Forms, newsletter signups, booking widgets, store products and member areas each
 A 301 redirect tells browsers and search engines that a page has moved permanently, and Google passes the old page's standing to the new address.
 ### In Next.js
 Redirects go in the redirects function of next.config.js. Each entry has a source, a destination and permanent set to true. Next.js sends a 308 status for permanent redirects, which Google treats the same way as a 301. Patterns can cover whole groups, for example a single rule sending /blog-1/:slug to /blog/:slug.
-For a few hundred redirects the config file is fine. For a thousand or more, the Next.js documentation recommends keeping the map in a lookup file and handling it in middleware.
+For a few hundred redirects the config file is fine. For a thousand or more, the Next.js documentation recommends keeping the map in a lookup file and handling it in middleware, which newer Next.js versions call proxy.
 ### On other platforms
 Most hosts and site builders have a redirect or URL mapping setting. The principle is identical: old path, new path, permanent.
 ### Mistakes to avoid
@@ -1687,6 +1824,11 @@ A platform move does not cost rankings. Broken addresses and missing content do.
       'The hosted customer portal replaces a custom billing page for upgrades, card updates and cancellation.',
       'Test cancellations, failed payments and duplicate events before launch, then register the live webhook endpoint.',
     ],
+    sources: [
+      { title: 'Using webhooks with subscriptions', publisher: 'Stripe', url: 'https://docs.stripe.com/billing/subscriptions/webhooks' },
+      { title: 'Provide a customer portal to your customers', publisher: 'Stripe', url: 'https://docs.stripe.com/customer-management' },
+      { title: 'Manage webhook endpoints', publisher: 'Stripe', url: 'https://docs.stripe.com/webhooks/signature' },
+    ],
     body: `Billing is where MVPs most often overbuild or underbuild. Some founders spend three weeks on a custom billing page before they have a customer. Others ship a payment link and find out a month later that cancelled users still have full access.
 
 The setup below is the middle path: the smallest amount of Stripe work that is still correct.
@@ -1755,7 +1897,7 @@ On the user or organization record:
 Every protected feature reads this record on the server. A typical rule: allow access when status is active or trialing, and allow a short grace period when it is past_due. Never accept a plan value sent from the browser, and do not store the plan somewhere the user can write to. In Firebase, that means the subscription fields are written only by the server through the Admin SDK, and security rules deny client writes to them.
 Calling Stripe on each page load to check the plan is slow, runs into rate limits as you grow, and breaks your app whenever that call fails. The webhook-fed copy in your own database is what the app reads.
 SQWAD, my own SaaS for Shopify brands, is built on Next.js, Firebase and Stripe, so Stripe is something I run in my own product and not only something I set up for clients.
-![SQWAD: my own SaaS for Shopify brands running creator programs, built with Next.js, Firebase and Stripe.](/work/fiverr/sqwad.jpg)
+![SQWAD's pricing tiers: Starter $99 a month, Pro $399 a month, Scale $999 a month plus 1%, first month free.](/shots/sqwad-home-s4.jpg)
 
 ## How do users upgrade, downgrade or cancel?
 Send them to the Stripe customer portal, which handles plan changes, card updates, invoices and cancellation without any billing pages of your own.
@@ -1838,6 +1980,11 @@ Use Stripe's hosted pieces for everything a customer sees, Checkout and the cust
       'Hiding buttons is not security; permissions are enforced on the server and in database rules.',
       'Route every check through one permission function, so adding a role later means editing one map.',
     ],
+    sources: [
+      { title: 'Control Access with Custom Claims and Security Rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/auth/admin/custom-claims' },
+      { title: 'Row Security Policies', publisher: 'PostgreSQL Documentation', url: 'https://www.postgresql.org/docs/current/ddl-rowsecurity.html' },
+      { title: 'Row Level Security', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+    ],
     body: `Roles look simple on a whiteboard: admins can do everything, members can do some things. Then the first customer asks for a contractor who can see one project, or a manager who can approve but not pay, and the simple picture stops matching the code.
 
 You do not need to build for all of that up front. You do need a foundation that can absorb it later without a rewrite. I have built that foundation for my own SaaS and for a healthcare platform with five roles, and the same few decisions matter every time.
@@ -1916,6 +2063,7 @@ They look like the same foundation with more roles on top, each role seeing its 
 Guardian MindCare is a therapy practice platform I built with five roles: therapists, supervisors, trainees, clients and admins. Each has its own portal, and permissions make sure each role sees only what it should. In a healthcare product, that separation is the core requirement.
 ![Guardian MindCare: a therapy practice platform I built with separate portals for therapists, supervisors, trainees, clients and admins.](/work/fiverr/guardian.jpg)
 SQWAD, my own SaaS, has two kinds of separation. Brands are the tenants, each with its own team members and a branded portal, and each brand's data is isolated from every other brand's. Creators are a different kind of user, who apply to a brand's program and see only their own side of it.
+![SQWAD's brand directory, where creators apply to the brands whose programs they want to join.](/shots/sqwad-brands.jpg)
 TheHoopGang portal is a smaller version of the same shape: each creator has a dashboard for their own gear and content, and the brand's staff work from an admin side that covers all 50+ creators.
 ![TheHoopGang creator dashboard: what an approved creator sees, with their status, package and content progress.](/images/hoopgang/creator-dashboard.png)
 The lesson from all three is that roles with very different jobs deserve separate interfaces, not one interface with buttons hidden. A creator dashboard and an admin dashboard share data and almost no screens.
@@ -1954,7 +2102,7 @@ Create organizations from day one, store roles on memberships, enforce access on
     title: 'Build or buy: software for running a brand creator program',
     description: 'When a brand should use existing creator program software, when to build a custom creator portal, and what each needs to do well.',
     date: d,
-    updated: '2026-11-17',
+    updated: '2026-11-22',
     keywords: ['creator program software', 'build creator portal', 'UGC creator management', 'influencer program tools build vs buy'],
     service: 'saas-mvp-development',
     shortAnswer: 'Most brands should start with existing creator program software, because applications, product seeding, content tracking and payouts are already built. Build a custom portal only when your program has unusual workflows or needs deep integration with your own systems.',
@@ -1972,6 +2120,10 @@ Create organizations from day one, store roles on memberships, enforce access on
       'The reward model, such as refunds tied to posting, is usually what decides whether standard software fits.',
       'Attribution and payouts are the hardest parts to build and deserve the most careful scoping.',
       'Starting on software first gives you real requirements if you build later.',
+    ],
+    sources: [
+      { title: 'TheHoopGang Case Study', publisher: 'SQWAD', url: 'https://joinsqwad.com/case-studies/thehoopgang' },
+      { title: 'Disclosures 101 for Social Media Influencers', publisher: 'Federal Trade Commission', url: 'https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers' },
     ],
     body: `I have been on both sides of this decision. I have built custom creator portals for brands, including TheHoopGang, and then I built SQWAD, a SaaS platform that Shopify brands use to run creator programs. So I sell one of the "buy" options and I also get paid to build the alternative. Take that as a disclosure, and as the reason I have a clear view of where each one fits.
 
@@ -2021,8 +2173,8 @@ If creators apply, receive product, post, and are paid a fee or commission, that
 - Is pricing flat, per creator, or a share of sales?
 - Can you export your creators, content and history if you leave?
 The last question matters more than it seems. Your creator relationships and content library are assets. Make sure they can leave with you.
-SQWAD is the tool I built for this. It gives each Shopify brand a branded portal where creators apply, receive product, submit content, join competitions and get paid, and it traces Meta ads back to the creator whose content made the sale. It now tracks more than $500K in creator-driven sales for the brands on the platform.
-![SQWAD: my own SaaS that Shopify brands use to run creator programs, from applications to payouts.](/work/fiverr/sqwad.jpg)
+SQWAD is the tool I built for this. It gives each Shopify brand a branded portal where creators apply, receive product, submit content, join competitions and get paid, and it traces Meta ads back to the creator whose content made the sale. SQWAD's published TheHoopGang case study reports $500K+ in revenue attributed to creator videos and a 3.7x return on ad spend across 759 creator ads.
+![SQWAD's TheHoopGang case study page, with the figures as published on joinsqwad.com.](/shots/sqwad-case-studies-thehoopgang.jpg)
 
 ## When is a custom creator portal worth building?
 Build when your rewards or approvals are unusual, when the program has to connect deeply to your own systems, or when the creator experience is central to the brand.
@@ -2056,6 +2208,7 @@ There are three common ways to connect a sale to a creator, in rising order of d
 - Tracked links: more precise, but they lose the trail when someone sees a video and buys days later on another device
 - Ad-level tracking: when creator content runs as paid ads, tying each ad's sales back to the creator who made it
 The third matters most for brands that run creator content as ads, and it is the hardest to build, since it means working with an ads API and matching each ad to a person. It is the problem SQWAD was built around: every Meta ad traced back to the creator whose content made the sale.
+![SQWAD's revenue attribution page: each Meta ad traced to the creator and video behind it.](/shots/sqwad-creator-revenue-attribution.jpg)
 ### Payouts
 Paying dozens of people involves approvals, records, failed payments, and tax paperwork that depends on where you and your creators are. Refund-based rewards add their own cases: partial refunds, returned items, a post deleted after the refund.
 > Before choosing any tool or build, write your reward rule as one sentence with its exceptions. "Refund the order after one approved video, unless the item was returned" tells you quickly whether a standard tool can do it.
@@ -2081,6 +2234,16 @@ Custom portals fail when they try to rebuild a whole platform instead of solving
 - Skipping the creator's view: creators who cannot see their status go back to messaging you, and the portal has saved nothing
 - Weak access control: creators able to see each other's details, or admin pages reachable by anyone with the link
 The builds that work start narrow. The first version handles one flow end to end for both sides: the creator signs up, does what the program asks and sees their status, and the team sees everyone in one admin view. Everything else is added once that loop is in use.
+
+## Does the software need to handle disclosure rules?
+Yes, at least by reminding creators, because in the US a creator who gets free product or payment from a brand is expected to disclose it.
+The Federal Trade Commission's guide for influencers says a "material connection" to a brand, which includes payment, free or discounted products and personal ties, must be disclosed clearly and where people will notice it. Gifted gear counts, so a refundable gifting program counts too.
+Whatever you buy or build, the program should make this easy to get right:
+- Put the disclosure rule in the brief creators read before they post
+- Add a checkbox in the content submission step confirming the post is disclosed
+- Have the review step check for it before a post is approved or a refund or payout is released
+- Keep the brief version and approval record with each post, so you can show what you asked for
+This is general information, not legal advice. Brands with large programs or creators in other countries should check the rules that apply to them.
 
 ## The bottom line
 Use spreadsheets for the first handful of creators, buy software when tracking starts to slip, and build custom only for the parts of your program that tools cannot do, usually an unusual reward rule or a deep integration. If you are a Shopify brand with a standard program, a tool like SQWAD will get you live faster than any build. If your rules are your own, a focused portal is worth it.`,
@@ -2108,6 +2271,12 @@ Use spreadsheets for the first handful of creators, buy software when tracking s
       'Invite the developer to each service with their own login, and never send keys in a chat.',
       'Keep every account and the repository in your own name, with the developer as a guest.',
       'You can keep using the AI tool afterward if both of you work through the same GitHub repository.',
+    ],
+    sources: [
+      { title: 'Inviting collaborators to a personal repository', publisher: 'GitHub Docs', url: 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository' },
+      { title: 'Sync your Lovable project with GitHub', publisher: 'Lovable', url: 'https://docs.lovable.dev/integrations/github' },
+      { title: 'Row Level Security', publisher: 'Supabase', url: 'https://supabase.com/docs/guides/database/postgres/row-level-security' },
+      { title: 'Environment variables', publisher: 'Vercel', url: 'https://vercel.com/docs/environment-variables' },
     ],
     body: `A good handoff can turn a week of investigation into a day of fixes. When I take over an app built with Lovable, Bolt, v0, Replit or Cursor, the code is rarely the slow part. The slow part is finding out where the code lives, which problems matter, and how to get into the database.
 
