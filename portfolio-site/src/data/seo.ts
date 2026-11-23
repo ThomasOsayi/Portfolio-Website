@@ -6,6 +6,7 @@ import { morePosts } from './posts-more';
 import { postsBatch2 } from './posts-batch2';
 import { postsBatch3 } from './posts-batch3';
 import { postsBatch4 } from './posts-batch4';
+import { genPosts } from './gen';
 
 export const SITE = 'https://thomasosayi.com';
 
@@ -529,6 +530,8 @@ export interface Post {
   // 3-5 one-sentence takeaways shown in a box above the article
   takeaways?: string[];
   faqs?: { q: string; a: string }[];
+  // outside references shown in a "Sources" list at the end of the article
+  sources?: { title: string; publisher: string; url: string }[];
   body: string;
 }
 
@@ -759,7 +762,7 @@ If you want to change layouts yourself every week, WordPress is reasonable. If y
   },
 ];
 
-export const posts: Post[] = [...postsBatch4, ...postsBatch3, ...postsBatch2, ...morePosts, ...basePosts];
+export const posts: Post[] = [...genPosts, ...postsBatch4, ...postsBatch3, ...postsBatch2, ...morePosts, ...basePosts];
 
 export const serviceBySlug = (s: string) => services.find((x) => x.slug === s);
 export const caseBySlug = (s: string) => caseStudies.find((x) => x.slug === s);
