@@ -154,3 +154,104 @@ Indexing requests (URL Inspection, all accepted "Indexing requested")
 Deploy: commit 9d2704a live; all 5 URLs return 200; new posts appear in sitemap.xml and llms.txt; Firebase title and Lovable guide confirmed in live HTML.
 Mention action suggested to Thomas: answer the Product Hunt vibecoding discussion "has anyone found a good solution for keeping vibe coded apps stable after launch" (producthunt.com/p/vibecoding/...) with the fix vs refactor vs rebuild framing, linking /blog/fix-or-rebuild-ai-built-app.
 Next run: check whether the Firebase retitle lifts CTR on "firebase best practices" (baseline 282 imp, pos 6.2, 0 clicks); Wednesday 11-25 runs AI panel B.
+
+---
+
+## 2026-11-22 (Sunday, manual request from Thomas: "100 more pages" + deepen existing content with screenshots)
+
+Thomas asked for 100 new pages now (warned about scaled-content risk with 65 pages "crawled, not indexed"; he chose 100 now).
+
+Infrastructure
+- 92 project screenshots captured with Playwright from the public sites (SQWAD, Guardian MindCare public pages, TheHoopGang portal, LACEUP, VenCare, Pacific Harbor, SCOPRO, Serenity, New York Nook, Artistic Printing, FieldOps sign-in, Astiglow) into public/shots/ (1600x1000 JPEG; mobile shots on a neutral canvas). Excluded: therapist profiles, testimonials with names/faces, creator photos and handles.
+- Article template: `sources` field and Sources list (also emitted as schema citation), About the author box (LMU CS student, SQWAD founder), mid-article CTA box linking /start and the service page. Removed the old one-line byline.
+- `guide` now rendered on fix and industry pages (from 11-20).
+
+Published 100 new pages (all live 200, in sitemap.xml and llms.txt; GSC sitemap read Nov 22, 187 discovered)
+- 75 blog posts (25 per service, 1,750 to 2,200 words, each with sources; many comparisons). Slugs:
+  - /blog/how-much-does-a-restaurant-website-cost
+  - /blog/restaurant-online-ordering-without-third-party-fees
+  - /blog/toast-vs-squarespace-vs-custom-restaurant-website
+  - /blog/google-business-profile-vs-website
+  - /blog/new-business-website-launch-checklist
+  - /blog/how-to-choose-a-domain-name-for-a-small-business
+  - /blog/google-workspace-vs-microsoft-365-business-email
+  - /blog/connect-godaddy-domain-to-vercel
+  - /blog/why-is-my-website-slow
+  - /blog/best-hosting-for-small-business-website
+  - /blog/how-to-write-website-copy-for-a-small-business
+  - /blog/real-photos-vs-stock-photos-on-a-business-website
+  - /blog/quote-request-form-for-service-businesses
+  - /blog/how-to-get-more-google-reviews
+  - /blog/website-redesign-cost
+  - /blog/are-website-contact-forms-hipaa-compliant
+  - /blog/bilingual-website-english-spanish
+  - /blog/track-website-leads-with-google-analytics-4
+  - /blog/headless-cms-for-small-business
+  - /blog/schema-markup-for-small-business
+  - /blog/take-deposits-online-to-reduce-no-shows
+  - /blog/sell-gift-cards-on-your-website
+  - /blog/how-to-launch-a-clothing-brand-website
+  - /blog/headless-shopify-vs-shopify-theme
+  - /blog/website-privacy-policy-and-cookie-banner
+  - /blog/supabase-auth-redirect-url-not-working
+  - /blog/environment-variables-undefined-on-vercel
+  - /blog/fix-cors-error-nextjs-api-route
+  - /blog/firestore-missing-or-insufficient-permissions
+  - /blog/firebase-auth-unauthorized-domain
+  - /blog/lovable-credits-running-out
+  - /blog/export-bolt-project-to-github
+  - /blog/cursor-vs-claude-code-vs-windsurf
+  - /blog/api-key-exposed-in-frontend
+  - /blog/stripe-test-mode-to-live-mode-checklist
+  - /blog/fix-404-on-refresh-react-vite-app
+  - /blog/resend-vs-sendgrid-vs-postmark
+  - /blog/supabase-edge-function-errors
+  - /blog/move-replit-app-to-vercel
+  - /blog/review-ai-generated-code-checklist
+  - /blog/add-tests-to-ai-generated-app
+  - /blog/speed-up-a-slow-ai-built-app
+  - /blog/change-supabase-database-safely
+  - /blog/vercel-function-timeout
+  - /blog/nextjs-image-hostname-not-configured
+  - /blog/monthly-cost-to-run-an-ai-built-app
+  - /blog/is-lovable-bad-for-seo
+  - /blog/add-an-admin-dashboard-to-a-lovable-app
+  - /blog/backup-supabase-or-firebase-database
+  - /blog/undo-broken-ai-changes-with-git
+  - /blog/how-to-scope-an-mvp
+  - /blog/multi-tenant-saas-with-firestore
+  - /blog/web-app-vs-mobile-app-for-mvp
+  - /blog/pwa-vs-native-app
+  - /blog/how-to-build-a-marketplace-mvp
+  - /blog/build-a-creator-affiliate-tracking-system
+  - /blog/saas-pricing-models-flat-tiered-usage
+  - /blog/saas-onboarding-flow
+  - /blog/how-to-build-a-client-portal
+  - /blog/stripe-connect-marketplace-payouts
+  - /blog/saas-admin-dashboard-features
+  - /blog/validate-a-saas-idea-before-building
+  - /blog/bubble-vs-custom-code-for-mvp
+  - /blog/technical-cofounder-vs-freelancer-vs-agency
+  - /blog/best-tech-stack-for-saas-mvp
+  - /blog/meta-ads-attribution-for-creator-content
+  - /blog/shopify-app-vs-standalone-saas
+  - /blog/outlook-calendar-integration-in-a-web-app
+  - /blog/realtime-firestore-listeners-vs-websockets
+  - /blog/product-analytics-for-an-mvp
+  - /blog/how-long-does-it-take-to-build-an-mvp
+  - /blog/internal-dashboard-for-an-ecommerce-brand
+  - /blog/connect-claude-to-your-business-data-with-mcp
+  - /blog/hipaa-basics-for-a-health-app-mvp
+  - /blog/add-multiple-languages-to-a-nextjs-app
+- 13 industry pages with guides: plumbers-and-hvac, roofers-and-general-contractors, cleaning-services, landscapers-and-lawn-care, moving-companies, pet-groomers-and-veterinary-clinics, food-trucks, bakeries-and-cafes, wedding-planners-and-event-pros, insurance-agencies, home-care-agencies, tattoo-studios, churches-and-faith-organizations
+- 6 fix pages with guides: firebase-studio, google-ai-studio, github-copilot, rork, emergent, codex (Firebase Studio framed around its 2027 shutdown)
+- 6 case studies: pacific-harbor-medical-group, scopro-creators, serenity-institute, fieldops, nom, thg-brain
+
+Deepened existing content
+- 8 existing case studies expanded from ~760 to ~890 words up to 1,400 to 1,700 words with 5 to 6 screenshots each.
+- 37 existing posts: screenshots swapped/added, sources added to all, new sections where under 2,000 words (updated set to 2026-11-22 only where content changed).
+- Fact fixes: SQWAD "$500K" now attributed to SQWAD's published TheHoopGang case study everywhere; Next.js 16 proxy naming; Next.js redirects send 308; Lovable TanStack Start (from May 13 2026) noted.
+- Open questions for Thomas: LACEUP checkout (case study says demo flow; live site copy mentions Stripe/Apple Pay); TheHoopGang gear framing (refundable gifting vs free gear on the live page).
+
+Indexing requests (accepted): /blog/how-much-does-a-restaurant-website-cost, /blog/cursor-vs-claude-code-vs-windsurf, /blog/firestore-missing-or-insufficient-permissions, /blog/how-to-scope-an-mvp, /blog/is-lovable-bad-for-seo, /websites-for/plumbers-and-hvac, /projects/sqwad.
+Next indexing priorities: /fix/firebase-studio, /projects/pacific-harbor-medical-group, /blog/google-business-profile-vs-website, /blog/best-tech-stack-for-saas-mvp.
