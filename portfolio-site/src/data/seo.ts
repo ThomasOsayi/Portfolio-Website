@@ -7,6 +7,8 @@ import { postsBatch2 } from './posts-batch2';
 import { postsBatch3 } from './posts-batch3';
 import { postsBatch4 } from './posts-batch4';
 import { genPosts } from './gen';
+import { caseStudiesGenA } from './gen/cases-a';
+import { caseStudiesGenB } from './gen/cases-b';
 
 export const SITE = 'https://thomasosayi.com';
 
@@ -130,7 +132,7 @@ export interface CaseStudy {
   body: string;
 }
 
-export const caseStudies: CaseStudy[] = [
+const baseCaseStudies: CaseStudy[] = [
   {
     slug: 'sqwad',
     name: 'SQWAD',
@@ -761,6 +763,8 @@ A careful move should hold its rankings, and the faster pages give them room to 
 If you want to change layouts yourself every week, WordPress is reasonable. If you want a fast, custom site that ranks well and does not need babysitting, Next.js is the better fit. For a small business whose site has one clear job, that usually means Next.js, with a simple way to edit the parts that change.`,
   },
 ];
+
+export const caseStudies: CaseStudy[] = [...baseCaseStudies, ...caseStudiesGenA, ...caseStudiesGenB];
 
 export const posts: Post[] = [...genPosts, ...postsBatch4, ...postsBatch3, ...postsBatch2, ...morePosts, ...basePosts];
 
