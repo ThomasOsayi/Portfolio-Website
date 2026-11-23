@@ -328,3 +328,5 @@ Verify: tsc, eslint, next build pass; check.mjs ok on all 4 new files; no duplic
 Commit author: last commit author was "Claude", so commits use ThomasOsayi (most recent human author) per the never-commit-as-Claude rule.
 
 Expansion progress: 17/300
+Deploy: commit 2fdc9b4 live; all 17 URLs return 200 and appear in sitemap.xml (lastmod 2026-11-23) and llms.txt.
+Mention action suggested to Thomas: LinkedIn post on the Lemon Squeezy shutdown (stops processing 2027-03-31) with a 3-line Stripe vs Paddle vs Stripe Managed Payments take, linking /blog/stripe-vs-paddle-vs-lemon-squeezy.
