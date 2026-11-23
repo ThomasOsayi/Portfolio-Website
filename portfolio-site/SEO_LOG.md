@@ -42,9 +42,23 @@ Posts (slug: primary keyword)
 - nextjs-vs-wordpress-small-business: Next.js vs WordPress
 - fix-or-rebuild-ai-built-app: fix or rebuild vibe coded app
 - what-pages-does-a-small-business-website-need: what pages does a small business website need
+- framer-vs-webflow-vs-custom-website: Framer vs Webflow
+- square-vs-stripe-vs-paypal-small-business-website: Square vs Stripe vs PayPal
+- who-owns-my-website: who owns my website
+- edit-website-yourself-after-it-is-built: update my own website
+- lovable-vs-cursor: Lovable vs Cursor
+- supabase-storage-upload-not-working: Supabase storage upload not working
+- too-many-redirects-nextjs: too many redirects Next.js
+- too-many-database-connections-serverless: too many connections Postgres serverless
+- clerk-vs-supabase-auth-vs-firebase-auth: Clerk vs Supabase Auth
+- stripe-vs-paddle-vs-lemon-squeezy: Stripe vs Paddle vs Lemon Squeezy
+- vercel-vs-railway-vs-render-for-saas: Vercel vs Railway
+- add-ai-features-to-a-saas-app: add AI to my SaaS app
+- cron-jobs-and-background-jobs-nextjs: cron jobs Next.js Vercel
+- (2026-11-22 batch: see the slug list under 2026-11-22; each slug's wording is its primary keyword)
 
-Industry pages (/websites-for/): restaurants, therapy-practices, medical-clinics, salons-and-spas, startups, local-service-businesses, dental-practices, law-firms, real-estate-agents, gyms-and-fitness-studios, ecommerce-brands, print-shops-and-manufacturers, nonprofits, coaches-and-consultants, med-spas, physical-therapy-and-chiropractic, event-venues, car-washes-and-auto-detailing, accountants-and-bookkeepers, tutoring-and-education, photographers, architects-and-interior-designers. None has a `guide` yet (Friday backlog).
-Tool fix pages (/fix/): lovable, bolt, v0, replit, cursor, windsurf, claude-code, base44, chatgpt. Guides done: lovable (2026-11-20). Others still need a `guide` (Friday backlog).
+Industry pages (/websites-for/): auto-repair-shops, property-management-companies (11-23), restaurants, therapy-practices, medical-clinics, salons-and-spas, startups, local-service-businesses, dental-practices, law-firms, real-estate-agents, gyms-and-fitness-studios, ecommerce-brands, print-shops-and-manufacturers, nonprofits, coaches-and-consultants, med-spas, physical-therapy-and-chiropractic, event-venues, car-washes-and-auto-detailing, accountants-and-bookkeepers, tutoring-and-education, photographers, architects-and-interior-designers. None has a `guide` yet (Friday backlog).
+Tool fix pages (/fix/): figma-make, kiro (11-23), lovable, bolt, v0, replit, cursor, windsurf, claude-code, base44, chatgpt. Guides done: lovable (2026-11-20). Others still need a `guide` (Friday backlog).
 `guide` field: was not implemented in code before 2026-11-20; now on ToolFix and Industry types and rendered on /fix/[slug] and /websites-for/[slug] (before Questions). Service pages do not render a guide yet.
 Last new industry/tool page added: before 2026-11-19 (batch of Nov 17).
 
@@ -255,3 +269,62 @@ Deepened existing content
 
 Indexing requests (accepted): /blog/how-much-does-a-restaurant-website-cost, /blog/cursor-vs-claude-code-vs-windsurf, /blog/firestore-missing-or-insufficient-permissions, /blog/how-to-scope-an-mvp, /blog/is-lovable-bad-for-seo, /websites-for/plumbers-and-hvac, /projects/sqwad.
 Next indexing priorities: /fix/firebase-studio, /projects/pacific-harbor-medical-group, /blog/google-business-profile-vs-website, /blog/best-tech-stack-for-saas-mvp.
+
+---
+
+## Expansion plan (requested 2026-11-22): 300 new pages, about 17 per run, 2026-11-23 to about 2027-01-04
+
+### Topic backlog (one primary keyword each; check against the list above before writing)
+Wed 2026-11-25 (planned)
+- Websites: wordpress-vs-squarespace-for-small-business ("WordPress vs Squarespace", comparison); should-my-business-website-have-a-blog; service-area-business-website-without-an-address; google-ads-landing-page-for-local-business; add-google-reviews-to-your-website
+- Fix: bolt-vs-replit (comparison); javascript-heap-out-of-memory-nextjs-build; supabase-confirmation-email-not-sending; firebase-app-hosting-vs-vercel-for-nextjs (comparison)
+- SaaS: neon-vs-supabase-postgres (comparison); free-trial-vs-freemium-saas; team-accounts-and-invites-in-saas; audit-logs-for-saas
+- Industry: florists, daycare-and-childcare-centers
+- Fix pages: anything-create-xyz, gemini-cli (verify demand and current product facts first)
+Fri 2026-11-27 candidates
+- Websites: website-terms-and-conditions-small-business (not legal advice), how-to-add-a-menu-to-a-restaurant-website-without-pdf, website-for-a-side-business, squarespace-vs-shopify-for-small-store (comparison)
+- Fix: github-actions-failing-after-ai-changes, nextjs-server-actions-not-working, react-native-expo-build-failed (NOM is a real example), v0-vs-lovable-for-designers? (check overlap with lovable-vs-bolt-vs-v0 first; skip if it competes)
+- SaaS: saas-mvp-feature-flags, sendgrid-to-resend-migration? (check overlap with resend-vs-sendgrid-vs-postmark; skip if it competes), b2b-saas-sso-saml-for-mvp, usage-based-billing-with-stripe-meters, postgres-vs-firestore-for-saas (comparison)
+- Industry ideas: breweries-and-wineries, funeral-homes, optometrists, music-schools (check overlap with tutoring-and-education), senior-living
+
+## 2026-11-23 (Monday)
+
+Search Console (last 28 days, data through 11-21)
+- Clicks 1 (prev 0), impressions 2,720 (prev 373), CTR 0%, avg position 10.2 (prev 12.5). 98 queries, 35 pages.
+- Top query "firebase best practices" 2,343 imp, 0 clicks (prev 282). Page /blog/firebase-security-rules-checklist 2,392 imp. The 11-20 retitle has not produced clicks yet; keep watching CTR there (Friday optimization candidate).
+- MVP cost cluster ("how much does it cost to build an mvp" 15, "how much does an mvp cost" 12, "cost to build an mvp" 9, "mvp pricing" 9, "how much does mvp cost" 8): /blog/how-much-does-a-saas-mvp-cost 88 imp.
+- Other pages: website-maintenance-cost-small-business 50, how-to-get-your-business-mentioned-in-ai-search 44, vercel-build-failed-nextjs-fixes 33, online-booking-for-small-business-websites 23, landing-page-vs-website 18, vibe-coding-vs-hiring-a-developer 12. Homepage got the 1 click. New queries: "hire vibe coding developers" 9, "custom booking website" 7, "website hosting and maintenance cost" 8.
+- Generative AI report: link present but not openable from the page this run; last run it mirrored web totals. Not logged.
+- Sitemaps: /sitemap.xml Success, last read Nov 22, 187 discovered. No resubmit.
+- Page indexing: 1 indexed, 65 "Crawled - currently not indexed" (unchanged since 11-20; report lags). Manual actions: none. Security issues: none.
+- indexing-ledger.json does not exist yet in seo-brief/.
+
+Throttle decision: not-indexed count did not grow (65 to 65) while 100 pages were published on 11-22, so no throttle. Full batch of 17.
+
+Published (17 new pages, all with verified sources)
+- /blog/framer-vs-webflow-vs-custom-website (2,084 words, websites) "Framer vs Webflow", comparison
+- /blog/square-vs-stripe-vs-paypal-small-business-website (1,927, websites) "Square vs Stripe vs PayPal", comparison
+- /blog/who-owns-my-website (1,842, websites) "who owns my website"
+- /blog/edit-website-yourself-after-it-is-built (1,834, websites) "update my own website"
+- /blog/lovable-vs-cursor (2,183, fix) "Lovable vs Cursor", comparison (Cursor moved to new plans: Free, Plus $8, Premium $30, Super $100, Ultra $200)
+- /blog/supabase-storage-upload-not-working (2,195, fix)
+- /blog/too-many-redirects-nextjs (2,113, fix)
+- /blog/too-many-database-connections-serverless (1,914, fix)
+- /blog/clerk-vs-supabase-auth-vs-firebase-auth (2,184, saas) "Clerk vs Supabase Auth", comparison
+- /blog/stripe-vs-paddle-vs-lemon-squeezy (1,988, saas) comparison; notes Lemon Squeezy shutdown (stops processing 2027-03-31, announced 2026-11-16)
+- /blog/vercel-vs-railway-vs-render-for-saas (1,839, saas) "Vercel vs Railway", comparison
+- /blog/add-ai-features-to-a-saas-app (2,113, saas)
+- /blog/cron-jobs-and-background-jobs-nextjs (2,086, saas); Vercel Cron Jobs now "legacy", Vercel Schedules in beta
+- /websites-for/auto-repair-shops (guide 1,306 words, 6 FAQs)
+- /websites-for/property-management-companies (guide 1,187, 6 FAQs, Fair Housing general info + not legal advice)
+- /fix/figma-make (guide 1,345, 6 FAQs)
+- /fix/kiro (guide 1,221, 6 FAQs)
+Mix: 13 posts (4 websites, 4 fix, 5 SaaS; 6 comparisons), 2 industry, 2 fix pages.
+
+Refresh: skipped, no post is older than 30 days yet (oldest 2026-11-16; first eligible about 2026-12-17).
+Optimization pass: Monday, skipped. AI visibility: Monday, skipped (Wed 11-25 runs panel B).
+Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallows only /admin and /api/). No AI crawler blocked.
+Verify: tsc, eslint, next build pass; check.mjs ok on all 4 new files; no duplicate slugs; no dashes.
+Commit author: last commit author was "Claude", so commits use ThomasOsayi (most recent human author) per the never-commit-as-Claude rule.
+
+Expansion progress: 17/300

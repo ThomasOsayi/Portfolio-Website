@@ -1,4 +1,4 @@
-// Generated article batches (Nov 22 2026).
+// Generated article batches (Nov 2026). Regenerated each run: imports every gen/posts-*.ts.
 import type { Post } from '../seo';
 import { postsGen01 } from './posts-01';
 import { postsGen02 } from './posts-02';
@@ -15,5 +15,8 @@ import { postsGen12 } from './posts-12';
 import { postsGen13 } from './posts-13';
 import { postsGen14 } from './posts-14';
 import { postsGen15 } from './posts-15';
+import { postsGen16 } from './posts-16';
+import { postsGen17 } from './posts-17';
+import { postsGen18 } from './posts-18';
 
-export const genPosts: Post[] = [...postsGen01, ...postsGen02, ...postsGen03, ...postsGen04, ...postsGen05, ...postsGen06, ...postsGen07, ...postsGen08, ...postsGen09, ...postsGen10, ...postsGen11, ...postsGen12, ...postsGen13, ...postsGen14, ...postsGen15];
+export const genPosts: Post[] = [...postsGen01, ...postsGen02, ...postsGen03, ...postsGen04, ...postsGen05, ...postsGen06, ...postsGen07, ...postsGen08, ...postsGen09, ...postsGen10, ...postsGen11, ...postsGen12, ...postsGen13, ...postsGen14, ...postsGen15, ...postsGen16, ...postsGen17, ...postsGen18];
