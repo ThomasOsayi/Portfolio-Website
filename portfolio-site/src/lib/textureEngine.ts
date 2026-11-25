@@ -472,7 +472,11 @@
     build(word) {
       const { gl, mat, stage, canvas } = this;
       const rect = stage.getBoundingClientRect();
-      const dpr = Math.min(devicePixelRatio || 1, this.opts.maxDpr || 2);
+      // opts.zoom: re-render sharper while the page is pinch-zoomed (visual viewport scale)
+      const zoom = Math.min(Math.max(this.opts.zoom || 1, 1), 3);
+      // keep the canvas under ~6 MP and 4096 px a side: iOS Safari blanks canvases past its memory limit
+      const cssW = Math.max(1, rect.width), cssH = Math.max(1, rect.height);
+      const dpr = Math.min(Math.min(devicePixelRatio || 1, this.opts.maxDpr || 2) * zoom, 4096 / cssW, 4096 / cssH, Math.sqrt(6e6 / (cssW * cssH)));
       const w = Math.max(2, Math.round(rect.width * dpr)), h = Math.max(2, Math.round(rect.height * dpr));
       canvas.width = w; canvas.height = h;
       this.w = w; this.h = h; this.dpr = dpr;
@@ -525,7 +529,7 @@
 
       if (mat.kind === 0) {
         let area = 0; for (let i = 0; i < cov.length; i++) area += cov[i]; area *= q * q;
-        const cap = Math.round((rect.width < 700 ? 60000 : 160000) * (this.opts.strandScale || 1));
+        const cap = Math.round((rect.width < 700 ? 60000 : 160000) * (this.opts.strandScale || 1) * Math.min(zoom, 2));
         const count = Math.min(cap, Math.round(area / mat.density));
         const data = new Float32Array(count * 7), baseLen = size * mat.len;
         const bx0 = Math.max(0, Math.floor(x - m.actualBoundingBoxLeft)), bx1 = Math.min(w - 1, Math.ceil(x + m.actualBoundingBoxRight));

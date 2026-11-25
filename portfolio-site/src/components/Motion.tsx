@@ -188,6 +188,22 @@ export default function Motion() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const withQ = (o: any) => ({ ...o, baseDpr: o.maxDpr ?? 1.25, baseStrands: o.strandScale ?? 1, maxDpr: (o.maxDpr ?? 1.25) * LEVELS[qLevel][0], strandScale: (o.strandScale ?? 1) * LEVELS[qLevel][1] });
 
+    // pinch-zoom on touch screens: re-render the hero at the zoomed resolution once the gesture settles
+    const pinch = () => (window.visualViewport ? Math.min(Math.max(window.visualViewport.scale, 1), 3) : 1);
+    if (window.visualViewport) {
+      let zt = 0, lastZ = 1;
+      const onZoom = () => {
+        clearTimeout(zt);
+        zt = window.setTimeout(() => {
+          const z = pinch();
+          if (!hero || Math.abs(z - lastZ) < 0.2) return;
+          lastZ = z; hero.opts.zoom = z; hero.build('THOMAS');
+        }, 280);
+      };
+      window.visualViewport.addEventListener('resize', onZoom);
+      cleanups.push(() => { clearTimeout(zt); window.visualViewport?.removeEventListener('resize', onZoom); });
+    }
+
     // hero material switcher
     const stage = $('.hero-stage')!;
     const matName = $('#mat-name');
@@ -208,7 +224,7 @@ export default function Motion() {
       }
       try {
         // capped resolution and strand count keep the hero at a steady frame rate
-        hero = new engine.TextureWord(stage, key, withQ({ bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44, maxDpr: 1.25, strandScale: innerWidth < 700 ? 0.6 : 0.55 }));
+        hero = new engine.TextureWord(stage, key, withQ({ bg: HERO_BG, fitW: fitW(), fitH: innerWidth < 700 ? 0.5 : 0.6, cy: 0.44, maxDpr: innerWidth < 700 ? 3 : 1.25, strandScale: innerWidth < 700 ? 1.5 : 0.55, zoom: pinch() }));
         hero.word = 'THOMAS';
         hero.build('THOMAS');
         engine.instances.push(hero);
