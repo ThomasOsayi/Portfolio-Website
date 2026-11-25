@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
     url: 'https://thomasosayi.com',
-    images: [{ url: '/og-port-image.png', width: 1200, height: 630, alt: 'Thomas Osayi, Full-Stack Developer and Entrepreneur' }],
+    images: [{ url: '/og-thomas-osayi.jpg', width: 1200, height: 630, alt: 'THOMAS in cobalt fur. Thomas Osayi, Next.js and full-stack developer and entrepreneur in Los Angeles' }],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { card: 'summary_large_image', images: ['/og-thomas-osayi.jpg'] },
 };
 
 const SITE = 'https://thomasosayi.com';
@@ -46,7 +46,7 @@ const jsonLd = {
       '@id': `${SITE}/#person`,
       name: 'Thomas Osayi',
       url: SITE,
-      image: `${SITE}/og-port-image.png`,
+      image: `${SITE}/og-thomas-osayi.jpg`,
       jobTitle: 'Full-Stack Developer',
       description: 'Full-stack developer and founder of SQWAD, building websites, SaaS products and web apps.',
       alumniOf: { '@type': 'CollegeOrUniversity', name: 'Loyola Marymount University' },
@@ -59,7 +59,7 @@ const jsonLd = {
       '@id': `${SITE}/#business`,
       name: 'Thomas Osayi Web Development',
       url: SITE,
-      image: `${SITE}/og-port-image.png`,
+      image: `${SITE}/og-thomas-osayi.jpg`,
       founder: { '@id': `${SITE}/#person` },
       priceRange: '$$',
       areaServed: [{ '@type': 'City', name: 'Los Angeles' }, { '@type': 'Country', name: 'United States' }],

@@ -12,7 +12,7 @@ export const generateStaticParams = () => toolFixes.map((t) => ({ slug: t.slug }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const t = toolBySlug((await params).slug);
   if (!t) return {};
-  return { title: t.metaTitle, description: t.description, alternates: { canonical: `/fix/${t.slug}` }, openGraph: { title: t.metaTitle, description: t.description, url: `${SITE}/fix/${t.slug}`, images: ['/og-port-image.png'] } };
+  return { title: t.metaTitle, description: t.description, alternates: { canonical: `/fix/${t.slug}` }, openGraph: { title: t.metaTitle, description: t.description, url: `${SITE}/fix/${t.slug}`, images: ['/og-thomas-osayi.jpg'] } };
 }
 
 export default async function FixPage({ params }: { params: Promise<{ slug: string }> }) {

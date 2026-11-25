@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Website Cost Calculator 2026 | How Much Does a Website or App Cost? | Thomas Osayi',
   description: 'Free website and app cost calculator. Pick the type of site, pages and features to get an instant price and timeline estimate for a custom Next.js build.',
   alternates: { canonical: '/tools/website-cost-calculator' },
-  openGraph: { title: 'Website Cost Calculator', description: 'Instant price and timeline estimate for a custom website, web app or SaaS MVP.', url: `${SITE}/tools/website-cost-calculator`, images: ['/og-port-image.png'] },
+  openGraph: { title: 'Website Cost Calculator', description: 'Instant price and timeline estimate for a custom website, web app or SaaS MVP.', url: `${SITE}/tools/website-cost-calculator`, images: ['/og-thomas-osayi.jpg'] },
 };
 
 const faqs = [

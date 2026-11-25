@@ -12,7 +12,7 @@ export const generateStaticParams = () => industries.map((i) => ({ slug: i.slug 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const i = industryBySlug((await params).slug);
   if (!i) return {};
-  return { title: i.metaTitle, description: i.description, alternates: { canonical: `/websites-for/${i.slug}` }, openGraph: { title: i.metaTitle, description: i.description, url: `${SITE}/websites-for/${i.slug}`, images: ['/og-port-image.png'] } };
+  return { title: i.metaTitle, description: i.description, alternates: { canonical: `/websites-for/${i.slug}` }, openGraph: { title: i.metaTitle, description: i.description, url: `${SITE}/websites-for/${i.slug}`, images: ['/og-thomas-osayi.jpg'] } };
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {

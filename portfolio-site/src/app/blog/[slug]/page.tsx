@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: p.description,
     keywords: p.keywords,
     alternates: { canonical: `/blog/${p.slug}` },
-    openGraph: { type: 'article', title: p.title, description: p.description, url: `${SITE}/blog/${p.slug}`, publishedTime: p.date, modifiedTime: p.updated ?? p.date, images: ['/og-port-image.png'] },
+    openGraph: { type: 'article', title: p.title, description: p.description, url: `${SITE}/blog/${p.slug}`, publishedTime: p.date, modifiedTime: p.updated ?? p.date, images: ['/og-thomas-osayi.jpg'] },
   };
 }
 
@@ -36,7 +36,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <Shell crumbs={[{ href: '/blog', label: 'Writing' }, { href: `/blog/${p.slug}`, label: p.title }]}>
       {p.faqs?.length ? <JsonLd data={faqLd(p.faqs)} /> : null}
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', ...(p.shortAnswer ? { abstract: p.shortAnswer } : {}), headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, ...(p.sources?.length ? { citation: p.sources.map((x) => ({ '@type': 'CreativeWork', name: x.title, url: x.url, publisher: x.publisher })) } : {}), publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-port-image.png`, keywords: p.keywords.join(', ') }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BlogPosting', ...(p.shortAnswer ? { abstract: p.shortAnswer } : {}), headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, url: `${SITE}/blog/${p.slug}`, author: { '@id': `${SITE}/#person` }, ...(p.sources?.length ? { citation: p.sources.map((x) => ({ '@type': 'CreativeWork', name: x.title, url: x.url, publisher: x.publisher })) } : {}), publisher: { '@id': `${SITE}/#person` }, image: `${SITE}/og-thomas-osayi.jpg`, keywords: p.keywords.join(', ') }} />
       <p className="label">{fmt(p.date)}{p.updated && p.updated !== p.date ? ` · Updated ${fmt(p.updated)}` : ''} · {readingMinutes(p.body)} min read · Thomas Osayi</p>
       <h1 style={{ maxWidth: '22ch' }}>{p.title}</h1>
       <p className="lede">{p.description}</p>
