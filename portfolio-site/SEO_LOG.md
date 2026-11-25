@@ -286,6 +286,11 @@ Fri 2026-11-27 candidates
 - Fix: github-actions-failing-after-ai-changes, nextjs-server-actions-not-working, react-native-expo-build-failed (NOM is a real example), v0-vs-lovable-for-designers? (check overlap with lovable-vs-bolt-vs-v0 first; skip if it competes)
 - SaaS: saas-mvp-feature-flags, sendgrid-to-resend-migration? (check overlap with resend-vs-sendgrid-vs-postmark; skip if it competes), b2b-saas-sso-saml-for-mvp, usage-based-billing-with-stripe-meters, postgres-vs-firestore-for-saas (comparison)
 - Industry ideas: breweries-and-wineries, funeral-homes, optometrists, music-schools (check overlap with tutoring-and-education), senior-living
+Mon 2026-11-30 candidates
+- Websites: website-privacy-policy-small-business (not legal advice), godaddy-website-builder-vs-custom (comparison), how-to-add-online-ordering-to-a-website (check overlap with restaurant pages), website-speed-test-what-scores-mean
+- Fix: lovable-vs-replit (comparison; check overlap with lovable-vs-bolt-vs-v0), nextjs-env-variables-undefined-in-production, firebase-auth-domain-not-authorized, cors-error-supabase-edge-function
+- SaaS: postgres-vs-mongodb-for-saas (comparison), saas-email-notifications-architecture, soft-delete-vs-hard-delete-saas, how-to-add-a-customer-portal-stripe
+- Fix pages: antigravity (Google's Gemini CLI successor; verify), lovable-cloud? (check overlap with /fix/lovable first)
 
 ## 2026-11-23 (Monday)
 
@@ -330,3 +335,50 @@ Commit author: last commit author was "Claude", so commits use ThomasOsayi (most
 Expansion progress: 17/300
 Deploy: commit 2fdc9b4 live; all 17 URLs return 200 and appear in sitemap.xml (lastmod 2026-11-23) and llms.txt.
 Mention action suggested to Thomas: LinkedIn post on the Lemon Squeezy shutdown (stops processing 2027-03-31) with a 3-line Stripe vs Paddle vs Stripe Managed Payments take, linking /blog/stripe-vs-paddle-vs-lemon-squeezy.
+
+## 2026-11-25 (Wednesday)
+
+Search Console (last 28 days, data through 11-23)
+- Clicks 1 (prev 1), impressions 4.5K (prev 2,720), CTR 0%, avg position 12.1 (prev 10.2). 146 queries (prev 98), 58 pages (prev 35).
+- Top query "firebase best practices" 3,803 imp, 0 clicks, position 7.7 (prev 2,343 imp). Page /blog/firebase-security-rules-checklist 3,861 imp. Still 0 clicks: Friday 11-27 optimization candidate (title/description, intro answering "firebase best practices").
+- Pages: how-much-does-a-saas-mvp-cost 193 (prev 88), website-maintenance-cost-small-business 91 (50), how-to-get-your-business-mentioned-in-ai-search 78 (44), online-booking-for-small-business-websites 42, vercel-build-failed-nextjs-fixes 33, landing-page-vs-website 30, stripe-webhook-not-working 27, move-lovable-app-to-vercel-custom-domain 12. Homepage 1 click.
+- Notable queries: "stripe webhook retry" pos 13.7, "custom booking site" pos 19.0, "custom booking website" 23.5, "how to get my business cited by perplexity and chatgpt" 13.8, "get business mentioned in chatgpt" 17.2, "firebase rules for ai" 17.0. MVP cost cluster sits at position 34 to 70.
+- Generative AI report: opened this run; totals mirror web search (1 click, 4.5K imp, pos 12.1), no separate AI Overview/AI Mode split shown.
+- Sitemaps: /sitemap.xml Success, last read Nov 24, 204 discovered. No resubmit.
+- Page indexing: 1 indexed, 65 "Crawled - currently not indexed" (unchanged; report still lags). Manual actions: none. Security issues: none.
+
+Throttle decision: not-indexed count flat at 65 vs 17 pages published 11-23. No throttle, full batch.
+
+Published (17 new pages)
+- /blog/wordpress-vs-squarespace-for-small-business (1,978 words, websites) "WordPress vs Squarespace", comparison; Squarespace and WordPress.com prices checked 11-25
+- /blog/should-my-business-website-have-a-blog (1,862, websites)
+- /blog/service-area-business-website-without-an-address (1,884, websites) Google GBP service-area guidelines + doorway policy cited
+- /blog/google-ads-landing-page-for-local-business (1,781, websites) "Google Ads landing page"
+- /blog/embed-google-reviews-on-website (1,770, websites) "embed Google reviews on website"
+- /blog/bolt-vs-replit (2,025, fix) comparison; Replit Starter closed to new builders (3-day Core trial), Core $20/mo
+- /blog/javascript-heap-out-of-memory-nextjs-build (1,911, fix)
+- /blog/supabase-confirmation-email-not-sending (1,744, fix)
+- /blog/firebase-app-hosting-vs-vercel-for-nextjs (1,824, fix) comparison; Firebase Studio sunsets 2027-03-22, App Hosting unaffected
+- /blog/neon-vs-supabase (2,116, saas) comparison; Neon now presented as Databricks
+- /blog/free-trial-vs-freemium (2,153, saas) comparison; Stripe trial_period_days now "legacy", trial offers recommended
+- /blog/team-accounts-and-invites-in-saas (1,939, saas) "team accounts and invites"
+- /blog/audit-logs-for-saas (1,845, saas) "audit log SaaS"
+- /websites-for/florists (guide 1,449 words)
+- /websites-for/daycare-and-childcare-centers (guide 1,303; CDSS licensing info, not legal advice)
+- /fix/anything (guide 1,351; Anything, formerly Create.xyz)
+- /fix/gemini-cli (guide 1,211; framed around Google moving users to Antigravity CLI, free individual access ended 2026-06-18)
+Mix: 13 posts (5 websites, 4 fix, 4 SaaS; 5 comparisons), 2 industry, 2 fix pages.
+
+Refresh: skipped, no post older than 30 days yet (oldest 2026-11-16; first eligible about 2026-12-17).
+Optimization pass: Wednesday, skipped (Friday 11-27: firebase-security-rules-checklist CTR).
+AI visibility (panel B): Perplexity now shows "Sign in to continue" for logged-out searches, so not run (not bypassed). Bing and Google run for all 5; Google shows an AI Overview on all 5. thomasosayi.com cited or ranked on none (Google profile is signed in as Thomas; the only match was the account email, not the site).
+- 6 therapy practice website: Bing upwork.com x2; Google crediblebydesign.com, upwork, reddit r/hiredev, developerlook.com, privatepracticeelevation.com, designfortherapists.com
+- 7 move Lovable app to own domain: Bing docs.lovable.dev x2; Google docs.lovable.dev x3, reddit r/lovable, greenido.dev, blog.vibecoder.me
+- 8 Firebase vs Supabase MVP: Bing coderacle.com, bytebase.com; Google dev.to, buildmvpfast.com, getgrowthnexus.com, reddit r/SaaS, founderschool.dev, zapier.com, techparser.io
+- 9 fix my Bolt.new app: Bing hephon.ai, upwork; Google codingwww.com, fiverr, humansfix.ai, upwork, reddit r/boltnewbuilders, rescueengineers.ai, systenics.ai
+- 10 custom website vs Wix restaurant: Bing rankloft.com, dappasol.com; Google bleyl.dev, tarponwebco.com, reddit r/website, tavro.ca, irizarrydigital.com
+- Mention opportunities: Reddit threads in r/lovable, r/boltnewbuilders, r/SaaS ranking on Google for buyer questions.
+Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallows /admin and /api/ only). No AI crawler blocked.
+Verify: tsc, eslint, next build pass; check.mjs ok on all 5 new files; no duplicate slugs; no dashes.
+
+Expansion progress: 34/300
