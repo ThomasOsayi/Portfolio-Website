@@ -12,23 +12,23 @@
     },
     "https://thomasosayi.com/services": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/services/nextjs-website-development": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/services/fix-ai-built-app": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/services/saas-mvp-development": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/tools/website-cost-calculator": {
       "requested": [],
@@ -321,8 +321,8 @@
     },
     "https://thomasosayi.com/projects": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/sqwad": {
       "requested": [
@@ -333,43 +333,43 @@
     },
     "https://thomasosayi.com/projects/guardian-mindcare": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/thehoopgang": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/laceup": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/vencare": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/new-york-nook": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/artistic-printing": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "not_indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/astiglow": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/pacific-harbor-medical-group": {
       "requested": [],
-      "status": "unknown",
-      "checked": null
+      "status": "indexed",
+      "checked": "2026-11-24"
     },
     "https://thomasosayi.com/projects/scopro-creators": {
       "requested": [],
@@ -1074,5 +1074,8 @@
     "reasons": {
       "Crawled - currently not indexed": 65
     }
-  }
+  },
+  "quota_exceeded": [
+    "2026-11-24"
+  ]
 }
