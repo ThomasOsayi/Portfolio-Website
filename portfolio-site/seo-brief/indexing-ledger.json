@@ -1065,10 +1065,117 @@
       "requested": [],
       "status": "unknown",
       "checked": null
+    },
+    "https://thomasosayi.com/websites-for/florists": {
+      "requested": [],
+      "status": "unknown",
+      "checked": null
+    },
+    "https://thomasosayi.com/websites-for/daycare-and-childcare-centers": {
+      "requested": [],
+      "status": "unknown",
+      "checked": null
+    },
+    "https://thomasosayi.com/fix/anything": {
+      "requested": [],
+      "status": "unknown",
+      "checked": null
+    },
+    "https://thomasosayi.com/fix/gemini-cli": {
+      "requested": [],
+      "status": "unknown",
+      "checked": null
+    },
+    "https://thomasosayi.com/blog/wordpress-vs-squarespace-for-small-business": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/should-my-business-website-have-a-blog": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/service-area-business-website-without-an-address": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/google-ads-landing-page-for-local-business": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/embed-google-reviews-on-website": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/bolt-vs-replit": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/javascript-heap-out-of-memory-nextjs-build": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/supabase-confirmation-email-not-sending": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/firebase-app-hosting-vs-vercel-for-nextjs": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/neon-vs-supabase": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/free-trial-vs-freemium": {
+      "requested": [
+        "2026-11-25"
+      ],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/team-accounts-and-invites-in-saas": {
+      "requested": [],
+      "status": "not_indexed",
+      "checked": "2026-11-25"
+    },
+    "https://thomasosayi.com/blog/audit-logs-for-saas": {
+      "requested": [],
+      "status": "unknown",
+      "checked": null
     }
   },
   "report": {
-    "date": "2026-11-24",
+    "date": "2026-11-25",
     "indexed": 1,
     "not_indexed": 65,
     "reasons": {
@@ -1076,6 +1183,7 @@
     }
   },
   "quota_exceeded": [
-    "2026-11-24"
+    "2026-11-24",
+    "2026-11-25"
   ]
 }
