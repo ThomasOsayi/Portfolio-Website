@@ -575,11 +575,11 @@ A hydration error is a disagreement between two renders of the same component. F
   },
   {
     slug: 'firebase-security-rules-checklist',
-    title: 'Firebase best practices before launch: the security rules checklist',
-    description: 'Firebase best practices for an MVP or AI-built app going live: Firestore and Storage security rules, server-only actions, App Check, budget alerts and separate projects, with the exact patterns to search for.',
+    title: 'Firebase best practices: the 2026 pre-launch checklist (rules, costs, App Check)',
+    description: 'Firebase best practices in one checklist: locked-down Firestore and Storage rules, server-only admin actions, App Check, cost-safe queries, indexes and separate projects.',
     date: d,
-    updated: '2026-11-20',
-    keywords: ['Firebase best practices', 'Firebase security rules', 'Firestore rules checklist', 'Firebase test mode expired', 'secure Firebase app'],
+    updated: '2026-11-27',
+    keywords: ['Firebase best practices', 'Firestore best practices', 'Firebase security rules', 'Firestore rules checklist', 'Firebase test mode expired', 'secure Firebase app'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Before launch, make sure no Firestore or Storage rule allows reads or writes to everyone, every user-owned document checks request.auth.uid against the owner, writes validate the fields they accept, and admin actions run on the server with the Admin SDK instead of from the browser.',
     faqs: [
@@ -596,15 +596,29 @@ A hydration error is a disagreement between two renders of the same component. F
       'Users must never be able to write their own role, plan or balance, so list exactly which fields each update may change.',
       'Role changes, payments and anything across users belong on the server with the Admin SDK, not in browser code.',
       'Before launch, test every collection as the owner, as a second user and as a signed-out visitor.',
+      'Firestore bills per document read, so paginate with cursors instead of offsets and never listen to a whole collection.',
     ],
     sources: [
       { title: 'Avoid insecure rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/rules/insecure-rules' },
       { title: 'Firebase launch checklist', publisher: 'Firebase', url: 'https://firebase.google.com/support/guides/launch-checklist' },
       { title: 'Firebase App Check', publisher: 'Firebase', url: 'https://firebase.google.com/docs/app-check' },
+      { title: 'Best practices for Cloud Firestore', publisher: 'Firebase', url: 'https://firebase.google.com/docs/firestore/best-practices' },
+      { title: 'Understand Cloud Firestore billing', publisher: 'Firebase', url: 'https://firebase.google.com/docs/firestore/pricing' },
       { title: 'Control Access with Custom Claims and Security Rules', publisher: 'Firebase', url: 'https://firebase.google.com/docs/auth/admin/custom-claims' },
     ],
     body: `Firebase is safe when its rules are right. The config in your frontend is public, so the rules are the only thing standing between a stranger and your data.
 That sentence is the whole security model, and it is the part AI app builders most often leave unfinished. The app works, sign-in works, data saves and loads, and the rules file still says anyone may read and write everything. This checklist is the pass I do on every Firebase app before it goes live, written so you can do it yourself.
+## What are the most important Firebase best practices?
+The short version: lock down your rules, keep privileged work on the server, protect your bill, and separate your environments.
+Here is the whole checklist on one screen. Every item has its own section below.
+- Security rules: no open or test-mode rules, every document tied to its owner, users cannot write their own role, plan or balance
+- Storage rules: private files under a user ID path, with size and file type limits
+- Server-only work: role changes, payments, credits and cross-user writes run with the Admin SDK behind a verified ID token
+- Abuse protection: App Check enforced, API keys restricted, unused sign-in providers disabled
+- Cost control: cursor pagination instead of offsets, listeners scoped to small queries, budget alerts set
+- Data design: automatic document IDs, index exemptions for fields you never query, no single document written by every user
+- Operations: separate development and production projects, more than one owner, rules tested before every deploy
+If you only have an hour, do the first three. They are where real data leaks come from.
 ## Why are security rules the only thing protecting my Firebase data?
 Because the browser talks to Firestore and Storage directly, with no server of yours in between, and the keys it uses are visible to everyone.
 In a traditional app, the browser calls your server and your server decides what to return. With Firebase's client SDK, the browser sends its query straight to Google's servers. The apiKey, projectId and the rest of the config object ship inside your JavaScript, and anyone can copy them from the page source. That is by design. The config only identifies the project.
@@ -686,6 +700,20 @@ The final checklist:
 - Storage paths are checked by user ID, with size and type limits
 - Rules tested as a second user and as a signed-out visitor
 If you would rather have someone else do this pass, I review and fix Firebase rules as part of my work on AI-built apps. A single rules problem is a Quick Fix from $60, and a full pre-launch pass with auth, payments and deployment is the Finish and Launch package from $600.
+## What are the Firestore best practices for cost and performance?
+Design queries so each screen reads a small, predictable number of documents, because Firestore bills by the document and slows down on hotspots.
+Google's Cloud Firestore best practices page and billing page give the rules I build around:
+### Reads are the bill
+Firestore charges for each document read, written and deleted, and its billing page says a query that returns nothing is still charged a minimum of one read. A home screen that loads 300 documents for every visitor costs 300 reads per visit. Load the 20 the screen shows.
+### Paginate with cursors, not offsets
+The best practices page says not to use offsets. Documents skipped by an offset are still retrieved and billed. Use startAfter with the last document of the previous page instead.
+### Keep listeners narrow
+A realtime listener re-reads documents as they change, so a listener on an entire collection of orders is a running meter. Listen to a filtered, limited query, such as this user's open orders, and detach listeners when the screen unmounts.
+### Avoid hotspots
+Google recommends automatic document IDs, because sequential IDs such as Customer1, Customer2, Customer3 can create hotspots that hurt latency. The same page warns that one document updated at high rates will hit contention, so a single global counter that every user increments is a design to avoid. Use a distributed counter or aggregate on the server.
+### Trim indexes you never query
+Firestore indexes every field by default. The best practices page suggests index exemptions for large string fields and for fields you never filter on, which saves storage and write cost.
+> Before launch, open the Usage tab in the Firebase console, click through your app once as a normal user, and see how many reads one session costs. Multiply by your expected users per month and you have a realistic floor for the bill.
 ## Which Firebase best practices matter beyond security rules?
 Rules come first, but Google's own Firebase launch checklist adds a few project settings that take minutes and prevent the next most common disasters.
 - Separate projects. The checklist recommends different Firebase projects for development, testing and production. Testing a migration against live data is how real records get deleted.

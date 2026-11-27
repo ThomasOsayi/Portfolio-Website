@@ -21,5 +21,8 @@ import { postsGen18 } from './posts-18';
 import { postsGen19 } from './posts-19';
 import { postsGen20 } from './posts-20';
 import { postsGen21 } from './posts-21';
+import { postsGen22 } from './posts-22';
+import { postsGen23 } from './posts-23';
+import { postsGen24 } from './posts-24';
 
-export const genPosts: Post[] = [...postsGen01, ...postsGen02, ...postsGen03, ...postsGen04, ...postsGen05, ...postsGen06, ...postsGen07, ...postsGen08, ...postsGen09, ...postsGen10, ...postsGen11, ...postsGen12, ...postsGen13, ...postsGen14, ...postsGen15, ...postsGen16, ...postsGen17, ...postsGen18, ...postsGen19, ...postsGen20, ...postsGen21];
+export const genPosts: Post[] = [...postsGen01, ...postsGen02, ...postsGen03, ...postsGen04, ...postsGen05, ...postsGen06, ...postsGen07, ...postsGen08, ...postsGen09, ...postsGen10, ...postsGen11, ...postsGen12, ...postsGen13, ...postsGen14, ...postsGen15, ...postsGen16, ...postsGen17, ...postsGen18, ...postsGen19, ...postsGen20, ...postsGen21, ...postsGen22, ...postsGen23, ...postsGen24];

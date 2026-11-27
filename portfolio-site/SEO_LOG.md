@@ -52,6 +52,20 @@ Posts (slug: primary keyword)
 - too-many-database-connections-serverless: too many connections Postgres serverless
 - clerk-vs-supabase-auth-vs-firebase-auth: Clerk vs Supabase Auth
 - stripe-vs-paddle-vs-lemon-squeezy: Stripe vs Paddle vs Lemon Squeezy
+- website-terms-and-conditions-small-business: website terms and conditions (11-27)
+- restaurant-menu-on-website-without-pdf: restaurant menu on website without PDF (11-27)
+- website-for-a-side-business: website for a side business (11-27)
+- squarespace-vs-shopify-for-small-store: Squarespace vs Shopify (11-27)
+- github-actions-failing-after-ai-changes: GitHub Actions failing (11-27)
+- nextjs-server-actions-not-working: Next.js Server Actions not working (11-27)
+- expo-eas-build-failed: EAS build failed (11-27)
+- netlify-vs-vercel: Netlify vs Vercel (11-27)
+- feature-flags-for-saas-mvp: feature flags for SaaS (11-27)
+- sso-saml-for-b2b-saas: SSO SAML for B2B SaaS (11-27)
+- stripe-usage-based-billing: Stripe usage-based billing (11-27)
+- prisma-vs-drizzle: Prisma vs Drizzle (11-27)
+- retool-vs-custom-admin-dashboard: Retool vs custom admin dashboard (11-27)
+- (11-25 batch: see the 2026-11-25 entry; each slug's wording is its primary keyword)
 - vercel-vs-railway-vs-render-for-saas: Vercel vs Railway
 - add-ai-features-to-a-saas-app: add AI to my SaaS app
 - cron-jobs-and-background-jobs-nextjs: cron jobs Next.js Vercel
@@ -292,6 +306,12 @@ Mon 2026-11-30 candidates
 - SaaS: postgres-vs-mongodb-for-saas (comparison), saas-email-notifications-architecture, soft-delete-vs-hard-delete-saas, how-to-add-a-customer-portal-stripe
 - Fix pages: antigravity (Google's Gemini CLI successor; verify), lovable-cloud? (check overlap with /fix/lovable first)
 
+Wed 2026-12-02 candidates (planned 11-27)
+- Websites: website-accessibility-lawsuit-risk? (check overlap with website-accessibility-basics-small-business; skip if it competes), how-to-add-a-booking-calendar-to-squarespace-vs-custom, wix-vs-custom-website-cost, website-for-a-new-restaurant-before-opening
+- Fix: lovable-supabase-rls-infinite-recursion, vite-build-works-locally-fails-on-vercel, supabase-realtime-not-working, ai-app-security-audit-checklist (check overlap with review-ai-generated-code-checklist)
+- SaaS: postgres-vs-mongodb-for-saas (comparison), saas-email-notifications-architecture, soft-delete-vs-hard-delete, upstash-vs-redis-cloud? (verify demand), inngest-vs-trigger-dev (comparison)
+- Industry: optometrists, music-schools (check overlap with tutoring-and-education); fix pages: same, mocha (verify demand)
+
 ## 2026-11-23 (Monday)
 
 Search Console (last 28 days, data through 11-21)
@@ -382,3 +402,47 @@ Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallow
 Verify: tsc, eslint, next build pass; check.mjs ok on all 5 new files; no duplicate slugs; no dashes.
 
 Expansion progress: 34/300
+
+## 2026-11-27 (Friday)
+
+Search Console (last 28 days, data through 11-25)
+- Clicks 4 (prev 1), impressions 7.11K (prev 4.5K), CTR 0.1% (prev 0%), avg position 13.0 (prev 12.1). 253 queries (prev 146).
+- Clicks: toast-vs-squarespace-vs-custom-restaurant-website 1 (14 imp, pos 11.1), export-bolt-project-to-github 1 (8 imp, pos 8.5), homepage 1, saas-onboarding-flow 1 (query "saas onboarding journey").
+- "firebase best practices" 5,515 imp, 0 clicks, pos 8.3. Page /blog/firebase-security-rules-checklist 5,596 imp. Optimized today (below).
+- Other pages: how-much-does-a-saas-mvp-cost 311 (pos 56.8), stripe-test-mode-to-live-mode-checklist 142 (pos 17.9; "stripe live mode" pos 8.5, "stripe switch to test mode" pos 8.0, "stripe test mode" pos 41.2), website-maintenance-cost-small-business 114, how-to-get-your-business-mentioned-in-ai-search 101, online-booking 53, firestore-missing-or-insufficient-permissions 46 (pos 8.8), connect-godaddy-domain-to-vercel 41 (pos 5.9), landing-page-vs-website 41, change-supabase-database-safely 27 (pos 10.3), firebase-auth-unauthorized-domain 20 (pos 7.9), outlook-calendar-integration-in-a-web-app 16 (pos 6.5).
+- Generative AI report: now shows its own total, 128 AI feature impressions in 28 days (first separate figure; last run it mirrored web totals). Rising in the last days of the window.
+- Sitemaps: /sitemap.xml Success, last read Nov 26, 221 discovered. No resubmit.
+- Page indexing: 177 indexed (prev 1 shown; report caught up), 20 not indexed: 18 Crawled - currently not indexed, 1 Discovered - currently not indexed, 1 Not found (404). Manual actions: none. Security issues: none.
+- Vercel Web Analytics: the API returns "Web Analytics not found" for project portfolio-website (team thomas-osayis-projects), so AI referral visits (chatgpt.com, perplexity.ai, copilot, gemini, claude.ai) cannot be measured. Thomas would need to enable Web Analytics on the project.
+
+Throttle decision: crawled/discovered not indexed fell from 65 to 19 while 34 pages were published, so no throttle. Full batch of 17.
+
+Published (17 new pages, sources verified this run)
+- /blog/website-terms-and-conditions-small-business (2,163 words, websites) Berman v. Freedom Financial and Nguyen v. Barnes & Noble (clickwrap), CA AG refund policy page; not legal advice
+- /blog/restaurant-menu-on-website-without-pdf (2,193, websites) schema.org Menu, GBP menu editor; New York Nook figures
+- /blog/website-for-a-side-business (1,901, websites) Stripe pricing, GBP service areas, IRS self-employment tax (not tax advice)
+- /blog/squarespace-vs-shopify-for-small-store (2,138, websites) comparison; Squarespace Basic $19/yr-billed with 2% fee, Shopify Basic $29/yr-billed, checked 11-27; LACEUP figures
+- /blog/github-actions-failing-after-ai-changes (2,112, fix)
+- /blog/nextjs-server-actions-not-working (2,043, fix) Next.js 16 docs (1MB body limit, redirect outside try, updateTag vs revalidateTag)
+- /blog/expo-eas-build-failed (1,962, fix) Expo SDK 58; NOM video
+- /blog/netlify-vs-vercel (2,007, fix) comparison; Netlify credit plans (Free 300 credits, Personal $9, Pro $20), Vercel Hobby non-commercial, Pro $20/seat
+- /blog/feature-flags-for-saas-mvp (2,189, saas)
+- /blog/sso-saml-for-b2b-saas (2,068, saas) WorkOS and Clerk pricing, OIDC and SCIM specs
+- /blog/stripe-usage-based-billing (2,070, saas) Billing Meters; Stripe now presents Metronome for new usage-based integrations; legacy usage records removed in 2025-03-31.basil
+- /blog/prisma-vs-drizzle (1,997, saas) comparison; Prisma 8 in RC, Drizzle v1 rc.6, 0.45.2 stable
+- /blog/retool-vs-custom-admin-dashboard (2,017, saas) comparison; THG Brain example
+- /websites-for/breweries-and-wineries (guide 1,373) TTB Industry Circular 2024-1, CA Type 02/82/23 shipping rules; not legal advice; says Thomas has not built for the industry
+- /websites-for/funeral-homes (guide 1,323) FTC Funeral Rule, 2022 ANPR on online prices (no final rule found), CA B&P 7685(b) website price list; not legal advice
+- /fix/antigravity (guide 1,181) Google Antigravity 2.0, permission presets, plan quotas
+- /fix/manus (guide 1,196) Manus website builder (now part of Meta): Cloud Run hosting, GitHub sync, credits
+Mix: 13 posts (4 websites, 4 fix, 5 SaaS; 4 comparisons), 2 industry, 2 fix pages.
+
+Refresh: skipped, no post older than 30 days yet (oldest 2026-11-16; first eligible about 2026-12-17).
+Optimization pass (Friday)
+- /blog/firebase-security-rules-checklist: retitled "Firebase best practices: the 2026 pre-launch checklist (rules, costs, App Check)", new description, new early section "What are the most important Firebase best practices?" (one-screen checklist answering the query directly), new section "What are the Firestore best practices for cost and performance?" (per-document billing, minimum one read per empty query, cursors not offsets, narrow listeners, automatic IDs and hotspots, index exemptions) with Firestore best-practices and billing pages added to sources; all security content kept. updated 2026-11-27. Body now 2,707 words. Baseline to watch: 5,515 imp, pos 8.3, 0 clicks.
+- /blog/stripe-test-mode-to-live-mode-checklist: retitled to include sandboxes, new section "How do I switch between test mode, sandboxes and live mode in Stripe?" (account picker, legacy test mode sandbox, up to five general sandboxes), new FAQ "How do I switch Stripe to test mode?", Stripe sandboxes and testing docs added to sources. updated 2026-11-27. Baseline: 142 imp, pos 17.9.
+AI visibility: Friday, skipped (Wednesday 12-02 runs panel A with the new dashboard rows). No AI visibility fix queue items yet.
+Technical checks: /llms.txt 200, /robots.txt 200 (User-Agent * Allow /, disallows /admin and /api/ only). No AI crawler blocked.
+Verify: tsc, eslint, next build pass; check.mjs ok on all 5 new files and both optimized posts; no duplicate slugs; no dashes.
+
+Expansion progress: 51/300

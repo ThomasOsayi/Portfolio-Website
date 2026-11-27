@@ -368,10 +368,11 @@ A key in your frontend is fine if it is a public key backed by real rules: Fireb
   },
   {
     slug: 'stripe-test-mode-to-live-mode-checklist',
-    title: 'Stripe test mode to live mode: the checklist I use before taking payments',
-    description: 'Switching Stripe from test mode to live mode: new keys, a live webhook endpoint and signing secret, products and prices copied over, tax settings and the customer portal.',
+    title: 'Stripe test mode to live mode (and sandboxes): the go-live checklist',
+    description: 'How to switch Stripe between test mode, sandboxes and live mode, then go live safely: new keys, a live webhook secret, products copied over, tax and the customer portal.',
     date: d,
-    keywords: ['Stripe test mode to live mode', 'Stripe go live checklist', 'Stripe live webhook signing secret', 'Stripe copy to live mode', 'Stripe live mode keys'],
+    updated: '2026-11-27',
+    keywords: ['Stripe test mode to live mode', 'Stripe switch to test mode', 'Stripe sandbox vs test mode', 'Stripe go live checklist', 'Stripe live webhook signing secret', 'Stripe copy to live mode', 'Stripe live mode keys'],
     service: 'fix-ai-built-app',
     shortAnswer: 'Going live in Stripe means more than swapping pk_test_ for pk_live_: test and live mode have separate keys, separate webhook endpoints with separate signing secrets, and separate products and prices. Replace every key, register a live webhook endpoint and copy its signing secret, recreate or copy products so the live price IDs are in your config, configure tax and the customer portal in live mode, then make one real purchase and refund it.',
     takeaways: [
@@ -381,6 +382,7 @@ A key in your frontend is fine if it is a public key backed by real rules: Fireb
       'One real purchase on your own card, followed by a refund, is the only test that proves the live setup works end to end.',
     ],
     faqs: [
+      { q: 'How do I switch Stripe to test mode?', a: 'Open the account picker in the Stripe Dashboard and choose a sandbox, or the legacy test mode sandbox, and use its test API keys; to go back, exit the sandbox with the same account picker and use your live keys.' },
       { q: 'What changes when I switch Stripe from test mode to live mode?', a: 'Your API keys, webhook endpoints and signing secrets, and every product, price and coupon ID change, because test and live mode objects are kept completely separate.' },
       { q: 'Do I need a new webhook signing secret for live mode?', a: 'Yes, each webhook endpoint has its own signing secret, so you must register a live endpoint and put its whsec_ secret in your production environment variables.' },
       { q: 'Can I copy Stripe products from test mode to live mode?', a: 'Yes, Stripe has a Copy to live mode button on a product page that copies the product and its prices, but the copies get new IDs your code must use.' },
@@ -388,6 +390,8 @@ A key in your frontend is fine if it is a public key backed by real rules: Fireb
       { q: 'Can someone take my Stripe integration live for me?', a: 'Thomas Osayi fixes a single Stripe issue from $60 and takes apps whose core already works to launch, including payments, from $600.' },
     ],
     sources: [
+      { title: 'Sandboxes', publisher: 'Stripe', url: 'https://docs.stripe.com/sandboxes' },
+      { title: 'Testing use cases', publisher: 'Stripe', url: 'https://docs.stripe.com/test-mode' },
       { title: 'Go-live checklist', publisher: 'Stripe Documentation', url: 'https://docs.stripe.com/get-started/checklist/go-live?locale=en-GB' },
       { title: 'API keys', publisher: 'Stripe Documentation', url: 'https://docs.stripe.com/keys' },
       { title: 'Manage prices', publisher: 'Stripe Documentation', url: 'https://edge-docs.stripe.com/products-prices/manage-prices' },
@@ -400,6 +404,14 @@ Stripe's own go-live checklist says that switching between test and live is most
 Because Stripe keeps test and live mode completely separate: different keys, different webhook endpoints and signing secrets, and different products, prices and customers.
 Stripe's documentation is explicit that objects in one mode are not accessible in the other. A test price cannot be used in a live payment. A test webhook endpoint does not receive live events. So when an app has a test price ID hardcoded in the pricing page and a test signing secret in its environment variables, swapping only the publishable key gives you a checkout that fails, or a payment that succeeds with no webhook to record it.
 AI builders make this worse because they tend to scatter configuration around. It is common for a generated project to keep price IDs in several components and the webhook secret in an edge function's code rather than in secrets. Before changing anything, list every place Stripe is configured: environment variables, constants files, database rows that store price IDs, and serverless functions.
+## How do I switch between test mode, sandboxes and live mode in Stripe?
+Use the account picker in the Stripe Dashboard: choose a sandbox to test, and exit the sandbox to get back to live mode and your live keys.
+Stripe now calls its testing environments sandboxes. Every account keeps the original test mode as the legacy test mode sandbox, which cannot be deleted and shares its settings with live mode. On top of it you can create up to five general sandboxes, and Stripe's docs say the legacy one does not count toward that limit. General sandboxes isolate their settings completely and can be deleted, and Stripe recommends them for new integrations.
+That difference matters when you go live:
+- If you built in the legacy test mode sandbox, some settings carry over to live mode because they are shared, but products, prices, customers and webhook endpoints still do not.
+- If you built in a general sandbox, assume nothing carries over, and recreate every setting in live mode on purpose.
+- Either way, each environment has its own API keys, so the keys in your production environment variables must come from live mode, not from the sandbox you tested in.
+Switching back to test later is the same move in reverse: pick the sandbox in the account picker and use that sandbox's test keys in your local or preview environment only.
 ## Which API keys do I need to change?
 Replace the publishable key in the frontend with pk_live_ and the server key with a live restricted or secret key (rk_live_ or sk_live_), stored only in your host's environment variables.
 On the API keys page in the Dashboard, toggle from sandbox to live mode to see your live keys. A few things to know from Stripe's docs at the time of writing:

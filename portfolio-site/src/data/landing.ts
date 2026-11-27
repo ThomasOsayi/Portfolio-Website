@@ -7,6 +7,8 @@ import { industriesGenD } from './gen/industries-d';
 import { toolFixesGen2 } from './gen/tools-gen-2';
 import { industriesGenE } from './gen/industries-e';
 import { toolFixesGen3 } from './gen/tools-gen-3';
+import { industriesGenF } from './gen/industries-f';
+import { toolFixesGen4 } from './gen/tools-gen-4';
 import { moreIndustries } from './industries-more';
 import { industriesBatch2 } from './industries-batch2';
 import { moreToolFixes } from './tools-more';
@@ -210,7 +212,7 @@ const baseIndustries: Industry[] = [
   },
 ];
 
-export const industries: Industry[] = [...baseIndustries, ...moreIndustries, ...industriesBatch2, ...industriesGenA, ...industriesGenB, ...industriesGenC, ...industriesGenD, ...industriesGenE];
+export const industries: Industry[] = [...baseIndustries, ...moreIndustries, ...industriesBatch2, ...industriesGenA, ...industriesGenB, ...industriesGenC, ...industriesGenD, ...industriesGenE, ...industriesGenF];
 
 export interface ToolFix {
   slug: string;
@@ -380,6 +382,6 @@ Lovable gets you a working app quickly. The last stretch, access rules, payments
 ];
 
 export const industryBySlug = (s: string) => industries.find((x) => x.slug === s);
-export const toolFixes: ToolFix[] = [...baseToolFixes, ...moreToolFixes, ...toolFixesGen, ...toolFixesGen2, ...toolFixesGen3];
+export const toolFixes: ToolFix[] = [...baseToolFixes, ...moreToolFixes, ...toolFixesGen, ...toolFixesGen2, ...toolFixesGen3, ...toolFixesGen4];
 
 export const toolBySlug = (s: string) => toolFixes.find((x) => x.slug === s);
